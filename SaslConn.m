@@ -146,13 +146,13 @@ static sasl_callback_t SaslCallbacks[] = {
     }
     
     int rc = 0;
-    do {
+    for (;;) {
         rc = sasl_client_start( conn, [mechList UTF8String], &prompts, clientOutParam, lenParam, &mech );
-        if (SASL_INTERACT == rc) {
-            [self fillPrompts: prompts];
-            rc = sasl_client_start( conn, [mechList UTF8String], &prompts, clientOutParam, lenParam, &mech );
-        }
-    } while (rc == SASL_INTERACT);
+        
+        if (rc != SASL_INTERACT) break;
+
+        [self fillPrompts: prompts];
+    }
     
     if (rc != SASL_CONTINUE) {
         [self setAuthComponents: nil];
@@ -177,11 +177,6 @@ static sasl_callback_t SaslCallbacks[] = {
 
 - (SaslConnStatus) continueWithServerData: (NSData *) serverData clientOut: (NSData **) outData;
 {
-    sasl_interact_t *prompts = NULL;
-    const char *clientOut = NULL;
-    unsigned len = 0;
-    
- 
     const char *bytes = "";
     unsigned length = 0;
     
@@ -189,15 +184,19 @@ static sasl_callback_t SaslCallbacks[] = {
         bytes = [serverData bytes];
         length = [serverData length];
     }
+
+    sasl_interact_t *prompts = NULL;
+    const char *clientOut = NULL;
+    unsigned len = 0;
     
     int rc = 0;
-    do {
+    for (;;) {
         rc = sasl_client_step( conn, bytes, length, &prompts, &clientOut, &len );
-        if (rc == SASL_INTERACT) {
-            [self fillPrompts: prompts];
-            rc = sasl_client_step( conn, bytes, length, &prompts, &clientOut, &len );
-        }        
-    } while (SASL_INTERACT == rc);
+        
+        if (rc != SASL_INTERACT) break;
+
+        [self fillPrompts: prompts];
+    }
 
     if (rc != SASL_CONTINUE) {
         [self setAuthComponents: nil];
