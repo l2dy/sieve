@@ -13,6 +13,13 @@
 // TODO: Verschiedene Empfangs-Routinen aufspalten und vereinheltichen
 
 @interface SieveClient ()
+
+@property (readwrite, copy) NSString *host;
+@property (readwrite, retain) AsyncSocket *socket;
+@property (readwrite, retain) SaslConn *sasl;
+@property (readwrite, copy) NSString *availableMechanisms;
+@property (readwrite, assign) SieveClientStatus status;
+
 - (void) processResponseLine: (NSData *)readData list: (NSMutableArray *) receivedResponses block: (void (^)(NSDictionary *))completionBlock;
 - (void) receiveResponse: (void (^)(NSDictionary *))completionBlock;
 - (void) send: (NSString *) line completion: (void (^)(NSDictionary *))completionBlock;
@@ -23,12 +30,17 @@
 @implementation SieveClient
 
 @synthesize availableMechanisms;
-@synthesize host, port, socket, lineToSend;
+@synthesize host, socket;
+@synthesize status;
+@synthesize sasl;
+@synthesize startTLSIfPossible;
+@synthesize delegate;
 
 - (void) dealloc;
 {
     [self setHost: nil];
     [self setSocket: nil];
+    [self setSasl: nil];
     
     [super dealloc];
 }
@@ -39,6 +51,7 @@
 - (void) receiveCaps: (NSDictionary *) response;
 {
     if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
+        bool notifyDelegate = YES;
         for (NSString *line in [response objectForKey: @"response"]) {
             NSScanner *scanner = [NSScanner scannerWithString: line];
             [scanner setCaseSensitive: NO];
@@ -54,8 +67,9 @@
                     [self setAvailableMechanisms: rest];
                     
                 } else if ([item isEqualToString: @"starttls"]) {
-                    if (startTlsIfPossible && !startedTls) {
-                        [self startTLS];   
+                    if (startTLSIfPossible && !TLSActive) {
+                        [self startTLS]; 
+                        notifyDelegate = NO;
                         break; // muss nicht weiter bearbeitet werden, nach TLS handshake kommt sowieso neue caps
                     }
                     
@@ -66,14 +80,23 @@
                     // TODO: in array splitten und speichern als verfügbare notify-methoden speichern
                 }
             }
-            
         }
-    } 
+        
+        if (notifyDelegate) {
+            [delegate sieveClientEstablishedConnection: self];
+        }
+    } else {
+        NSLog( @"Capability response is not OK" );
+        // TODO: notify delegate
+    }
 }
 
-- (void) connect;
+- (void) connectToHost: (NSString *) newHost port: (unsigned) port;
 {
-    [[self mutableArrayValueForKey: @"exchange"] removeAllObjects];
+    NSAssert( status == SieveClientDisconnected, @"Cannot connect if already connected" );
+    
+    [[self mutableArrayValueForKey: @"log"] removeAllObjects];
+    [self setHost: newHost]; 
     
     NSLog( @"connecting to %@:%d", host, port );
     [self setSocket: [[[AsyncSocket alloc] initWithDelegate: self] autorelease]];
@@ -86,6 +109,8 @@
 
 - (void) disconnect;
 {
+    NSAssert( status != SieveClientDisconnected, @"Already disconnected" );
+    
     [self send: @"LOGOUT"];
     [socket disconnect];
 }
@@ -97,7 +122,7 @@
         if ([[info objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
             NSLog( @"OK, telling socket to start tls negotiation" );
             [socket startTLS: nil];
-            startedTls = true;
+            TLSActive = true;
             [self receiveResponse: ^(NSDictionary *response) {
                 [self receiveCaps: response];
             }];
@@ -107,7 +132,7 @@
 
 - (void) logLine: (NSString *) line from: (NSString *) source;
 {
-    [[self mutableArrayValueForKey: @"exchange"] addObject: [NSDictionary dictionaryWithObjectsAndKeys: line, @"line", source, @"who", nil]];
+    [[self mutableArrayValueForKey: @"log"] addObject: [NSDictionary dictionaryWithObjectsAndKeys: line, @"line", source, @"who", nil]];
 }
 
 - (void) sendString: (NSString *) line;
@@ -227,24 +252,24 @@
             if ([scanner scanQuotedString: &rest]) lastData = [rest base64DecodedData];
         }
         
-        if (lastData || !authSuccess) {
+        if (lastData || (status != SieveClientAuthenticated)) {
             SaslConnStatus rc = [sasl finishWithServerData: lastData];
             if (rc == SaslConnSuccess) {
                 NSLog( @"auth successful" );
-                authSuccess = true;
+                [self setStatus: SieveClientAuthenticated];
             }
         }
         
-        if (authSuccess) {
+        if (status == SieveClientAuthenticated) {
             NSLog( @"letztendlich auth wirklich erfolgreich!!!" );
             if ([sasl needsToEncodeData]) {
                 NSLog( @"data should be encoded" );
                 // TODO: sasl encoder installieren... wie auch immer
             } else {
                 // das sasl-objekt wird nicht mehr benötigt.
-                [sasl release];
-                sasl = nil;
-            }
+                [self setSasl: nil];
+            };
+            
             // TODO: notify successful auth here
             // [delegate sieveConnectionAuthentificatedSucessfully: self]
         }
@@ -280,7 +305,7 @@
             // TODO: [delegate sieveConnection: self gotDisconnectedWithError: bla]
             
         } else {
-            if (rc == SaslConnSuccess) authSuccess = YES;
+            if (rc == SaslConnSuccess) [self setStatus: SieveClientAuthenticated];
             
             NSString *authCommand = @"\"\"";
             if (nil != outData) authCommand = [NSString stringWithFormat: @"\"%@\"", [outData base64EncodedString]];
@@ -296,12 +321,15 @@
 
 - (void) auth;
 {
-    sasl = [[SaslConn alloc] initWithService: @"sieve" server: host socket: socket flags: SaslConnSuccessData];
+    NSAssert( status == SieveClientConnected, @"Wrong status" );
+    [self setStatus: SieveClientAuthenticating];
+    
+    [self setSasl:[[[SaslConn alloc] initWithService: @"sieve" server: host socket: socket flags: SaslConnSuccessData] autorelease]];
     
     NSData *outData = nil;
     SaslConnStatus rc = [sasl startWithMechanisms: availableMechanisms clientOut: &outData];
     if (rc != SaslConnFailed) {
-        if (SaslConnSuccess == rc) authSuccess = true;
+        if (SaslConnSuccess == rc) [self setStatus: SieveClientAuthenticated];
         
         NSString *authCommand = [NSString stringWithFormat: @"AUTHENTICATE \"%@\"", [sasl mechanism]];
         [self logLine: authCommand from: @"Client"];
@@ -324,54 +352,53 @@
 
 #pragma mark -
 
-- (NSArray *)exchange {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (NSArray *)log {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    return [[exchange retain] autorelease];
+    return [[log retain] autorelease];
 }
 
-- (unsigned)countOfExchange {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (unsigned)countOfLog {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    return [exchange count];
+    return [log count];
 }
 
-- (id)objectInExchangeAtIndex:(unsigned)theIndex {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (id)objectInLogAtIndex:(unsigned)theIndex {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    return [exchange objectAtIndex:theIndex];
+    return [log objectAtIndex:theIndex];
 }
 
-- (void)getExchange:(id *)objsPtr range:(NSRange)range {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (void)getLog:(id *)objsPtr range:(NSRange)range {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    [exchange getObjects:objsPtr range:range];
+    [log getObjects:objsPtr range:range];
 }
 
-- (void)insertObject:(id)obj inExchangeAtIndex:(unsigned)theIndex {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (void)insertObject:(id)obj inLogAtIndex:(unsigned)theIndex {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    [exchange insertObject:obj atIndex:theIndex];
+    [log insertObject:obj atIndex:theIndex];
 }
 
-- (void)removeObjectFromExchangeAtIndex:(unsigned)theIndex {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (void)removeObjectFromLogAtIndex:(unsigned)theIndex {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    [exchange removeObjectAtIndex:theIndex];
+    [log removeObjectAtIndex:theIndex];
 }
 
-- (void)replaceObjectInExchangeAtIndex:(unsigned)theIndex withObject:(id)obj {
-    if (!exchange) {
-        exchange = [[NSMutableArray alloc] init];
+- (void)replaceObjectInLogAtIndex:(unsigned)theIndex withObject:(id)obj {
+    if (!log) {
+        log = [[NSMutableArray alloc] init];
     }
-    [exchange replaceObjectAtIndex:theIndex withObject:obj];
+    [log replaceObjectAtIndex:theIndex withObject:obj];
 }
-
 
 @end

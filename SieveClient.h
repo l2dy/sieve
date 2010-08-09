@@ -12,33 +12,50 @@
 #import "AsyncSocket.h"
 #import "SaslConn.h"
 
+typedef enum {
+    SieveClientDisconnected,
+    SieveClientConnected,
+    SieveClientAuthenticating,
+    SieveClientAuthenticated
+} SieveClientStatus;
+
+@class SieveClient;
+
+@protocol SieveClientDelegate < NSObject > 
+
+- (void) sieveClientEstablishedConnection: (SieveClient *) client;
+
+@end
+
 @interface SieveClient : NSObject
 {
     NSString *host;
-    int port;
+    
     AsyncSocket *socket;
     SaslConn *sasl;
     
-    NSMutableArray *exchange;
+    NSMutableArray *log;
     
-    bool startedTls;
+    BOOL startTLSIfPossible;
+    BOOL TLSActive;
     NSString *availableMechanisms;
     
-    bool authSuccess;
+    SieveClientStatus status;
     
-    BOOL startTlsIfPossible;
+    __weak id <SieveClientDelegate> delegate;
 }
 
-@property (readwrite, copy) NSString *host;
-@property (readwrite, copy) NSString *lineToSend;
-@property (readwrite, assign) int port;
+@property (readwrite, assign) id <SieveClientDelegate> delegate;
 
-@property (readwrite, copy) NSString *availableMechanisms;
+@property (readonly, copy) NSString *host;
+@property (readonly, assign) BOOL startTLSIfPossible;
 
-@property (readwrite, retain) AsyncSocket *socket;
+@property (readonly, assign) SieveClientStatus status;
+
+@property (readonly, copy) NSString *availableMechanisms;
 
 
-- (void) connect;
+- (void) connectToHost: (NSString *) serverHost port: (unsigned) port;
 - (void) disconnect;
 
 - (void) startTLS;
@@ -46,12 +63,12 @@
 - (void) auth;
 
 
-- (NSArray *)exchange;
-- (unsigned)countOfExchange;
-- (id)objectInExchangeAtIndex:(unsigned)theIndex;
-- (void)getExchange:(id *)objsPtr range:(NSRange)range;
-- (void)insertObject:(id)obj inExchangeAtIndex:(unsigned)theIndex;
-- (void)removeObjectFromExchangeAtIndex:(unsigned)theIndex;
-- (void)replaceObjectInExchangeAtIndex:(unsigned)theIndex withObject:(id)obj;
+- (NSArray *)log;
+- (unsigned)countOfLog;
+- (id)objectInLogAtIndex:(unsigned)theIndex;
+- (void)getLog:(id *)objsPtr range:(NSRange)range;
+- (void)insertObject:(id)obj inLogAtIndex:(unsigned)theIndex;
+- (void)removeObjectFromLogAtIndex:(unsigned)theIndex;
+- (void)replaceObjectInLogAtIndex:(unsigned)theIndex withObject:(id)obj;
 
 @end
