@@ -41,7 +41,7 @@
 {
     SieveTest *result = [self copy];
     [result setInverted: !inverted];
-    return result;
+    return [result autorelease];
 }
 
 - initWithName: (NSString *) newName parameters: (NSArray *) newParameters;
