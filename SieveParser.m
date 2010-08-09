@@ -16,6 +16,8 @@
 
 
 #import "SieveParser.h"
+#import "SieveTest.h"
+
 #import "NSScanner+ScannerAdditions.h"
 
 @interface NSCharacterSet (IdentifierSets) 
@@ -82,7 +84,7 @@
 - (id) testBlock;
 - (id) ifBlock;
 - (id) block;
-- (id) test;
+- (SieveTest *) test;
 - (id) testList;
 
 @end
@@ -362,27 +364,27 @@
     return result;
 }
 
-- (id) test;
+- (SieveTest *) test;
 {
     if ([self acceptToken: @"not"]) {
         id test = [self test];
-        return [NSDictionary dictionaryWithObjectsAndKeys: @"not", @"test", test, @"child", nil];
+        return [test invertedTest];
     }
     
     if ([self acceptToken: @"allof"]) {
         id tests = [self testList];
-        return [NSDictionary dictionaryWithObjectsAndKeys: @"allof", @"test", tests, @"children", nil];
+        return [[[SieveAllOfTest alloc] initWithChildren: tests] autorelease];
     }
 
     if ([self acceptToken: @"anyof"]) {
         id tests = [self testList];
-        return [NSDictionary dictionaryWithObjectsAndKeys: @"anyof", @"test", tests, @"children", nil];
+        return [[[SieveAnyOfTest alloc] initWithChildren: tests] autorelease];
     }
     
     NSString *ident;
     if ([self acceptIdentifier: &ident]) {
         id params = [self params];
-        return [NSDictionary dictionaryWithObjectsAndKeys: ident, @"test", params, @"parameters", nil];
+        return [[[SieveTest alloc] initWithName: ident parameters: params] autorelease];
     }
 
     NSLog( @"error: expected test" );

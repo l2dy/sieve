@@ -17,6 +17,7 @@
 		2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
 		2644252D1201F55100699784 /* SieveParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2644252C1201F55100699784 /* SieveParser.m */; };
 		26475430120AD67500333B97 /* SyntaxHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2647542F120AD67500333B97 /* SyntaxHighlighter.m */; };
+		2655D0291210828100600B32 /* SieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2655D0281210828100600B32 /* SieveTest.m */; };
 		26AE38E5120980E500B19C0E /* NSScanner+ScannerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE38E4120980E500B19C0E /* NSScanner+ScannerAdditions.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -47,6 +48,8 @@
 		2644252C1201F55100699784 /* SieveParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveParser.m; sourceTree = "<group>"; };
 		2647542E120AD67500333B97 /* SyntaxHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighter.h; sourceTree = "<group>"; };
 		2647542F120AD67500333B97 /* SyntaxHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighter.m; sourceTree = "<group>"; };
+		2655D0271210828100600B32 /* SieveTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveTest.h; sourceTree = "<group>"; };
+		2655D0281210828100600B32 /* SieveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveTest.m; sourceTree = "<group>"; };
 		26AE38E3120980E500B19C0E /* NSScanner+ScannerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+ScannerAdditions.h"; sourceTree = "<group>"; };
 		26AE38E4120980E500B19C0E /* NSScanner+ScannerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+ScannerAdditions.m"; sourceTree = "<group>"; };
 		2A37F4ACFDCFA73011CA2CEA /* SieveDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocument.m; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				2644252C1201F55100699784 /* SieveParser.m */,
 				26AE38E3120980E500B19C0E /* NSScanner+ScannerAdditions.h */,
 				26AE38E4120980E500B19C0E /* NSScanner+ScannerAdditions.m */,
+				2655D0271210828100600B32 /* SieveTest.h */,
+				2655D0281210828100600B32 /* SieveTest.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				2639EA8B120F74050023F625 /* NSScanner+QuotedString.m in Sources */,
 				2639EA8C120F74050023F625 /* SaslConn.m in Sources */,
 				2639EA8D120F74050023F625 /* NSData+Base64Encoding.m in Sources */,
+				2655D0291210828100600B32 /* SieveTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
