@@ -20,16 +20,16 @@
 @class AsyncSocket;
 
 typedef enum {
-    SaslConnFailed,
-    SaslConnSuccess,
-    SaslConnContinue
+    SaslConnFailed,     //!< Negotiating the authentication failed
+    SaslConnSuccess,    //!< SASL mechanism was successful. 
+    SaslConnContinue    //!< More steps are neccessary for authentication
 } SaslConnStatus;
 
 enum SaslConnFlags {
-    SaslConnNoPlaintext     = 1 << 0,
-    SaslConnNoAnonymous     = 1 << 1,
-    SaslConnSuccessData     = 1 << 2,
-    SaslConnNeedProxy       = 1 << 3,
+    SaslConnNoPlaintext     = 1 << 0,       //!< Don't use plain-text mechanisms
+    SaslConnNoAnonymous     = 1 << 1,       //!< Don't use the anonymous mechanism
+    SaslConnSuccessData     = 1 << 2,       //!< Protocol can transport more data with success message
+    SaslConnNeedProxy       = 1 << 3,       //!< Need a mechanism that supports proxy authentication
 };
 
 typedef NSUInteger SaslConnFlags;
@@ -69,6 +69,8 @@ typedef NSUInteger SaslConnFlags;
 - (NSData *) encodeData: (NSData *) inData;
 - (NSData *) decodeData: (NSData *) inData;
 
+/** Returns \a YES if a security layer is negotiated.
+ */
 - (BOOL) needsToEncodeData;
 
 - (NSError *) lastError;

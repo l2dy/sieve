@@ -20,12 +20,16 @@
 
 @interface NSData (Base64Encoding)
 
+/** Converts the data object to a string in BASE 64 encoding
+ */
 - (NSString *) base64EncodedString;
 
 @end
 
 @interface NSString (Base64Decoding) 
 
+/** Converts the string from BASE 64 encoding to a binary NSData object
+ */
 - (NSData *) base64DecodedData;
 
 @end

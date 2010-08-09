@@ -18,13 +18,39 @@
 #import <Cocoa/Cocoa.h>
 
 
+/*! Additional methods for NSScanner
+ */
 @interface NSScanner (ScannerAdditions) 
+
+/*! Returns the character at the current scan location. Must not be called if scanner is at end.
+ */
 - (unichar) currentCharacter;
+
+/*! Moves the scan location one character ahead
+ */
 - (void) skipCharacter;
 
+
+/*! Scans a line terminator. Either a single CR, a single LF, a CRLF pair or one of the other Unicode
+ *  line separators
+ */
 - (BOOL) scanLineTerminator;
+
+/*! Scans a single character from the character set set
+ *  @param set      [in]    characters to accept
+ *  @param outChar  [out]   pointer to an unichar to receive the scanned character. May be NULL
+ *  @result         YES if a matching character was read, NO otherwise
+ */
 - (BOOL) scanCharacterFromSet: (NSCharacterSet *) set intoChar: (unichar *) outChar;
+
+/*! Returns YES if the character ch was the next character, otherwise NO 
+ */
 - (BOOL) scanCharacter: (unichar) ch;
+
+/*! Retrieves the next character from the string
+ *  @param outChar  [out]   pointer to an unichar to receive the scanned character. May be NULL
+ *  @result         YES if a character was read, NO otherwise
+ */
 - (BOOL) scanNextCharacterIntoChar: (unichar *) outChar;
 
 @end
