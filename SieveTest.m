@@ -34,7 +34,7 @@
 
 - (id) copyWithZone:(NSZone *)zone;
 {
-    return [[[self class] alloc] initWithName: name parameters:parameters];
+    return [[[self class] allocWithZone: zone] initWithName: name parameters:parameters];
 }
 
 - (SieveTest *) invertedTest;
