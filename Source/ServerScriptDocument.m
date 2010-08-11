@@ -37,4 +37,16 @@
     [self setIsProcessing: YES];
 }
 
+- (BOOL) isEdited;
+{
+    return [self isDocumentEdited];
+}
+
+- (void) updateChangeCount:(NSDocumentChangeType)change;
+{
+    [self willChangeValueForKey: @"isEdited"];
+    [super updateChangeCount: change];
+    [self didChangeValueForKey: @"isEdited"];
+}
+
 @end
