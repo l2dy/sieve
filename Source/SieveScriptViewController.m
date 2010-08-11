@@ -26,9 +26,4 @@
     return self;
 }
 
-- (NSUndoManager *) undoManagerForTextView:(NSTextView *)view;
-{
-    return [[self representedObject] undoManager];
-}
-
 @end

@@ -18,7 +18,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface SieveScriptViewController : NSViewController < NSTextViewDelegate > {
+@interface SieveScriptViewController : NSViewController {
 
 }
 
