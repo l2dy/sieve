@@ -19,6 +19,10 @@
 #import "SieveParser.h"
 #import "SieveDocumentWindowController.h"
 
+@interface NSDocument (MessingWithInternals)
+- (id) _setDisplayName: (id) newName;
+@end
+
 @implementation SieveDocument
 
 @synthesize script, result;
@@ -47,6 +51,23 @@
 {
     SieveParser *parser = [[[SieveParser alloc] initWithString: [self script]] autorelease];
     [self setResult: [[parser commands] description]];
+}
+
+
+#pragma mark -
+#pragma mark Hackery to support binding displayName
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
+{
+    if ([key isEqualToString: @"displayName"]) return NO;
+    else return [super automaticallyNotifiesObserversForKey: key];
+}
+
+- (id) _setDisplayName: (id) newName;
+{
+    [self willChangeValueForKey: @"displayName"];
+    id r = [super _setDisplayName: newName];
+    [self didChangeValueForKey: @"displayName"];
+    return r;
 }
 
 @end
