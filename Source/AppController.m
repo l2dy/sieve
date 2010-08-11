@@ -16,6 +16,7 @@
 
 #import "AppController.h"
 #import "ServerWindowController.h"
+#import "OpenURLController.h"
 
 @interface AppController ()
 
@@ -63,14 +64,36 @@
     return controller;
 }
 
+- (void) openURL: (NSURL *) url;
+{
+    if (nil == [url scheme]) {
+        url = [NSURL fileURLWithPath: [url path]];
+    }
+    
+    if ([url isFileURL]) {
+        [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: url display: YES error: NULL];
+    } else if ([[url scheme] isEqualToString: @"sieve"]) {
+        ServerWindowController *controller = [self serverWindowForURL: url];
+        [controller openURL: url];
+    } else {
+        NSBeep();
+    }
+}
+
 - (void) handleGetURLEvent: (NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent;
 {
     NSURL *url = [NSURL URLWithString: [[event descriptorForKeyword: keyDirectObject] stringValue]];
 
-    if ([[url scheme] isEqualToString: @"sieve"]) {
-        ServerWindowController *controller = [self serverWindowForURL: url];
-        [controller openURL: url];
-    }
+    [self openURL: url];
+}
+
+
+- (IBAction) openDocumentWithURL: (id) sender;
+{
+    [OpenURLController askForURLOnSuccess: ^(NSString *result) {
+        NSURL *url = [NSURL URLWithString: result];
+        [self openURL: url];
+    }];
 }
 
 @end

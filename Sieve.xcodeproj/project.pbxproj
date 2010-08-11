@@ -73,6 +73,8 @@
 		26F2B2071212C2B800458B80 /* SieveScriptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B2061212C2B800458B80 /* SieveScriptViewController.m */; };
 		26F2B20C1212C2ED00458B80 /* SieveScriptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2B20A1212C2ED00458B80 /* SieveScriptView.xib */; };
 		26F2B4C01212F73E00458B80 /* ServerScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */; };
+		26F2B50B1213000200458B80 /* OpenURLWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2B5091213000200458B80 /* OpenURLWindow.xib */; };
+		26F2B5111213015800458B80 /* OpenURLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B5101213015800458B80 /* OpenURLController.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -179,6 +181,9 @@
 		26F2B20B1212C2ED00458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SieveScriptView.xib; sourceTree = "<group>"; };
 		26F2B4BE1212F73E00458B80 /* ServerScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerScriptDocument.h; sourceTree = "<group>"; };
 		26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerScriptDocument.m; sourceTree = "<group>"; };
+		26F2B50A1213000200458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OpenURLWindow.xib; sourceTree = "<group>"; };
+		26F2B50F1213015800458B80 /* OpenURLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenURLController.h; sourceTree = "<group>"; };
+		26F2B5101213015800458B80 /* OpenURLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenURLController.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* Sieve-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sieve-Info.plist"; sourceTree = "<group>"; };
@@ -310,6 +315,8 @@
 				26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */,
 				26F2B2051212C2B800458B80 /* SieveScriptViewController.h */,
 				26F2B2061212C2B800458B80 /* SieveScriptViewController.m */,
+				26F2B50F1213015800458B80 /* OpenURLController.h */,
+				26F2B5101213015800458B80 /* OpenURLController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -391,6 +398,7 @@
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				26F2B1031212A4A500458B80 /* ServerWindow.xib */,
 				26F2B20A1212C2ED00458B80 /* SieveScriptView.xib */,
+				26F2B5091213000200458B80 /* OpenURLWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 				26F2AE8E1212992400458B80 /* TabNewMetalRollover.png in Resources */,
 				26F2B1051212A4A500458B80 /* ServerWindow.xib in Resources */,
 				26F2B20C1212C2ED00458B80 /* SieveScriptView.xib in Resources */,
+				26F2B50B1213000200458B80 /* OpenURLWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +552,7 @@
 				26F2B1D71212BDFB00458B80 /* SieveDocumentWindowController.m in Sources */,
 				26F2B2071212C2B800458B80 /* SieveScriptViewController.m in Sources */,
 				26F2B4C01212F73E00458B80 /* ServerScriptDocument.m in Sources */,
+				26F2B5111213015800458B80 /* OpenURLController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +597,14 @@
 				26F2B20B1212C2ED00458B80 /* English */,
 			);
 			name = SieveScriptView.xib;
+			sourceTree = "<group>";
+		};
+		26F2B5091213000200458B80 /* OpenURLWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26F2B50A1213000200458B80 /* English */,
+			);
+			name = OpenURLWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

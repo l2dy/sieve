@@ -16,11 +16,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface AppController : NSObject < NSApplicationDelegate > {
     NSMutableDictionary *openConnections;
 }
 
 @property (readwrite, retain, nonatomic) NSMutableDictionary *openConnections;
+
+- (IBAction) openDocumentWithURL: (id) sender;
 
 @end
