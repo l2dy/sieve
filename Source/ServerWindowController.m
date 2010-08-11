@@ -16,10 +16,13 @@
 
 
 #import "ServerWindowController.h"
+#import "SieveScriptViewController.h"
 
 #import "PSMTabBarControl.h"
 
 @implementation ServerWindowController
+
+@synthesize scriptViewController;
 
 - (id) init;
 {
@@ -45,6 +48,13 @@
     [tabBar setAutomaticallyAnimates: YES];
 }
 
+- (NSView *) documentView;
+{
+    if (nil == scriptViewController) {
+        [self setScriptViewController: [[[SieveScriptViewController alloc] init] autorelease]];
+    }
+    return [scriptViewController view];
+}
 #pragma mark -
 #pragma mark Tab bar delegate
 
@@ -56,6 +66,63 @@
 - (BOOL)tabView:(NSTabView*)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
 {
 	return YES;
+}
+
+- (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem;
+{
+    [tabViewItem unbind: @"label"];
+    [[tabViewItem identifier] close];
+}
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    [[tabViewItem identifier] addWindowController: self];
+}
+
+#pragma mark -
+#pragma mark Handling documents
+
+- (NSTabViewItem *) tabViewItemForDocument: (NSDocument *) document;
+{
+    if (nil == tabView) return nil;
+    
+    NSInteger index = [tabView indexOfTabViewItemWithIdentifier: document];
+    NSTabViewItem *item = nil;
+    if (index == NSNotFound) {
+        item = [[[NSTabViewItem alloc] initWithIdentifier: document] autorelease];
+        [item bind: @"label" toObject: document withKeyPath: @"displayName" options: nil];
+        [item setView: [self documentView]];
+        [tabView addTabViewItem: item];
+    } else {
+        item = [tabView tabViewItemAtIndex: index];
+    }
+}
+
+- (void) windowDidLoad;
+{
+    NSDocument *doc = [self document];
+    if (nil != doc) {
+        [self tabViewItemForDocument: doc];
+        [scriptViewController setRepresentedObject: doc];
+    }
+}
+
+- (void) setDocument:(NSDocument *)document;
+{
+    [super setDocument: document];
+    
+    if (nil != document) {
+        [tabView selectTabViewItem: [self tabViewItemForDocument: document]];
+    }
+    
+    [scriptViewController setRepresentedObject: document];
+}
+
+
+
+- (NSString *) windowTitleForDocumentDisplayName:(NSString *)displayName;
+{
+    return [NSString stringWithFormat: @"Server - %@", displayName];
 }
 
 @end

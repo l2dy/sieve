@@ -18,10 +18,16 @@
 #import <Cocoa/Cocoa.h>
 
 @class PSMTabBarControl;
+@class SieveScriptViewController;
 
-@interface ServerWindowController : NSWindowController {
+@interface ServerWindowController : NSWindowController < NSTabViewDelegate > {
     IBOutlet PSMTabBarControl *tabBar;
     IBOutlet NSTabView *tabView;
+    
+    SieveScriptViewController *scriptViewController;
 }
+
+
+@property (readwrite, retain) SieveScriptViewController *scriptViewController;
 
 @end
