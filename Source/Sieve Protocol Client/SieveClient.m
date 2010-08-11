@@ -100,6 +100,20 @@
     }
 }
 
+- (void) connectToURL: (NSURL *) url;
+{
+    NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Accepting only sieve URLs" );
+    
+    unsigned port = 2000;
+    
+    NSNumber *urlPort = [url port];
+    if (nil != urlPort) {
+        port = [urlPort unsignedIntValue];
+    }
+    
+    [self connectToHost: [url host] port: port];
+}
+
 - (void) connectToHost: (NSString *) newHost port: (unsigned) port;
 {
     NSAssert( status == SieveClientDisconnected, @"Cannot connect if already connected" );

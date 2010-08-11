@@ -64,6 +64,7 @@ typedef enum {
 @property (readonly, copy) NSString *availableMechanisms;
 
 
+- (void) connectToURL: (NSURL *) url;
 - (void) connectToHost: (NSString *) serverHost port: (unsigned) port;
 - (void) disconnect;
 
