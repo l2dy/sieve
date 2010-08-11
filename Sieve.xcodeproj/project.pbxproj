@@ -72,6 +72,7 @@
 		26F2B1D71212BDFB00458B80 /* SieveDocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */; };
 		26F2B2071212C2B800458B80 /* SieveScriptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B2061212C2B800458B80 /* SieveScriptViewController.m */; };
 		26F2B20C1212C2ED00458B80 /* SieveScriptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2B20A1212C2ED00458B80 /* SieveScriptView.xib */; };
+		26F2B4C01212F73E00458B80 /* ServerScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -176,6 +177,8 @@
 		26F2B2051212C2B800458B80 /* SieveScriptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveScriptViewController.h; sourceTree = "<group>"; };
 		26F2B2061212C2B800458B80 /* SieveScriptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveScriptViewController.m; sourceTree = "<group>"; };
 		26F2B20B1212C2ED00458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SieveScriptView.xib; sourceTree = "<group>"; };
+		26F2B4BE1212F73E00458B80 /* ServerScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerScriptDocument.h; sourceTree = "<group>"; };
+		26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerScriptDocument.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* Sieve-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sieve-Info.plist"; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				26F2B09312129B2600458B80 /* GUI */,
 				26F2B0A812129B2600458B80 /* SieveDocument.h */,
 				26F2B0A912129B2600458B80 /* SieveDocument.m */,
+				26F2B4BE1212F73E00458B80 /* ServerScriptDocument.h */,
+				26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */,
 				26F2B0ED1212A02700458B80 /* AppController.h */,
 				26F2B0EE1212A02700458B80 /* AppController.m */,
 				26F2B1071212A4EF00458B80 /* ServerWindowController.h */,
@@ -537,6 +542,7 @@
 				26F2B1091212A4EF00458B80 /* ServerWindowController.m in Sources */,
 				26F2B1D71212BDFB00458B80 /* SieveDocumentWindowController.m in Sources */,
 				26F2B2071212C2B800458B80 /* SieveScriptViewController.m in Sources */,
+				26F2B4C01212F73E00458B80 /* ServerScriptDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

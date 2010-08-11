@@ -20,14 +20,20 @@
 @class PSMTabBarControl;
 @class SieveScriptViewController;
 
-@interface ServerWindowController : NSWindowController < NSTabViewDelegate > {
+@interface ServerWindowController : NSWindowController < NSTabViewDelegate, NSWindowDelegate > {
     IBOutlet PSMTabBarControl *tabBar;
     IBOutlet NSTabView *tabView;
+    NSURL *baseURL;
     
     SieveScriptViewController *scriptViewController;
 }
 
-
+@property (readwrite, copy) NSURL *baseURL;
 @property (readwrite, retain) SieveScriptViewController *scriptViewController;
+
+- (id) initWithURL: (NSURL *) url;
+
+
+- (void) openURL: (NSURL *) url;
 
 @end

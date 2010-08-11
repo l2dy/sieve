@@ -16,11 +16,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ServerWindowController;
 
-@interface AppController : NSObject < NSApplicationDelegate > {
-    NSMutableDictionary *openConnections;
+#import "SieveDocument.h"
+
+@interface ServerScriptDocument : SieveDocument {
+    ServerWindowController *server;
+    BOOL isProcessing;
 }
 
-@property (readwrite, retain, nonatomic) NSMutableDictionary *openConnections;
+@property (readwrite, retain) ServerWindowController *server;
+@property (readwrite, assign) BOOL isProcessing;
+
+- initWithServer: (ServerWindowController *) server URL: (NSURL *) documentURL;
+
+- (void) beginDownload;
 
 @end

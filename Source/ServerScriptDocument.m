@@ -14,13 +14,27 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-#import <Cocoa/Cocoa.h>
+#import "ServerScriptDocument.h"
 
 
-@interface AppController : NSObject < NSApplicationDelegate > {
-    NSMutableDictionary *openConnections;
+@implementation ServerScriptDocument
+
+@synthesize server;
+@synthesize isProcessing;
+
+- initWithServer: (ServerWindowController *) srv URL: (NSURL *) documentURL;
+{
+    if (nil == [super init]) return nil;
+    
+    [self setFileURL: documentURL];
+    [self setServer: srv];
+    
+    return self;
 }
 
-@property (readwrite, retain, nonatomic) NSMutableDictionary *openConnections;
+- (void) beginDownload;
+{
+    [self setIsProcessing: YES];
+}
 
 @end

@@ -15,6 +15,7 @@
  */
 
 #import "AppController.h"
+#import "ServerWindowController.h"
 
 @interface AppController ()
 
@@ -24,6 +25,21 @@
 
 @implementation AppController
 
+@synthesize openConnections;
+
+- (void) dealloc;
+{
+    [self setOpenConnections: nil];
+    [super dealloc];
+}
+
+- (NSMutableDictionary *) openConnections;
+{
+    if (nil == openConnections) {
+        openConnections = [[NSMutableDictionary alloc] init];
+    }
+    return openConnections;
+}
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification
 {
@@ -32,12 +48,29 @@
                          forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 
+- (ServerWindowController *) serverWindowForURL: (NSURL *) url;
+{
+    NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Only work with sieve URLs" );
+    
+    NSURL *rootUrl = [[NSURL URLWithString:@"/" relativeToURL: url] absoluteURL];
+    
+    ServerWindowController *controller = [[self openConnections] objectForKey: rootUrl];
+    if (nil == controller) {
+        controller = [[[ServerWindowController alloc] initWithURL: rootUrl] autorelease];
+        [openConnections setObject: controller forKey: rootUrl];
+    }
+    
+    return controller;
+}
 
 - (void) handleGetURLEvent: (NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent;
 {
     NSURL *url = [NSURL URLWithString: [[event descriptorForKeyword: keyDirectObject] stringValue]];
-    NSLog( @"received URL %@", url );
-    // TODO: handle URL
+
+    if ([[url scheme] isEqualToString: @"sieve"]) {
+        ServerWindowController *controller = [self serverWindowForURL: url];
+        [controller openURL: url];
+    }
 }
 
 @end

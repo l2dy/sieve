@@ -17,17 +17,20 @@
 
 #import "ServerWindowController.h"
 #import "SieveScriptViewController.h"
+#import "ServerScriptDocument.h"
 
 #import "PSMTabBarControl.h"
 
 @implementation ServerWindowController
 
 @synthesize scriptViewController;
+@synthesize baseURL;
 
-- (id) init;
+- (id) initWithURL: (NSURL *) url;
 {
     if (nil == [super initWithWindowNibName: @"ServerWindow"]) return nil;
     
+    [self setBaseURL: url];
     
     return self;
 }
@@ -55,6 +58,24 @@
     }
     return [scriptViewController view];
 }
+
+- (void) openURL: (NSURL *) url;
+{
+    NSString *path = [url path];
+    if ([path length] != 0 && ![path isEqualToString: @"/"]) {
+        NSURL *documentURL = [baseURL URLByAppendingPathComponent: [path lastPathComponent]];
+        ServerScriptDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: documentURL];
+        if (nil == doc) {
+            doc = [[[ServerScriptDocument alloc] initWithServer: self URL: documentURL] autorelease];
+            [[NSDocumentController sharedDocumentController] addDocument: doc];
+            [doc beginDownload];
+        }
+        [doc addWindowController: self];
+    }
+    [[self window] makeKeyAndOrderFront: self];
+}
+
+
 #pragma mark -
 #pragma mark Tab bar delegate
 
@@ -77,6 +98,20 @@
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
     [[tabViewItem identifier] addWindowController: self];
+}
+
+#pragma mark -
+#pragma mark NSWindow delegate
+
+- (BOOL)window:(NSWindow *)window shouldDragDocumentWithEvent:(NSEvent *)event from:(NSPoint)dragImageLocation withPasteboard:(NSPasteboard *)pasteboard
+{
+    return NO;
+}
+
+
+- (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu
+{
+    return NO;
 }
 
 #pragma mark -
