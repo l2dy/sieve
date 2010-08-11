@@ -66,6 +66,7 @@
 		26F2B0B112129B2600458B80 /* SieveParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A412129B2600458B80 /* SieveParser.m */; };
 		26F2B0B212129B2600458B80 /* SieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A612129B2600458B80 /* SieveTest.m */; };
 		26F2B0B312129B2600458B80 /* SieveDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A912129B2600458B80 /* SieveDocument.m */; };
+		26F2B0EF1212A02700458B80 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0EE1212A02700458B80 /* AppController.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,8 @@
 		26F2B0A712129B2600458B80 /* Sieve_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sieve_Prefix.pch; path = Source/Sieve_Prefix.pch; sourceTree = "<group>"; };
 		26F2B0A812129B2600458B80 /* SieveDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocument.h; sourceTree = "<group>"; };
 		26F2B0A912129B2600458B80 /* SieveDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocument.m; sourceTree = "<group>"; };
+		26F2B0ED1212A02700458B80 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		26F2B0EE1212A02700458B80 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* Sieve-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sieve-Info.plist"; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				26F2B09312129B2600458B80 /* GUI */,
 				26F2B0A812129B2600458B80 /* SieveDocument.h */,
 				26F2B0A912129B2600458B80 /* SieveDocument.m */,
+				26F2B0ED1212A02700458B80 /* AppController.h */,
+				26F2B0EE1212A02700458B80 /* AppController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				26F2B0B112129B2600458B80 /* SieveParser.m in Sources */,
 				26F2B0B212129B2600458B80 /* SieveTest.m in Sources */,
 				26F2B0B312129B2600458B80 /* SieveDocument.m in Sources */,
+				26F2B0EF1212A02700458B80 /* AppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
