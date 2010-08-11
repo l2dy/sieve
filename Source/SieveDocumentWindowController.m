@@ -16,16 +16,14 @@
 
 
 #import "SieveDocumentWindowController.h"
+#import "SieveDocument.h"
 #import "SieveScriptViewController.h"
 
 @implementation SieveDocumentWindowController
 
-@synthesize scriptViewController;
-
 - (id) init;
 {
     if (nil == [super initWithWindowNibName: @"SieveDocument"]) return nil;
-    
     
     return self;
 }
@@ -36,14 +34,10 @@
     return nil;
 }
 
-- (void) setDocument:(NSDocument *)document;
+- (void) setDocument:(SieveDocument *)document;
 {
     [super setDocument: document];
-    if (nil == scriptViewController) {
-        [self setScriptViewController: [[[SieveScriptViewController alloc] init] autorelease]];
-        [[self window] setContentView: [scriptViewController view]];
-    }
-    [scriptViewController setRepresentedObject: document];
+    [[self window] setContentView: [[document viewController] view]];
 }
 
 
