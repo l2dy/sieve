@@ -19,9 +19,6 @@
 @class SieveScriptViewController;
 
 @interface SieveDocumentWindowController : NSWindowController {
-    SieveScriptViewController *scriptViewController;
 }
-
-@property (readwrite, retain) SieveScriptViewController *scriptViewController;
 
 @end

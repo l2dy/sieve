@@ -16,14 +16,12 @@
 
 
 #import "ServerWindowController.h"
-#import "SieveScriptViewController.h"
 #import "ServerScriptDocument.h"
 
 #import "PSMTabBarControl.h"
 
 @implementation ServerWindowController
 
-@synthesize scriptViewController;
 @synthesize baseURL;
 
 - (id) initWithURL: (NSURL *) url;
@@ -49,14 +47,6 @@
     [tabBar setUseOverflowMenu: YES];
     [tabBar setAllowsBackgroundTabClosing: YES];
     [tabBar setAutomaticallyAnimates: YES];
-}
-
-- (NSView *) documentView;
-{
-    if (nil == scriptViewController) {
-        [self setScriptViewController: [[[SieveScriptViewController alloc] init] autorelease]];
-    }
-    return [scriptViewController view];
 }
 
 - (void) openURL: (NSURL *) url;
@@ -117,7 +107,7 @@
 #pragma mark -
 #pragma mark Handling documents
 
-- (NSTabViewItem *) tabViewItemForDocument: (NSDocument *) document;
+- (NSTabViewItem *) tabViewItemForDocument: (SieveDocument *) document;
 {
     if (nil == tabView) return nil;
     
@@ -126,7 +116,7 @@
     if (index == NSNotFound) {
         item = [[[NSTabViewItem alloc] initWithIdentifier: document] autorelease];
         [item bind: @"label" toObject: document withKeyPath: @"displayName" options: nil];
-        [item setView: [self documentView]];
+        [item setView: [[document viewController] view]];
         [tabView addTabViewItem: item];
     } else {
         item = [tabView tabViewItemAtIndex: index];
@@ -137,22 +127,19 @@
 
 - (void) windowDidLoad;
 {
-    NSDocument *doc = [self document];
+    SieveDocument *doc = [self document];
     if (nil != doc) {
         [self tabViewItemForDocument: doc];
-        [scriptViewController setRepresentedObject: doc];
     }
 }
 
-- (void) setDocument:(NSDocument *)document;
+- (void) setDocument:(SieveDocument *)document;
 {
     [super setDocument: document];
     
     if (nil != document) {
         [tabView selectTabViewItem: [self tabViewItemForDocument: document]];
     }
-    
-    [scriptViewController setRepresentedObject: document];
 }
 
 - (NSString *) windowTitle;

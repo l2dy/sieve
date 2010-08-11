@@ -26,6 +26,7 @@
 @implementation SieveDocument
 
 @synthesize script, result;
+@synthesize viewController;
 
 -(void) makeWindowControllers;
 {
@@ -53,6 +54,24 @@
     [self setResult: [[parser commands] description]];
 }
 
+
+- (NSViewController *) viewController;
+{
+    if (nil == viewController) {
+        viewController = [[SieveScriptViewController alloc] init];
+        [viewController setRepresentedObject: self];
+    }
+    return viewController;
+}
+
+- (void) setViewController: (NSViewController *) newViewController;
+{
+    if (viewController != newViewController) {
+        [viewController release];
+        viewController = [newViewController retain];
+        [viewController setRepresentedObject: self];
+    }
+}
 
 #pragma mark -
 #pragma mark Hackery to support binding displayName

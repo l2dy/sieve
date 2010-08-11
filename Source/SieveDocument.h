@@ -21,10 +21,13 @@
 @interface SieveDocument : NSDocument {
     NSString *script;
     NSString *result;
+    NSViewController *viewController;
 }
 
 @property (readwrite, copy) NSString *script;
 @property (readwrite, copy) NSString *result;
+@property (readwrite, retain) NSViewController *viewController;
 
 - (IBAction) parseScript: (id) sender;
+
 @end
