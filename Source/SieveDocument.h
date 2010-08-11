@@ -14,20 +14,14 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-
-
 #import <Cocoa/Cocoa.h>
 
 @interface SieveDocument : NSDocument {
     NSString *script;
-    NSString *result;
     NSViewController *viewController;
 }
 
 @property (readwrite, copy) NSString *script;
-@property (readwrite, copy) NSString *result;
 @property (readwrite, retain) NSViewController *viewController;
-
-- (IBAction) parseScript: (id) sender;
 
 @end

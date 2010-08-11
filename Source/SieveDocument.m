@@ -16,7 +16,7 @@
 
 
 #import "SieveDocument.h"
-#import "SieveParser.h"
+#import "SieveScriptViewController.h"
 #import "SieveDocumentWindowController.h"
 
 @interface NSDocument (MessingWithInternals)
@@ -25,7 +25,7 @@
 
 @implementation SieveDocument
 
-@synthesize script, result;
+@synthesize script;
 @synthesize viewController;
 
 -(void) makeWindowControllers;
@@ -47,13 +47,6 @@
     [self setScript: [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease]];
     return YES;
 }
-
-- (IBAction) parseScript: (id) sender;
-{
-    SieveParser *parser = [[[SieveParser alloc] initWithString: [self script]] autorelease];
-    [self setResult: [[parser commands] description]];
-}
-
 
 - (NSViewController *) viewController;
 {
