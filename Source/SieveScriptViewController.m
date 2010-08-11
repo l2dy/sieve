@@ -15,36 +15,15 @@
  */
 
 
-#import "SieveDocumentWindowController.h"
 #import "SieveScriptViewController.h"
 
-@implementation SieveDocumentWindowController
 
-@synthesize scriptViewController;
+@implementation SieveScriptViewController
 
-- (id) init;
+- init;
 {
-    if (nil == [super initWithWindowNibName: @"SieveDocument"]) return nil;
-    
-    
+    if (nil == [super initWithNibName: @"SieveScriptView" bundle: nil]) return nil;
     return self;
 }
-
-- (id) initWithWindowNibName:(NSString *)windowNibName;
-{
-    NSAssert( NO, @"Should not be called" );
-    return nil;
-}
-
-- (void) setDocument:(NSDocument *)document;
-{
-    [super setDocument: document];
-    if (nil == scriptViewController) {
-        [self setScriptViewController: [[[SieveScriptViewController alloc] init] autorelease]];
-        [[self window] setContentView: [scriptViewController view]];
-    }
-    [scriptViewController setRepresentedObject: document];
-}
-
 
 @end
