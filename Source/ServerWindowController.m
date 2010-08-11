@@ -131,6 +131,8 @@
     } else {
         item = [tabView tabViewItemAtIndex: index];
     }
+    
+    return item;
 }
 
 - (void) windowDidLoad;
