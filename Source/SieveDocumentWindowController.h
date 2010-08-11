@@ -14,39 +14,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
+#import <Cocoa/Cocoa.h>
 
-#import "SieveDocument.h"
-#import "SieveParser.h"
-#import "SieveDocumentWindowController.h"
 
-@implementation SieveDocument
+@interface SieveDocumentWindowController : NSWindowController {
 
-@synthesize script, result;
-
--(void) makeWindowControllers;
-{
-    [self addWindowController: [[[SieveDocumentWindowController alloc] init] autorelease]];
-}
-
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-{
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
-    
-	return [script dataUsingEncoding: NSUTF8StringEncoding];
-}
-
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
-
-    [self setScript: [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease]];
-    return YES;
-}
-
-- (IBAction) parseScript: (id) sender;
-{
-    SieveParser *parser = [[[SieveParser alloc] initWithString: [self script]] autorelease];
-    [self setResult: [[parser commands] description]];
 }
 
 @end

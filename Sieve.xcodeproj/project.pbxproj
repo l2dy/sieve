@@ -69,6 +69,7 @@
 		26F2B0EF1212A02700458B80 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0EE1212A02700458B80 /* AppController.m */; };
 		26F2B1051212A4A500458B80 /* ServerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2B1031212A4A500458B80 /* ServerWindow.xib */; };
 		26F2B1091212A4EF00458B80 /* ServerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B1081212A4EF00458B80 /* ServerWindowController.m */; };
+		26F2B1D71212BDFB00458B80 /* SieveDocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -168,6 +169,8 @@
 		26F2B1041212A4A500458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ServerWindow.xib; sourceTree = "<group>"; };
 		26F2B1071212A4EF00458B80 /* ServerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerWindowController.h; sourceTree = "<group>"; };
 		26F2B1081212A4EF00458B80 /* ServerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerWindowController.m; sourceTree = "<group>"; };
+		26F2B1D51212BDFB00458B80 /* SieveDocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentWindowController.h; sourceTree = "<group>"; };
+		26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentWindowController.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D15AC360486D014006FF6A4 /* Sieve-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sieve-Info.plist"; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				26F2B0EE1212A02700458B80 /* AppController.m */,
 				26F2B1071212A4EF00458B80 /* ServerWindowController.h */,
 				26F2B1081212A4EF00458B80 /* ServerWindowController.m */,
+				26F2B1D51212BDFB00458B80 /* SieveDocumentWindowController.h */,
+				26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				26F2B0B312129B2600458B80 /* SieveDocument.m in Sources */,
 				26F2B0EF1212A02700458B80 /* AppController.m in Sources */,
 				26F2B1091212A4EF00458B80 /* ServerWindowController.m in Sources */,
+				26F2B1D71212BDFB00458B80 /* SieveDocumentWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

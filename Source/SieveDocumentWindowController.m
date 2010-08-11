@@ -15,38 +15,23 @@
  */
 
 
-#import "SieveDocument.h"
-#import "SieveParser.h"
 #import "SieveDocumentWindowController.h"
 
-@implementation SieveDocument
 
-@synthesize script, result;
+@implementation SieveDocumentWindowController
 
--(void) makeWindowControllers;
+- (id) init;
 {
-    [self addWindowController: [[[SieveDocumentWindowController alloc] init] autorelease]];
-}
-
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-{
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
+    if (nil == [super initWithWindowNibName: @"SieveDocument"]) return nil;
     
-	return [script dataUsingEncoding: NSUTF8StringEncoding];
+    
+    return self;
 }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+- (id) initWithWindowNibName:(NSString *)windowNibName;
 {
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
-
-    [self setScript: [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease]];
-    return YES;
-}
-
-- (IBAction) parseScript: (id) sender;
-{
-    SieveParser *parser = [[[SieveParser alloc] initWithString: [self script]] autorelease];
-    [self setResult: [[parser commands] description]];
+    NSAssert( NO, @"Should not be called" );
+    return nil;
 }
 
 @end
