@@ -155,11 +155,16 @@
     [scriptViewController setRepresentedObject: document];
 }
 
-
+- (NSString *) windowTitle;
+{
+    NSString *result = [baseURL host];
+    if (nil != [baseURL port] && 2000 != [[baseURL port] intValue]) result = [result stringByAppendingFormat: @":%@", [baseURL port]];
+    return result;
+}
 
 - (NSString *) windowTitleForDocumentDisplayName:(NSString *)displayName;
 {
-    return [NSString stringWithFormat: @"Server - %@", displayName];
+    return [NSString stringWithFormat: @"%@ - %@", [self windowTitle], displayName];
 }
 
 @end
