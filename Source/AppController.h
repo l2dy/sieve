@@ -22,6 +22,6 @@
 
 @property (readwrite, retain, nonatomic) NSMutableDictionary *openConnections;
 
-- (IBAction) openDocumentWithURL: (id) sender;
+- (IBAction) performOpenURL: (id) sender;
 
 @end

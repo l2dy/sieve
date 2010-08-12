@@ -87,8 +87,7 @@
     [self openURL: url];
 }
 
-
-- (IBAction) openDocumentWithURL: (id) sender;
+- (IBAction) performOpenURL: (id) sender;
 {
     [OpenURLController askForURLOnSuccess: ^(NSString *result) {
         NSURL *url = [NSURL URLWithString: result];
