@@ -65,7 +65,6 @@
     [[self window] makeKeyAndOrderFront: self];
 }
 
-
 #pragma mark -
 #pragma mark Tab bar delegate
 
@@ -152,6 +151,26 @@
 - (NSString *) windowTitleForDocumentDisplayName:(NSString *)displayName;
 {
     return [NSString stringWithFormat: @"%@ - %@", [self windowTitle], displayName];
+}
+
+#pragma mark -
+#pragma mark Closing the window/tabs
+
+- (IBAction) performCloseTab: (id) sender;
+{
+    
+}
+
+- (BOOL) hasOpenTabs;
+{
+    return [tabView numberOfTabViewItems] > 0;
+}
+
+- (BOOL) validateMenuItem: (NSMenuItem *) menuItem;
+{
+    if ([menuItem action] == @selector( performCloseTab: )) {
+        return [self hasOpenTabs];
+    }
 }
 
 @end
