@@ -28,6 +28,7 @@
 
 @implementation ServerWindowController
 
+@synthesize client;
 @synthesize baseURL;
 
 - (id) initWithURL: (NSURL *) url;
@@ -35,6 +36,11 @@
     if (nil == [super initWithWindowNibName: @"ServerWindow"]) return nil;
     
     [self setBaseURL: url];
+    
+    [self setClient: [[[SieveClient alloc] init] autorelease]];
+    [client setDelegate: self];
+    [client connectToURL: url];
+    [client listScripts];
     
     return self;
 }
@@ -204,6 +210,20 @@
     if ([menuItem action] == @selector( performCloseTab: )) {
         return [self hasOpenTabs];
     }
+}
+
+
+#pragma mark -
+#pragma mark SieveClient Delegate
+
+- (NSURLCredential *) sieveClient: (SieveClient *) sc needsCredentialsForUser: (NSString *) user;
+{
+    return nil;
+}
+
+- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scripts active: (NSString *)activeScript;
+{
+    NSLog( @"script list: %@", scripts );
 }
 
 @end

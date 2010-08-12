@@ -29,16 +29,24 @@ typedef enum {
 } SieveClientStatus;
 
 @class SieveClient;
+@class SieveOperation;
 
 @protocol SieveClientDelegate < NSObject > 
 
+- (NSURLCredential *) sieveClient: (SieveClient *) client needsCredentialsForUser: (NSString *) uid;
+
+@optional
 - (void) sieveClientEstablishedConnection: (SieveClient *) client;
+- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scripts active: (NSString *)activeScript;
+- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName;
+- (void) sieveClient: (SieveClient *) client storedScriptWithName: (NSString *) name;
 
 @end
 
 @interface SieveClient : NSObject
 {
     NSString *host;
+    NSString *user;
     
     AsyncSocket *socket;
     SaslConn *sasl;
@@ -52,17 +60,25 @@ typedef enum {
     SieveClientStatus status;
     
     __weak id <SieveClientDelegate> delegate;
+    
+    NSMutableArray *operations;
+    SieveOperation *currentOperation;
 }
 
 @property (readwrite, assign) id <SieveClientDelegate> delegate;
 
 @property (readonly, copy) NSString *host;
+@property (readwrite, copy) NSString *user;
 @property (readonly, assign) BOOL startTLSIfPossible;
 
 @property (readonly, assign) SieveClientStatus status;
 
 @property (readonly, copy) NSString *availableMechanisms;
 
+- (void) retrieveScript: (NSString *) name;
+- (void) setActiveScript: (NSString *) scriptName;
+- (void) putScript: (NSString *) script withName: (NSString *) name;
+- (void) listScripts;
 
 - (void) connectToURL: (NSURL *) url;
 - (void) connectToHost: (NSString *) serverHost port: (unsigned) port;

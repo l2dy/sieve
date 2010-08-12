@@ -18,6 +18,8 @@
 #import "SieveClient.h"
 #import "NSData+Base64Encoding.h"
 #import "NSScanner+QuotedString.h"
+#import "SieveOperation.h"
+#import "SieveClientInternals.h"
 
 // TODO: Verschiedene Empfangs-Routinen aufspalten und vereinheltichen
 
@@ -28,11 +30,11 @@
 @property (readwrite, retain) SaslConn *sasl;
 @property (readwrite, copy) NSString *availableMechanisms;
 @property (readwrite, assign) SieveClientStatus status;
+@property (readwrite, retain) NSMutableArray *operations;
+@property (readwrite, retain) SieveOperation *currentOperation;
 
 - (void) processResponseLine: (NSData *)readData list: (NSMutableArray *) receivedResponses block: (void (^)(NSDictionary *))completionBlock;
 - (void) receiveResponse: (void (^)(NSDictionary *))completionBlock;
-- (void) send: (NSString *) line completion: (void (^)(NSDictionary *))completionBlock;
-- (void) send: (NSString *) line;
 
 @end
 
@@ -44,6 +46,24 @@
 @synthesize sasl;
 @synthesize startTLSIfPossible;
 @synthesize delegate;
+@synthesize user;
+@synthesize operations;
+@synthesize currentOperation;
+
+- (NSMutableArray *) operations;
+{
+    if (nil == operations) {
+        operations = [[NSMutableArray alloc] init];
+    }
+    return operations;
+}
+
+- init;
+{
+    if (nil == [super init]) return nil;
+    startTLSIfPossible = YES;
+    return self;
+}
 
 - (void) dealloc;
 {
@@ -60,7 +80,7 @@
 - (void) receiveCaps: (NSDictionary *) response;
 {
     if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
-        bool notifyDelegate = YES;
+        bool readyForAuth = YES;
         for (NSString *line in [response objectForKey: @"response"]) {
             NSScanner *scanner = [NSScanner scannerWithString: line];
             [scanner setCaseSensitive: NO];
@@ -78,7 +98,7 @@
                 } else if ([item isEqualToString: @"starttls"]) {
                     if (startTLSIfPossible && !TLSActive) {
                         [self startTLS]; 
-                        notifyDelegate = NO;
+                        readyForAuth = NO;
                         break; // muss nicht weiter bearbeitet werden, nach TLS handshake kommt sowieso neue caps
                     }
                     
@@ -91,8 +111,9 @@
             }
         }
         
-        if (notifyDelegate) {
-            [delegate sieveClientEstablishedConnection: self];
+        if (readyForAuth) {
+            [self setStatus: SieveClientConnected];
+            [self auth];
         }
     } else {
         NSLog( @"Capability response is not OK" );
@@ -110,6 +131,8 @@
     if (nil != urlPort) {
         port = [urlPort unsignedIntValue];
     }
+    
+    [self setUser: [url user]];
     
     [self connectToHost: [url host] port: port];
 }
@@ -164,6 +187,10 @@
     [socket writeData: lineData withTimeout: -1 tag: 0];
 }
 
+- (void) sendData: (NSData *) data
+{
+    [socket writeData: data withTimeout: -1 tag: 0];
+}
 
 - (void) send: (NSString *) line completion: (void (^)(NSDictionary *))completionBlock;
 {
@@ -289,12 +316,13 @@
                 NSLog( @"data should be encoded" );
                 // TODO: sasl encoder installieren... wie auch immer
             } else {
-                // das sasl-objekt wird nicht mehr benötigt.
                 [self setSasl: nil];
-            };
+            }
             
-            // TODO: notify successful auth here
-            // [delegate sieveConnectionAuthentificatedSucessfully: self]
+            if ([delegate respondsToSelector: @selector( sieveClientEstablishedConnection: )]) {
+                [delegate sieveClientEstablishedConnection: self];
+            }
+            [self startNextOperation];
         }
         
     } else if ([scanner scanString: @"NO " intoString: NULL]) {
@@ -349,6 +377,16 @@
     
     [self setSasl:[[[SaslConn alloc] initWithService: @"sieve" server: host socket: socket flags: SaslConnSuccessData] autorelease]];
     
+    NSURLCredential *cred = [delegate sieveClient: self needsCredentialsForUser: user];
+    if (nil == cred) {
+        [self disconnect];
+        return;
+    }
+    
+    [self setUser: [cred user]];
+    [sasl setAuthName: user];
+    [sasl setPassword: [cred password]];
+
     NSData *outData = nil;
     SaslConnStatus rc = [sasl startWithMechanisms: availableMechanisms clientOut: &outData];
     if (rc != SaslConnFailed) {
@@ -373,7 +411,46 @@
     }
 }
 
+- (void) startNextOperation;
+{
+    if ([operations count] > 0) {
+        [self setCurrentOperation: [operations objectAtIndex: 0]];
+        [operations removeObjectAtIndex: 0];
+        [currentOperation start];
+    } else {
+        [self setCurrentOperation: nil];
+    }
+}
+
+- (void) addOperation: (SieveOperation *) operation;
+{
+    [[self operations] addObject: operation];
+    if (nil == currentOperation && status == SieveClientAuthenticated) [self startNextOperation];
+}
+
+- (void) retrieveScript: (NSString *) name;
+{
+    
+}
+
+- (void) setActiveScript: (NSString *) scriptName;
+{
+    
+}
+
+- (void) putScript: (NSString *) script withName: (NSString *) name;
+{
+    
+}
+
+- (void) listScripts;
+{
+    [self addOperation: [[[SieveListScriptsOperation alloc] initForClient: self] autorelease]];
+}
+
+
 #pragma mark -
+#pragma mark Logging
 
 - (NSArray *)log {
     if (!log) {

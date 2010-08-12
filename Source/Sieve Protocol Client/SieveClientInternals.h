@@ -14,26 +14,15 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-
-#import <Cocoa/Cocoa.h>
-
 #import "SieveClient.h"
 
-@class PSMTabBarControl;
-@class SieveScriptViewController;
+@interface SieveClient (Internals)
 
-@interface ServerWindowController : NSWindowController < NSTabViewDelegate, NSWindowDelegate, SieveClientDelegate > {
-    IBOutlet PSMTabBarControl *tabBar;
-    IBOutlet NSTabView *tabView;
-    NSURL *baseURL;
-    SieveClient *client;
-}
-
-@property (readwrite, retain) SieveClient *client;
-@property (readwrite, copy) NSURL *baseURL;
-
-- (id) initWithURL: (NSURL *) url;
-
-- (void) openURL: (NSURL *) url;
+- (void) sendData: (NSData *) data;
+- (void) send: (NSString *) line completion: (void (^)(NSDictionary *))completionBlock;
+- (void) send: (NSString *) line;
+- (void) startNextOperation;
+- (void) logLine: (NSString *) line from: (NSString *) source;
+- (void) receiveResponse: (void (^)(NSDictionary *))completionBlock;
 
 @end

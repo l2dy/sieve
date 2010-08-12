@@ -10,6 +10,7 @@
 		1DDD582C0DA1D0D100B32029 /* SieveDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58280DA1D0D100B32029 /* SieveDocument.xib */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
+		264084B21213FD61004F42BB /* SieveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264084B11213FD61004F42BB /* SieveOperation.m */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -85,6 +86,9 @@
 		1DDD58290DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SieveDocument.xib; sourceTree = "<group>"; };
 		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2639EA9E120F74490023F625 /* libsasl2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsasl2.dylib; path = /usr/lib/libsasl2.dylib; sourceTree = "<absolute>"; };
+		264084B01213FD61004F42BB /* SieveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveOperation.h; sourceTree = "<group>"; };
+		264084B11213FD61004F42BB /* SieveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveOperation.m; sourceTree = "<group>"; };
+		264084B512140058004F42BB /* SieveClientInternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveClientInternals.h; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -341,6 +345,9 @@
 				26F2B09D12129B2600458B80 /* SaslConn.m */,
 				26F2B09E12129B2600458B80 /* SieveClient.h */,
 				26F2B09F12129B2600458B80 /* SieveClient.m */,
+				264084B01213FD61004F42BB /* SieveOperation.h */,
+				264084B11213FD61004F42BB /* SieveOperation.m */,
+				264084B512140058004F42BB /* SieveClientInternals.h */,
 			);
 			path = "Sieve Protocol Client";
 			sourceTree = "<group>";
@@ -553,6 +560,7 @@
 				26F2B2071212C2B800458B80 /* SieveScriptViewController.m in Sources */,
 				26F2B4C01212F73E00458B80 /* ServerScriptDocument.m in Sources */,
 				26F2B5111213015800458B80 /* OpenURLController.m in Sources */,
+				264084B21213FD61004F42BB /* SieveOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
