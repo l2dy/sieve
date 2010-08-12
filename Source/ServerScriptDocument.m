@@ -49,4 +49,9 @@
     [self didChangeValueForKey: @"isEdited"];
 }
 
+- (NSWindow *) windowForSheet;
+{
+    return [server window];
+}
+
 @end

@@ -20,6 +20,12 @@
 
 #import "PSMTabBarControl.h"
 
+@interface ServerWindowController ()
+
+- (void) closeTab:(NSTabViewItem *)tab;
+
+@end
+
 @implementation ServerWindowController
 
 @synthesize baseURL;
@@ -45,7 +51,6 @@
     [tabBar setTearOffStyle: PSMTabBarTearOffMiniwindow];
     [tabBar setAllowsBackgroundTabClosing: YES];
     [tabBar setUseOverflowMenu: YES];
-    [tabBar setAllowsBackgroundTabClosing: YES];
     [tabBar setAutomaticallyAnimates: YES];
 }
 
@@ -87,6 +92,17 @@
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
     [[tabViewItem identifier] addWindowController: self];
+}
+
+- (BOOL) tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem;
+{
+    NSLog( @"should close tab view for %@", [[[tabViewItem identifier] fileURL] absoluteString] );
+    if ([[tabViewItem identifier] isDocumentEdited]) {
+        [self closeTab: tabViewItem];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark -
@@ -156,9 +172,26 @@
 #pragma mark -
 #pragma mark Closing the window/tabs
 
+- (void)document:(NSDocument *)document shouldClose:(BOOL)shouldClose  contextInfo:(void  *)contextInfo
+{
+    NSTabViewItem *tab = (NSTabViewItem *)contextInfo;
+    if (shouldClose) {
+        [tabView removeTabViewItem: tab];
+        [self tabView: tabView didCloseTabViewItem: tab];
+    }
+}
+
+- (void) closeTab: (NSTabViewItem *) tab;
+{
+    NSParameterAssert( nil != tab );
+    
+    NSDocument *doc = [tab identifier];
+    [doc canCloseDocumentWithDelegate: self shouldCloseSelector:@selector(document:shouldClose:contextInfo:) contextInfo: tab];
+}
+
 - (IBAction) performCloseTab: (id) sender;
 {
-    
+    [self closeTab: [tabView selectedTabViewItem]];
 }
 
 - (BOOL) hasOpenTabs;
