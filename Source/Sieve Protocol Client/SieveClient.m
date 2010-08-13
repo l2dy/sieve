@@ -120,7 +120,6 @@
             [self auth];
         }
     } else {
-        NSLog( @"Capability response is not OK" );
         // TODO: notify delegate
     }
 }
@@ -148,7 +147,6 @@
     [[self mutableArrayValueForKey: @"log"] removeAllObjects];
     [self setHost: newHost]; 
     
-    NSLog( @"connecting to %@:%d", host, port );
     [self setSocket: [[[AsyncSocket alloc] initWithDelegate: self] autorelease]];
     [socket connectToHost: host onPort: port error: NULL];
     
@@ -168,9 +166,7 @@
 - (void) startTLS;
 {
     [self send: @"STARTTLS" completion: ^(NSDictionary *info) {
-        NSLog( @"Response to STARTTLS: %@", info );
         if ([[info objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
-            NSLog( @"OK, telling socket to start tls negotiation" );
             [socket startTLS: nil];
             TLSActive = true;
             [self receiveResponse: ^(NSDictionary *response) {
@@ -252,19 +248,15 @@
     NSString *responseString = nil;
     if ([scanner scanString: @"OK" intoString: &responseString] || [scanner scanString: @"NO" intoString: &responseString] || [scanner scanString: @"BYE" intoString: &responseString]) {
         [self logLine: receivedLine from: @"Server"];
-        NSLog( @"%@ response: %@", responseString, receivedResponses );
         
         NSString *extraInfo = nil;
 
         if ([scanner scanString: @"(" intoString: NULL]) {
             [scanner scanUpToString: @")" intoString: &extraInfo];
             [scanner scanString: @")" intoString: NULL];
-            NSLog( @"extraInfo: %@", extraInfo );
         }
         
         [self readStringFromScanner: scanner completion: ^(NSString *userInfo) {
-            NSLog( @"userInfo: %@", userInfo );
-            
             if (completionBlock != nil) {
                 NSMutableDictionary *completeResponse = [NSMutableDictionary dictionary];
                 [completeResponse setObject:responseString forKey:@"responseCode"];
@@ -309,7 +301,6 @@
         if (lastData || (status != SieveClientAuthenticated)) {
             SaslConnStatus rc = [sasl finishWithServerData: lastData];
             if (rc == SaslConnSuccess) {
-                NSLog( @"auth successful" );
                 [self setStatus: SieveClientAuthenticated];
             }
         }
@@ -324,16 +315,13 @@
         
     } else if ([scanner scanString: @"NO " intoString: NULL]) {
         [self logLine: receivedString from: @"Server"];
-        NSLog( @"auth failed." );
         [self setStatus: SieveClientConnected];
         [delegate sieveClient: self needsCredentials: nil];
         
     } else if ([scanner scanString: @"BYE " intoString: NULL]) {
         [self logLine: receivedString from: @"Server"];
-        NSLog( @"auth failed with BYE" );
         [socket disconnect];
-        // [delegate sieveConnection: self gotDisconnectedWithError: bla]
-        // TODO: notification dass verbindung abgebrochen wurde
+        // TODO: Notify delegate that connection was dropped
         
     } else {
         NSString *rest = @"";
@@ -345,12 +333,11 @@
         SaslConnStatus rc = [sasl continueWithServerData: data clientOut: &outData];
         
         if (rc == SaslConnFailed) {
-            NSLog( @"Failed auth" );
-            // Der server weiß nicht, dass etwas nicht stimmt, also auth abbrechen mit "*"
+            // Abort the auth by sending "*"
             [self sendString: @"\"*\""];
             [self receiveResponse: nil];
             [self disconnect];
-            // TODO: [delegate sieveConnection: self gotDisconnectedWithError: bla]
+            // TODO: Notify delegate that connection was dropped
             
         } else {
             if (rc == SaslConnSuccess) [self setStatus: SieveClientAuthenticated];
@@ -377,7 +364,7 @@
 
 - (void) cancelAuth;
 {
-    // Nothing to do...
+    // TODO: Disconnect socket
 }
 
 - (void) authWithUser: (NSString *) userName andPassword: (NSString *) password;
@@ -409,9 +396,8 @@
             [self authStep: receivedString];
         }];
     } else {
-        NSLog( @"SASL AUTH nicht möglich, problem im Client" );
         [self disconnect];
-        // TODO: [delegate disconnectedBecauseSASL]
+        // TODO: Notify delegate that connection was dropped
     }
 }
 
@@ -443,7 +429,6 @@
         if (errSecSuccess == result) {
             NSData *data = [NSData dataWithBytesNoCopy: passwordData length: passwordLength freeWhenDone: NO];
             password = [[[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding] autorelease];
-            NSLog( @"password: %@", password );
             
             if (nil == userName) {
                 SecKeychainAttribute nameAttribute = {
@@ -456,18 +441,11 @@
                 if (result == errSecSuccess) {
                     data = [NSData dataWithBytesNoCopy: nameAttribute.data length: nameAttribute.length freeWhenDone:NO];
                     userName = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
-                    NSLog( @"user: %@", userName );
                     SecKeychainItemFreeContent( &attrList, NULL );
-                } else {
-                    NSLog( @"error %d", result );
-                    NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
-                }
+                } 
             }
             
             SecKeychainItemFreeContent( NULL, passwordData );
-        } else {
-            NSLog( @"error %d", result );
-            NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
         }
         
         triedKeychain = YES;
