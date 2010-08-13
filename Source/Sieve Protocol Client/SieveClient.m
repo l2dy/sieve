@@ -417,7 +417,7 @@
 
 - (void) auth;
 {
-    NSString *userName = nil;
+    NSString *userName = [self user];
     NSString *password = nil;
 
     if (!triedKeychain) {
@@ -425,31 +425,43 @@
         UInt32 passwordLength = 0;
         void *passwordData = NULL;
         SecKeychainItemRef item = NULL;
+        
+        const char *userNameString = NULL;
+        unsigned userNameLength = 0;
+        
+        if (nil != userName) {
+            NSData *userNameData = [userName dataUsingEncoding: NSUTF8StringEncoding];
+            userNameString = [userNameData bytes];
+            userNameLength = [userNameData length];
+        }
+        
         OSStatus result = SecKeychainFindInternetPassword( NULL, [serverName length], [serverName bytes], 0, NULL,
-                                        0, NULL, 0, NULL, [socket connectedPort], FOUR_CHAR_CODE( 'SieV' ), 
-                                        kSecAuthenticationTypeDefault, &passwordLength, 
-                                        &passwordData, &item );
+                                        userNameLength, userNameString, 0, NULL, [socket connectedPort], 
+                                        FOUR_CHAR_CODE( 'SieV' ), kSecAuthenticationTypeDefault, 
+                                        &passwordLength, &passwordData, &item );
         
         if (errSecSuccess == result) {
             NSData *data = [NSData dataWithBytesNoCopy: passwordData length: passwordLength freeWhenDone: NO];
             password = [[[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding] autorelease];
             NSLog( @"password: %@", password );
             
-            SecKeychainAttribute nameAttribute = {
-                kSecAccountItemAttr, 0, NULL
-            };
-            SecKeychainAttributeList attrList = {
-                1, &nameAttribute
-            };
-            result = SecKeychainItemCopyContent( item, NULL, &attrList, NULL, NULL );
-            if (result == errSecSuccess) {
-                data = [NSData dataWithBytesNoCopy: nameAttribute.data length: nameAttribute.length freeWhenDone:NO];
-                userName = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
-                NSLog( @"user: %@", userName );
-                SecKeychainItemFreeContent( &attrList, NULL );
-            } else {
-                NSLog( @"error %d", result );
-                NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
+            if (nil == userName) {
+                SecKeychainAttribute nameAttribute = {
+                    kSecAccountItemAttr, 0, NULL
+                };
+                SecKeychainAttributeList attrList = {
+                    1, &nameAttribute
+                };
+                result = SecKeychainItemCopyContent( item, NULL, &attrList, NULL, NULL );
+                if (result == errSecSuccess) {
+                    data = [NSData dataWithBytesNoCopy: nameAttribute.data length: nameAttribute.length freeWhenDone:NO];
+                    userName = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
+                    NSLog( @"user: %@", userName );
+                    SecKeychainItemFreeContent( &attrList, NULL );
+                } else {
+                    NSLog( @"error %d", result );
+                    NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
+                }
             }
             
             SecKeychainItemFreeContent( NULL, passwordData );
@@ -464,7 +476,8 @@
     if (nil != password && nil != userName) {
         [self authWithUser: userName andPassword: password ];
     } else {
-        [delegate sieveClient: self needsCredentials: nil];
+        NSURLCredential *partialCred = [NSURLCredential credentialWithUser: userName password: password persistence: NSURLCredentialPersistenceNone];
+        [delegate sieveClient: self needsCredentials: partialCred];
     }
 }
 
