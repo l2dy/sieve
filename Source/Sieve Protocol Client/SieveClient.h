@@ -33,7 +33,8 @@ typedef enum {
 
 @protocol SieveClientDelegate < NSObject > 
 
-- (NSURLCredential *) sieveClient: (SieveClient *) client needsCredentialsForUser: (NSString *) uid;
+- (void) sieveClient: (SieveClient *) client needsCredentials: (NSURLCredential *) defaultCreds;
+- (void) sieveClientSucceededAuth: (SieveClient *) client;
 
 @optional
 - (void) sieveClientEstablishedConnection: (SieveClient *) client;
@@ -63,6 +64,8 @@ typedef enum {
     
     NSMutableArray *operations;
     SieveOperation *currentOperation;
+    
+    BOOL triedKeychain;
 }
 
 @property (readwrite, assign) id <SieveClientDelegate> delegate;
@@ -74,6 +77,10 @@ typedef enum {
 @property (readonly, assign) SieveClientStatus status;
 
 @property (readonly, copy) NSString *availableMechanisms;
+
+
+- (void) continueAuthWithCredentials: (NSURLCredential *) creds;
+- (void) cancelAuth;
 
 - (void) retrieveScript: (NSString *) name;
 - (void) setActiveScript: (NSString *) scriptName;

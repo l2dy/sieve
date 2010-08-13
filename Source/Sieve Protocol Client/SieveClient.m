@@ -35,6 +35,7 @@
 
 - (void) processResponseLine: (NSData *)readData list: (NSMutableArray *) receivedResponses block: (void (^)(NSDictionary *))completionBlock;
 - (void) receiveResponse: (void (^)(NSDictionary *))completionBlock;
+- (void) authWithUser: (NSString *) userName andPassword: (NSString *) password;
 
 @end
 
@@ -113,6 +114,9 @@
         
         if (readyForAuth) {
             [self setStatus: SieveClientConnected];
+            if ([delegate respondsToSelector: @selector( sieveClientEstablishedConnection: )]) {
+                [delegate sieveClientEstablishedConnection: self];
+            }
             [self auth];
         }
     } else {
@@ -311,25 +315,18 @@
         }
         
         if (status == SieveClientAuthenticated) {
-            NSLog( @"letztendlich auth wirklich erfolgreich!!!" );
-            if ([sasl needsToEncodeData]) {
-                NSLog( @"data should be encoded" );
-                // TODO: sasl encoder installieren... wie auch immer
-            } else {
-                [self setSasl: nil];
-            }
+            NSAssert( ![sasl needsToEncodeData], @"Sieve security layers are not supported." );
+            [self setSasl: nil];
             
-            if ([delegate respondsToSelector: @selector( sieveClientEstablishedConnection: )]) {
-                [delegate sieveClientEstablishedConnection: self];
-            }
+            [delegate sieveClientSucceededAuth: self];
             [self startNextOperation];
         }
         
     } else if ([scanner scanString: @"NO " intoString: NULL]) {
         [self logLine: receivedString from: @"Server"];
         NSLog( @"auth failed." );
-        // TODO: benutzer fragen ob neuer versuch unternommen werden soll
-        // [delegate sieveConnection: self failedAuthWithError: bla]
+        [self setStatus: SieveClientConnected];
+        [delegate sieveClient: self needsCredentials: nil];
         
     } else if ([scanner scanString: @"BYE " intoString: NULL]) {
         [self logLine: receivedString from: @"Server"];
@@ -370,22 +367,29 @@
     
 }
 
-- (void) auth;
+- (void) continueAuthWithCredentials: (NSURLCredential *) creds;
+{
+    if ([creds persistence] == NSURLCredentialPersistencePermanent) {
+        // TODO: store credentials in key chain
+    }
+    [self authWithUser: [creds user] andPassword: [creds password]];
+}
+
+- (void) cancelAuth;
+{
+    // Nothing to do...
+}
+
+- (void) authWithUser: (NSString *) userName andPassword: (NSString *) password;
 {
     NSAssert( status == SieveClientConnected, @"Wrong status" );
     [self setStatus: SieveClientAuthenticating];
     
     [self setSasl:[[[SaslConn alloc] initWithService: @"sieve" server: host socket: socket flags: SaslConnSuccessData] autorelease]];
     
-    NSURLCredential *cred = [delegate sieveClient: self needsCredentialsForUser: user];
-    if (nil == cred) {
-        [self disconnect];
-        return;
-    }
-    
-    [self setUser: [cred user]];
-    [sasl setAuthName: user];
-    [sasl setPassword: [cred password]];
+    [self setUser: userName];
+    [sasl setAuthName: userName];
+    [sasl setPassword: password];
 
     NSData *outData = nil;
     SaslConnStatus rc = [sasl startWithMechanisms: availableMechanisms clientOut: &outData];
@@ -408,6 +412,59 @@
         NSLog( @"SASL AUTH nicht möglich, problem im Client" );
         [self disconnect];
         // TODO: [delegate disconnectedBecauseSASL]
+    }
+}
+
+- (void) auth;
+{
+    NSString *userName = nil;
+    NSString *password = nil;
+
+    if (!triedKeychain) {
+        NSData *serverName = [host dataUsingEncoding: NSUTF8StringEncoding];
+        UInt32 passwordLength = 0;
+        void *passwordData = NULL;
+        SecKeychainItemRef item = NULL;
+        OSStatus result = SecKeychainFindInternetPassword( NULL, [serverName length], [serverName bytes], 0, NULL,
+                                        0, NULL, 0, NULL, [socket connectedPort], FOUR_CHAR_CODE( 'SieV' ), 
+                                        kSecAuthenticationTypeDefault, &passwordLength, 
+                                        &passwordData, &item );
+        
+        if (errSecSuccess == result) {
+            NSData *data = [NSData dataWithBytesNoCopy: passwordData length: passwordLength freeWhenDone: NO];
+            password = [[[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding] autorelease];
+            NSLog( @"password: %@", password );
+            
+            SecKeychainAttribute nameAttribute = {
+                kSecAccountItemAttr, 0, NULL
+            };
+            SecKeychainAttributeList attrList = {
+                1, &nameAttribute
+            };
+            result = SecKeychainItemCopyContent( item, NULL, &attrList, NULL, NULL );
+            if (result == errSecSuccess) {
+                data = [NSData dataWithBytesNoCopy: nameAttribute.data length: nameAttribute.length freeWhenDone:NO];
+                userName = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
+                NSLog( @"user: %@", userName );
+                SecKeychainItemFreeContent( &attrList, NULL );
+            } else {
+                NSLog( @"error %d", result );
+                NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
+            }
+            
+            SecKeychainItemFreeContent( NULL, passwordData );
+        } else {
+            NSLog( @"error %d", result );
+            NSLog( @"message: %@", SecCopyErrorMessageString( result, NULL ) );
+        }
+        
+        triedKeychain = YES;
+    }
+    
+    if (nil != password && nil != userName) {
+        [self authWithUser: userName andPassword: password ];
+    } else {
+        [delegate sieveClient: self needsCredentials: nil];
     }
 }
 

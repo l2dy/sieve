@@ -11,6 +11,7 @@
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
 		264084B21213FD61004F42BB /* SieveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264084B11213FD61004F42BB /* SieveOperation.m */; };
+		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -89,6 +90,7 @@
 		264084B01213FD61004F42BB /* SieveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveOperation.h; sourceTree = "<group>"; };
 		264084B11213FD61004F42BB /* SieveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveOperation.m; sourceTree = "<group>"; };
 		264084B512140058004F42BB /* SieveClientInternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveClientInternals.h; sourceTree = "<group>"; };
+		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */,
 				26F2AE2E1212981E00458B80 /* Carbon.framework in Frameworks */,
+				2659699512153CC10050A913 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +421,7 @@
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
 				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 				2639EA9E120F74490023F625 /* libsasl2.dylib */,
+				2659699412153CC10050A913 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
