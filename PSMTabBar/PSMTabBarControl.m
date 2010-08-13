@@ -363,16 +363,11 @@
 
 - (void)setStyleNamed:(NSString *)name
 {
-    id <PSMTabStyle> newStyle;
-    if ([name isEqualToString:@"Aqua"]) {
-        newStyle = [[PSMAquaTabStyle alloc] init];
-    } else if ([name isEqualToString:@"Unified"]) {
-        newStyle = [[PSMUnifiedTabStyle alloc] init];
-    } else if ([name isEqualToString:@"Adium"]) {
-        newStyle = [[PSMAdiumTabStyle alloc] init];
-    } else {
-        newStyle = [[PSMMetalTabStyle alloc] init];
-    }
+    NSString *className = [NSString stringWithFormat: @"PSM%@TabStyle", [name capitalizedString]];
+    Class styleClass = NSClassFromString( className );
+    if (Nil == styleClass) styleClass = [PSMMetalTabStyle class];
+
+    id <PSMTabStyle> newStyle = [[styleClass alloc] init];
    
     [self setStyle:newStyle];
     [newStyle release];
