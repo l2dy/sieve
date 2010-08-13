@@ -16,6 +16,7 @@
 
 #import "SieveOperation.h"
 #import "SieveClientInternals.h"
+#import "NSScanner+QuotedString.h"
 
 @implementation SieveOperation
 
@@ -64,12 +65,24 @@
         id <SieveClientDelegate> delegate = [client delegate];
         
         if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:)]) {
-            // TODO: parse list, find out the active script and so on and so on.
             
-            NSArray *scripts = [response objectForKey: @"responses"];
-            NSString *activeScript;
+            NSArray *responseLines = [response objectForKey: @"response"];
+            NSString *activeScript = nil;
+            NSMutableArray *scriptNames = [NSMutableArray arrayWithCapacity: [responseLines count]];
+            for (NSString *line in responseLines) {
+                NSScanner *scanner = [NSScanner scannerWithString: line];
+                [scanner setCaseSensitive: NO];
+                
+                NSString *scriptName = nil;
+                if ([scanner scanQuotedString: &scriptName]) {
+                    [scriptNames addObject: scriptName];
+                    if ([scanner scanString: @"ACTIVE" intoString: NULL]) {
+                        activeScript = scriptName;
+                    }
+                }
+            }
             
-            [delegate sieveClient: client retrievedScriptList: scripts active: activeScript];
+            [delegate sieveClient: client retrievedScriptList: scriptNames active: activeScript];
         }
     }
 

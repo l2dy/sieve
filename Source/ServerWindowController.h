@@ -27,13 +27,27 @@
     IBOutlet NSTabView *tabView;
     NSURL *baseURL;
     SieveClient *client;
+    NSMutableArray *scripts;
+    NSString *activeScript;
 }
 
 @property (readwrite, retain) SieveClient *client;
 @property (readwrite, copy) NSURL *baseURL;
+@property (readwrite, copy) NSString *activeScript;
 
 - (id) initWithURL: (NSURL *) url;
 
 - (void) openURL: (NSURL *) url;
+
+- (NSArray *)scripts;
+- (void) setScripts: (NSArray *) newScripts;
+
+- (unsigned)countOfScripts;
+- (id)objectInScriptsAtIndex:(unsigned)theIndex;
+- (void)getScripts:(id *)objsPtr range:(NSRange)range;
+- (void)insertObject:(id)obj inScriptsAtIndex:(unsigned)theIndex;
+- (void)removeObjectFromScriptsAtIndex:(unsigned)theIndex;
+- (void)replaceObjectInScriptsAtIndex:(unsigned)theIndex withObject:(id)obj;
+
 
 @end

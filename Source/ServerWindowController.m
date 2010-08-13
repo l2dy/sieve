@@ -30,6 +30,7 @@
 
 @synthesize client;
 @synthesize baseURL;
+@synthesize activeScript;
 
 - (id) initWithURL: (NSURL *) url;
 {
@@ -216,14 +217,83 @@
 #pragma mark -
 #pragma mark SieveClient Delegate
 
-- (NSURLCredential *) sieveClient: (SieveClient *) sc needsCredentialsForUser: (NSString *) user;
+- (void) sieveClient: (SieveClient *) c needsCredentials: (NSURLCredential *) defaultCreds;
 {
-    return nil;
+    [c cancelAuth];
 }
 
-- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scripts active: (NSString *)activeScript;
+- (void) sieveClientSucceededAuth: (SieveClient *) client;
 {
-    NSLog( @"script list: %@", scripts );
+    NSLog( @"auth successful!" );
 }
+
+- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scriptList active: (NSString *)newActiveScript;
+{
+    [self setScripts: scriptList];
+    [self setActiveScript: newActiveScript];
+}
+
+
+#pragma mark -
+#pragma mark Accessors
+
+- (void) setScripts: (NSArray *) newScripts;
+{
+    if (scripts != newScripts) {
+        [scripts release];
+        scripts = [newScripts mutableCopy];
+    }
+}
+
+- (NSArray *)scripts {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    return [[scripts retain] autorelease];
+}
+
+- (unsigned)countOfScripts {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    return [scripts count];
+}
+
+- (id)objectInScriptsAtIndex:(unsigned)theIndex {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    return [scripts objectAtIndex:theIndex];
+}
+
+- (void)getScripts:(id *)objsPtr range:(NSRange)range {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    [scripts getObjects:objsPtr range:range];
+}
+
+- (void)insertObject:(id)obj inScriptsAtIndex:(unsigned)theIndex {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    [scripts insertObject:obj atIndex:theIndex];
+}
+
+- (void)removeObjectFromScriptsAtIndex:(unsigned)theIndex {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    [scripts removeObjectAtIndex:theIndex];
+}
+
+- (void)replaceObjectInScriptsAtIndex:(unsigned)theIndex withObject:(id)obj {
+    if (!scripts) {
+        scripts = [[NSMutableArray alloc] init];
+    }
+    [scripts replaceObjectAtIndex:theIndex withObject:obj];
+}
+
+
 
 @end
