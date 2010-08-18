@@ -71,6 +71,8 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
     NSAssert( saveOperation != NSAutosaveOperation, @"I don't support autosave" );
     NSAssert( [typeName isEqualToString: @"SieveScript"], @"I only support sieve scripts" );
     
+    [[self viewController] commitEditing];
+    
     if ([url isFileURL]) {
         [self saveToURL:url ofType:typeName forSaveOperation:saveOperation delegate:delegate didSaveSelector: selector contextInfo: contextInfo];        
     } else {
