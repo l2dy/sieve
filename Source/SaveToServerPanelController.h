@@ -13,6 +13,7 @@ typedef void (^SaveCompletionBlock)( NSInteger returnCode, NSString *name );
 
 @interface SaveToServerPanelController : NSWindowController {
     NSString *result;
+    IBOutlet NSObjectController *objectController;
 }
 
 @property (readwrite, copy) NSString *result;

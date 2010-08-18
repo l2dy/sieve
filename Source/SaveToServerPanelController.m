@@ -22,11 +22,13 @@
 
 - (IBAction) saveClicked: (id) sender;
 {
+    [objectController commitEditing];
     [NSApp endSheet: [self window] returnCode: NSOKButton];
 }
 
 - (IBAction) cancelClicked: (id) sender;
 {
+    [objectController discardEditing];
     [NSApp endSheet: [self window] returnCode: NSCancelButton];
 }
 

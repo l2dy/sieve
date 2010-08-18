@@ -22,6 +22,7 @@
     NSString *currentString;
     IBOutlet NSArrayController *historyArray;
     void (^successBlock)( NSString *result );
+    IBOutlet NSObjectController *objectController;
 }
 
 + (void) askForURLOnSuccess: (void (^)( NSString *result )) successBlock;

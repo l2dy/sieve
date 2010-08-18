@@ -36,6 +36,8 @@
 
 - (IBAction) openClicked: (id) sender;
 {
+    [objectController commitEditing];
+    
     while (true) {
         NSInteger oldIndex = [[historyArray arrangedObjects] indexOfObject: currentString];
         if (oldIndex == NSNotFound) break;
@@ -58,6 +60,8 @@
 
 - (IBAction) cancelClicked: (id) sender;
 {
+    [objectController discardEditing];
+    
     [[self window] close];
 }
 
