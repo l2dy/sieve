@@ -170,7 +170,7 @@
 									<nil key="NSDefaultParagraphStyle"/>
 								</object>
 								<int key="NSTVFlags">6</int>
-								<string key="NSMaxSize">{997, 1e+07}</string>
+								<string key="NSMaxSize">{1012, 1e+07}</string>
 								<string key="NSMinize">{223, 0}</string>
 								<nil key="NSDelegate"/>
 							</object>
@@ -250,6 +250,22 @@
 						<reference key="destination" ref="62089660"/>
 					</object>
 					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: representedObject.script</string>
+						<reference key="source" ref="62089660"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="62089660"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">value: representedObject.script</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">representedObject.script</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">40</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -357,7 +373,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
