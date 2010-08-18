@@ -23,6 +23,8 @@
 
 // TODO: Verschiedene Empfangs-Routinen aufspalten und vereinheltichen
 
+NSString *const kSieveURLScheme = @"sieve";
+
 @interface SieveClient ()
 
 @property (readwrite, copy) NSString *host;
@@ -126,9 +128,9 @@
 
 - (void) connectToURL: (NSURL *) url;
 {
-    NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Accepting only sieve URLs" );
+    NSAssert( [[url scheme] isEqualToString: kSieveURLScheme], @"Accepting only sieve URLs" );
     
-    unsigned port = 2000;
+    unsigned port = kSieveDefaultPort;
     
     NSNumber *urlPort = [url port];
     if (nil != urlPort) {
@@ -374,7 +376,7 @@
     NSAssert( status == SieveClientConnected, @"Wrong status" );
     [self setStatus: SieveClientAuthenticating];
     
-    [self setSasl:[[[SaslConn alloc] initWithService: @"sieve" server: host socket: socket flags: SaslConnSuccessData] autorelease]];
+    [self setSasl:[[[SaslConn alloc] initWithService: kSieveURLScheme server: host socket: socket flags: SaslConnSuccessData] autorelease]];
     
     [self setUser: userName];
     [sasl setAuthName: userName];

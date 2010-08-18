@@ -51,7 +51,7 @@
 
 - (ServerWindowController *) serverWindowForURL: (NSURL *) url;
 {
-    NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Only work with sieve URLs" );
+    NSAssert( [[url scheme] isEqualToString: kSieveURLScheme], @"Only work with sieve URLs" );
     
     NSURL *rootUrl = [[NSURL URLWithString:@"/" relativeToURL: url] absoluteURL];
     
@@ -72,7 +72,7 @@
     
     if ([url isFileURL]) {
         [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: url display: YES error: NULL];
-    } else if ([[url scheme] isEqualToString: @"sieve"]) {
+    } else if ([[url scheme] isEqualToString: kSieveURLScheme]) {
         ServerWindowController *controller = [self serverWindowForURL: url];
         [controller openURL: url];
     } else {

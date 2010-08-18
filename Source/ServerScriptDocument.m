@@ -31,7 +31,7 @@
     if (nil == [super init]) return nil;
     
     [self setFileURL: documentURL];
-    [self setFileType: @"SieveScript"];
+    [self setFileType: kSieveScriptFileType];
     [self setServer: srv];
     
     return self;
@@ -69,14 +69,14 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
 - (void) saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)selector contextInfo:(void *)contextInfo;
 {
     NSAssert( saveOperation != NSAutosaveOperation, @"I don't support autosave" );
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"I only support sieve scripts" );
+    NSAssert( [typeName isEqualToString: kSieveScriptFileType], @"I only support sieve scripts" );
     
     [[self viewController] commitEditing];
     
     if ([url isFileURL]) {
-        [self saveToURL:url ofType:typeName forSaveOperation:saveOperation delegate:delegate didSaveSelector: selector contextInfo: contextInfo];        
+        [super saveToURL:url ofType:typeName forSaveOperation:saveOperation delegate:delegate didSaveSelector: selector contextInfo: contextInfo];        
     } else {
-        NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Support only SIEVE URLs" );
+        NSAssert( [[url scheme] isEqualToString: kSieveURLScheme], @"Support only SIEVE URLs" );
         
         SaveToURLBlock block = [^(BOOL result, NSError *error){
             if (result) {
@@ -124,7 +124,7 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
     [savePanel beginSheetModalForWindow: [self windowForSheet] completionBlock: ^( NSInteger rc, NSString *name) {
         if (NSOKButton == rc) {
             NSURL *newURL = [[server baseURL] URLByAppendingPathComponent: name];
-            [self saveToURL: newURL ofType: @"SieveScript" forSaveOperation: saveOperation delegate: delegate didSaveSelector:didSaveSelector contextInfo: contextInfo];
+            [self saveToURL: newURL ofType: kSieveScriptFileType forSaveOperation: saveOperation delegate: delegate didSaveSelector:didSaveSelector contextInfo: contextInfo];
         } else {
             BOOL result = NO;
             objc_msgSend( delegate, didSaveSelector, self, result, contextInfo );

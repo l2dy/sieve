@@ -21,6 +21,12 @@
 #import "AsyncSocket.h"
 #import "SaslConn.h"
 
+extern NSString *const kSieveURLScheme;
+
+enum {
+    kSieveDefaultPort = 2000,
+};
+
 typedef enum {
     SieveClientDisconnected,
     SieveClientConnected,

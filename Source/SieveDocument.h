@@ -16,6 +16,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString * const kSieveScriptFileType;
+
 @interface SieveDocument : NSDocument {
     NSString *script;
     NSViewController *viewController;

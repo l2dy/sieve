@@ -19,6 +19,9 @@
 #import "SieveScriptViewController.h"
 #import "SieveDocumentWindowController.h"
 
+NSString * const kSieveScriptFileType = @"SieveScript";
+
+
 @interface NSDocument (MessingWithInternals)
 - (id) _setDisplayName: (id) newName;
 @end
@@ -35,14 +38,14 @@
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
+    NSAssert( [typeName isEqualToString: kSieveScriptFileType], @"Only supporting sieve scripts" );
     
 	return [script dataUsingEncoding: NSUTF8StringEncoding];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-    NSAssert( [typeName isEqualToString: @"SieveScript"], @"Only supporting sieve scripts" );
+    NSAssert( [typeName isEqualToString: kSieveScriptFileType], @"Only supporting sieve scripts" );
 
     [self setScript: [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease]];
     return YES;
