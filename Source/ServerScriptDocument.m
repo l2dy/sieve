@@ -37,6 +37,12 @@
     [self setIsProcessing: YES];
 }
 
+- (void) finnishedDownload: (NSString *) newScript;
+{
+    [self setScript: newScript];
+    [self setIsProcessing: NO];
+}
+
 - (BOOL) isEdited;
 {
     return [self isDocumentEdited];

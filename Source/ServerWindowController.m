@@ -71,6 +71,7 @@
             doc = [[[ServerScriptDocument alloc] initWithServer: self URL: documentURL] autorelease];
             [[NSDocumentController sharedDocumentController] addDocument: doc];
             [doc beginDownload];
+            [client getScript: [path lastPathComponent]];
         }
         [doc addWindowController: self];
     }
@@ -231,6 +232,13 @@
 {
     [self setScripts: scriptList];
     [self setActiveScript: newActiveScript];
+}
+
+- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName;
+{
+    NSURL *scriptURL = [[self baseURL] URLByAppendingPathComponent: scriptName];
+    ServerScriptDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: scriptURL];
+    [doc finnishedDownload: script];
 }
 
 

@@ -31,5 +31,6 @@
 - initWithServer: (ServerWindowController *) server URL: (NSURL *) documentURL;
 
 - (void) beginDownload;
+- (void) finnishedDownload: (NSString *) newScript;
 
 @end
