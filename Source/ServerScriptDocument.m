@@ -15,7 +15,8 @@
  */
 
 #import "ServerScriptDocument.h"
-
+#import "ServerWindowController.h"
+#import "SieveClient.h"
 
 @implementation ServerScriptDocument
 
@@ -27,6 +28,7 @@
     if (nil == [super init]) return nil;
     
     [self setFileURL: documentURL];
+    [self setFileType: @"SieveScript"];
     [self setServer: srv];
     
     return self;
@@ -58,6 +60,50 @@
 - (NSWindow *) windowForSheet;
 {
     return [server window];
+}
+
+- (void) saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)selector contextInfo:(void *)contextInfo;
+{
+    NSAssert( saveOperation != NSAutosaveOperation, @"I don't support autosave" );
+    
+    if ([url isFileURL]) {
+        [self saveToURL:url ofType:typeName forSaveOperation:saveOperation delegate:delegate didSaveSelector: selector contextInfo: contextInfo];        
+    } else {
+        NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Support only SIEVE URLs" );
+        
+        NSInvocation *delegateInvocation = [NSInvocation invocationWithMethodSignature: [delegate methodSignatureForSelector: selector]];
+        [delegateInvocation setTarget: delegate];
+        [delegateInvocation setSelector: selector];
+        [delegateInvocation setArgument: &self atIndex: 2];
+        [delegateInvocation setArgument: &contextInfo atIndex:4];
+        [delegateInvocation retainArguments];
+        [delegateInvocation retain];
+        
+        [[server client] putScript: [self script] withName: [url lastPathComponent] delegate: self userInfo: delegateInvocation];
+    }
+}
+
+
+- (void) sieveClient: (SieveClient *) client failedToSaveScript: (NSString *) name withError: (NSError *) error contextInfo: (void *)ci;
+{
+    NSLog( @"Error saving script %@: %@", name, error );
+    
+    NSInvocation *delegateInvocation = ci;
+    BOOL result = NO;
+    [delegateInvocation setArgument: &result atIndex: 3];
+    [delegateInvocation invoke];
+    [delegateInvocation release];
+}
+
+- (void) sieveClient: (SieveClient *) client savedScript: (NSString *) name contextInfo: (void *)ci;
+{
+    NSLog( @"Successfully saved script %@", name );
+    
+    NSInvocation *delegateInvocation = ci;
+    BOOL result = YES;
+    [delegateInvocation setArgument: &result atIndex: 3];
+    [delegateInvocation invoke];
+    [delegateInvocation release];
 }
 
 @end
