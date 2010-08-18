@@ -17,6 +17,9 @@
 #import "ServerScriptDocument.h"
 #import "ServerWindowController.h"
 #import "SieveClient.h"
+#import "SaveToServerPanelController.h"
+
+#import <objc/message.h>
 
 @implementation ServerScriptDocument
 
@@ -62,48 +65,70 @@
     return [server window];
 }
 
+typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
 - (void) saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)selector contextInfo:(void *)contextInfo;
 {
     NSAssert( saveOperation != NSAutosaveOperation, @"I don't support autosave" );
+    NSAssert( [typeName isEqualToString: @"SieveScript"], @"I only support sieve scripts" );
     
     if ([url isFileURL]) {
         [self saveToURL:url ofType:typeName forSaveOperation:saveOperation delegate:delegate didSaveSelector: selector contextInfo: contextInfo];        
     } else {
         NSAssert( [[url scheme] isEqualToString: @"sieve"], @"Support only SIEVE URLs" );
         
-        NSInvocation *delegateInvocation = [NSInvocation invocationWithMethodSignature: [delegate methodSignatureForSelector: selector]];
-        [delegateInvocation setTarget: delegate];
-        [delegateInvocation setSelector: selector];
-        [delegateInvocation setArgument: &self atIndex: 2];
-        [delegateInvocation setArgument: &contextInfo atIndex:4];
-        [delegateInvocation retainArguments];
-        [delegateInvocation retain];
+        SaveToURLBlock block = [^(BOOL result, NSError *error){
+            if (result) {
+                [self updateChangeCount: NSChangeCleared];
+                if (nil == [self fileURL] || NSSaveAsOperation == saveOperation) {
+                    [self setFileURL: url];
+                }
+            }
+            ((void (*)( id, SEL, id, BOOL, void *))objc_msgSend)( delegate, selector, self, result, contextInfo );
+        } copy];
         
-        [[server client] putScript: [self script] withName: [url lastPathComponent] delegate: self userInfo: delegateInvocation];
+        [[server client] putScript: [self script] withName: [url lastPathComponent] delegate: self userInfo: block];
     }
 }
 
 
 - (void) sieveClient: (SieveClient *) client failedToSaveScript: (NSString *) name withError: (NSError *) error contextInfo: (void *)ci;
 {
-    NSLog( @"Error saving script %@: %@", name, error );
+    NSParameterAssert( NULL != ci );
     
-    NSInvocation *delegateInvocation = ci;
-    BOOL result = NO;
-    [delegateInvocation setArgument: &result atIndex: 3];
-    [delegateInvocation invoke];
-    [delegateInvocation release];
+    SaveToURLBlock block = (SaveToURLBlock)ci;
+    block( NO, error );
+    [block release];
 }
 
 - (void) sieveClient: (SieveClient *) client savedScript: (NSString *) name contextInfo: (void *)ci;
 {
-    NSLog( @"Successfully saved script %@", name );
+    NSParameterAssert( NULL != ci );
+
+    SaveToURLBlock block = (SaveToURLBlock)ci;
+    block( YES, nil );
+    [block release];
+}
+
+
+
+- (void) runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+{
+    if (saveOperation == NSSaveToOperation) {
+        [super runModalSavePanelForSaveOperation: saveOperation delegate: delegate didSaveSelector: didSaveSelector contextInfo: contextInfo];
+        return;
+    }
     
-    NSInvocation *delegateInvocation = ci;
-    BOOL result = YES;
-    [delegateInvocation setArgument: &result atIndex: 3];
-    [delegateInvocation invoke];
-    [delegateInvocation release];
+    SaveToServerPanelController *savePanel = [[SaveToServerPanelController alloc] init];
+    [savePanel beginSheetModalForWindow: [self windowForSheet] completionBlock: ^( NSInteger rc, NSString *name) {
+        if (NSOKButton == rc) {
+            NSURL *newURL = [[server baseURL] URLByAppendingPathComponent: name];
+            [self saveToURL: newURL ofType: @"SieveScript" forSaveOperation: saveOperation delegate: delegate didSaveSelector:didSaveSelector contextInfo: contextInfo];
+        } else {
+            BOOL result = NO;
+            objc_msgSend( delegate, didSaveSelector, self, result, contextInfo );
+        }
+        [savePanel release];
+    }];
 }
 
 @end
