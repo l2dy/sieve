@@ -24,6 +24,8 @@
 
 - (void) closeTab:(NSTabViewItem *)tab;
 
+- (IBAction) doubleClickedScript: (id) sender;
+
 @end
 
 @implementation ServerWindowController
@@ -59,6 +61,9 @@
     [tabBar setAllowsBackgroundTabClosing: YES];
     [tabBar setUseOverflowMenu: YES];
     [tabBar setAutomaticallyAnimates: YES];
+    
+    [scriptListView setTarget: self];
+    [scriptListView setDoubleAction: @selector( doubleClickedScript: )];
 }
 
 - (void) openURL: (NSURL *) url;
@@ -76,6 +81,15 @@
         [doc addWindowController: self];
     }
     [[self window] makeKeyAndOrderFront: self];
+}
+
+- (IBAction) doubleClickedScript: (id) sender;
+{
+    NSInteger row = [scriptListView clickedRow];
+    if (row != -1) {
+        NSString *scriptName = [self objectInScriptsAtIndex: row];
+        [self openURL: [baseURL URLByAppendingPathComponent: scriptName]];
+    }
 }
 
 #pragma mark -

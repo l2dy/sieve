@@ -25,6 +25,8 @@
 @interface ServerWindowController : NSWindowController < NSTabViewDelegate, NSWindowDelegate, SieveClientDelegate > {
     IBOutlet PSMTabBarControl *tabBar;
     IBOutlet NSTabView *tabView;
+    IBOutlet NSTableView *scriptListView;
+    
     NSURL *baseURL;
     SieveClient *client;
     NSMutableArray *scripts;
