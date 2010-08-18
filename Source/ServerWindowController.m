@@ -87,7 +87,7 @@
 {
     NSInteger row = [scriptListView clickedRow];
     if (row != -1) {
-        NSString *scriptName = [self objectInScriptsAtIndex: row];
+        NSString *scriptName = [[self objectInScriptsAtIndex: row] valueForKey: @"name"];
         [self openURL: [baseURL URLByAppendingPathComponent: scriptName]];
     }
 }
@@ -267,13 +267,6 @@
     }
 }
 
-- (NSArray *)scripts {
-    if (!scripts) {
-        scripts = [[NSMutableArray alloc] init];
-    }
-    return [[scripts retain] autorelease];
-}
-
 - (unsigned)countOfScripts {
     if (!scripts) {
         scripts = [[NSMutableArray alloc] init];
@@ -285,37 +278,14 @@
     if (!scripts) {
         scripts = [[NSMutableArray alloc] init];
     }
-    return [scripts objectAtIndex:theIndex];
+    NSString *name = [scripts objectAtIndex:theIndex];
+    NSNumber *active = [NSNumber numberWithBool: [name isEqualToString: activeScript]];
+    return [NSDictionary dictionaryWithObjectsAndKeys: name, @"name", active, @"active", nil];
 }
 
-- (void)getScripts:(id *)objsPtr range:(NSRange)range {
-    if (!scripts) {
-        scripts = [[NSMutableArray alloc] init];
-    }
-    [scripts getObjects:objsPtr range:range];
++ (NSSet *) keyPathsForValuesAffectingScripts;
+{
+    return [NSSet setWithObject: @"activeScript"];
 }
-
-- (void)insertObject:(id)obj inScriptsAtIndex:(unsigned)theIndex {
-    if (!scripts) {
-        scripts = [[NSMutableArray alloc] init];
-    }
-    [scripts insertObject:obj atIndex:theIndex];
-}
-
-- (void)removeObjectFromScriptsAtIndex:(unsigned)theIndex {
-    if (!scripts) {
-        scripts = [[NSMutableArray alloc] init];
-    }
-    [scripts removeObjectAtIndex:theIndex];
-}
-
-- (void)replaceObjectInScriptsAtIndex:(unsigned)theIndex withObject:(id)obj {
-    if (!scripts) {
-        scripts = [[NSMutableArray alloc] init];
-    }
-    [scripts replaceObjectAtIndex:theIndex withObject:obj];
-}
-
-
 
 @end

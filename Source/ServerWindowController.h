@@ -41,15 +41,10 @@
 
 - (void) openURL: (NSURL *) url;
 
-- (NSArray *)scripts;
 - (void) setScripts: (NSArray *) newScripts;
 
 - (unsigned)countOfScripts;
 - (id)objectInScriptsAtIndex:(unsigned)theIndex;
-- (void)getScripts:(id *)objsPtr range:(NSRange)range;
-- (void)insertObject:(id)obj inScriptsAtIndex:(unsigned)theIndex;
-- (void)removeObjectFromScriptsAtIndex:(unsigned)theIndex;
-- (void)replaceObjectInScriptsAtIndex:(unsigned)theIndex withObject:(id)obj;
 
 
 @end

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="20"/>
+			<integer value="16"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -591,8 +591,10 @@
 				<object class="NSMutableArray" key="NSDeclaredKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>self</string>
+					<string>name</string>
+					<string>active</string>
 				</object>
-				<string key="NSObjectClassName">NSString</string>
+				<string key="NSObjectClassName">NSDictionary</string>
 				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
@@ -757,28 +759,48 @@
 					<int key="connectionID">69</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.self</string>
-						<reference key="source" ref="126861750"/>
-						<reference key="destination" ref="704946717"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="126861750"/>
-							<reference key="NSDestination" ref="704946717"/>
-							<string key="NSLabel">value: arrangedObjects.self</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.self</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">70</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">scriptListView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="365968017"/>
 					</object>
 					<int key="connectionID">71</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.name</string>
+						<reference key="source" ref="126861750"/>
+						<reference key="destination" ref="704946717"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="126861750"/>
+							<reference key="NSDestination" ref="704946717"/>
+							<string key="NSLabel">value: arrangedObjects.name</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.name</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSConditionallySetsEditable</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">72</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">fontBold: arrangedObjects.active</string>
+						<reference key="source" ref="126861750"/>
+						<reference key="destination" ref="704946717"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="126861750"/>
+							<reference key="NSDestination" ref="704946717"/>
+							<string key="NSLabel">fontBold: arrangedObjects.active</string>
+							<string key="NSBinding">fontBold</string>
+							<string key="NSKeyPath">arrangedObjects.active</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">73</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1127,7 +1149,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">71</int>
+			<int key="maxID">73</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
