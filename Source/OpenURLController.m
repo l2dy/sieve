@@ -36,6 +36,12 @@
 
 - (IBAction) openClicked: (id) sender;
 {
+    while (true) {
+        NSInteger oldIndex = [[historyArray arrangedObjects] indexOfObject: currentString];
+        if (oldIndex == NSNotFound) break;
+        [historyArray removeObjectAtArrangedObjectIndex: oldIndex];
+    }
+    
     [historyArray insertObject: currentString atArrangedObjectIndex: 0];
  
     // TODO: Find out how many entries are kept in the open recent menu
