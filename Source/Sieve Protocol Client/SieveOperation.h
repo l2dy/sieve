@@ -19,6 +19,7 @@
 @class SieveClient;
 
 @interface SieveOperation : NSObject {
+@private
     __weak SieveClient *client;
     NSString *command;
 }
@@ -37,6 +38,14 @@
 
 
 @interface SieveListScriptsOperation : SieveOperation
+@end
 
+@interface SieveGetScriptOperation : SieveOperation {
+    NSString *scriptName;
+}
+
+@property (readwrite, copy) NSString *scriptName;
+
+- initWithScript: (NSString *) script forClient: (SieveClient *) client;
 
 @end

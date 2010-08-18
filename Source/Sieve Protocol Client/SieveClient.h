@@ -86,6 +86,7 @@ typedef enum {
 - (void) setActiveScript: (NSString *) scriptName;
 - (void) putScript: (NSString *) script withName: (NSString *) name;
 - (void) listScripts;
+- (void) getScript: (NSString *) scriptName;
 
 - (void) connectToURL: (NSURL *) url;
 - (void) connectToHost: (NSString *) serverHost port: (unsigned) port;

@@ -496,6 +496,10 @@
     [self addOperation: [[[SieveListScriptsOperation alloc] initForClient: self] autorelease]];
 }
 
+- (void) getScript: (NSString *) scriptName;
+{
+    [self addOperation: [[[SieveGetScriptOperation alloc] initWithScript: scriptName forClient:self] autorelease]];
+}
 
 #pragma mark -
 #pragma mark Logging

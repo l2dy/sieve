@@ -62,7 +62,7 @@
 - (void) receivedResponse: (NSDictionary *) response;
 {
     if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
-        id <SieveClientDelegate> delegate = [client delegate];
+        id <SieveClientDelegate> delegate = [[self client] delegate];
         
         if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:)]) {
             
@@ -82,11 +82,43 @@
                 }
             }
             
-            [delegate sieveClient: client retrievedScriptList: scriptNames active: activeScript];
+            [delegate sieveClient: [self client] retrievedScriptList: scriptNames active: activeScript];
         }
     }
 
     [super receivedResponse: response];
+}
+
+@end
+
+
+@implementation  SieveGetScriptOperation
+
+@synthesize scriptName;
+
+- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+{
+    NSString *command = [NSString stringWithFormat: @"GETSCRIPT \"%@\"", script ];
+    if (nil == [super initWithCommand: command forClient: client]) return nil;
+    [self setScriptName: script];
+    return self;
+}
+
+- (void) receivedResponse: (NSDictionary *) response;
+{
+    if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
+        id <SieveClientDelegate> delegate = [[self client] delegate];
+        if ([delegate respondsToSelector: @selector( sieveClient:retrievedScript:withName: )]) {
+            [delegate sieveClient: [self client] retrievedScript: [[response objectForKey: @"response"] objectAtIndex: 0] withName: scriptName];
+        }
+    }
+    [super receivedResponse: response];
+}
+
+- (void) dealloc;
+{
+    [self setScriptName: nil];
+    [super dealloc];
 }
 
 @end
