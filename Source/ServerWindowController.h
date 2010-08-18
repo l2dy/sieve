@@ -46,5 +46,6 @@
 - (unsigned)countOfScripts;
 - (id)objectInScriptsAtIndex:(unsigned)theIndex;
 
+- (IBAction) newDocument: (id) sender;
 
 @end

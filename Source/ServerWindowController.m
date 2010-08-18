@@ -92,6 +92,13 @@
     }
 }
 
+- (IBAction) newDocument: (id) sender;
+{
+    NSDocument *doc = [[[ServerScriptDocument alloc] initWithServer: self URL: nil] autorelease];
+    [[NSDocumentController sharedDocumentController] addDocument: doc];
+    [doc addWindowController: self];
+}
+
 #pragma mark -
 #pragma mark Tab bar delegate
 
@@ -226,6 +233,8 @@
     if ([menuItem action] == @selector( performCloseTab: )) {
         return [self hasOpenTabs];
     }
+    
+    return YES;
 }
 
 
