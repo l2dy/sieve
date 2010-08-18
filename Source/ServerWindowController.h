@@ -26,6 +26,7 @@
     IBOutlet PSMTabBarControl *tabBar;
     IBOutlet NSTabView *tabView;
     IBOutlet NSTableView *scriptListView;
+    IBOutlet NSArrayController *scriptsArrayController;
     
     NSURL *baseURL;
     SieveClient *client;
@@ -47,5 +48,8 @@
 - (id)objectInScriptsAtIndex:(unsigned)theIndex;
 
 - (IBAction) newDocument: (id) sender;
+- (IBAction) activateScript: (id) sender;
+- (IBAction) renameScript: (id) sender;
+- (IBAction) delete: (id) sender;
 
 @end

@@ -17,6 +17,7 @@
 
 #import "ServerWindowController.h"
 #import "ServerScriptDocument.h"
+#import "SaveToServerPanelController.h"
 
 #import "PSMTabBarControl.h"
 
@@ -98,6 +99,64 @@
     [[NSDocumentController sharedDocumentController] addDocument: doc];
     [doc addWindowController: self];
 }
+
+- (id) selectedScriptForSender: (id) sender;
+{
+    if ([sender isKindOfClass: [NSMenuItem class]]) {
+        NSInteger clickedRow = [scriptListView clickedRow];
+        if (clickedRow != -1) return [self objectInScriptsAtIndex: clickedRow];
+    } else {
+        NSArray *selectedObjects = [scriptsArrayController selectedObjects];
+        if ([selectedObjects count] >= 1) return [selectedObjects objectAtIndex: 0];
+    }
+    return nil;
+}
+
+- (IBAction) activateScript: (id) sender;
+{
+    id selectedScript = [self selectedScriptForSender: sender];
+    NSAssert( nil != selectedScript, @"User interface item enabled when it should not be" );
+    
+    [client setActiveScript: [selectedScript valueForKey: @"name"]];
+    [client listScripts];
+}
+
+- (IBAction) renameScript: (id) sender;
+{
+    id selectedScript = [self selectedScriptForSender: sender];
+    NSAssert( nil != selectedScript, @"User interface item enabled when it should not be" );
+    
+    SaveToServerPanelController *savePanel = [[SaveToServerPanelController alloc] init];
+    [savePanel beginSheetModalForWindow: [self window] completionBlock: ^( NSInteger rc, NSString *name ) {
+        if (NSOKButton == rc) {
+            [client renameScript: [selectedScript valueForKey: @"name"] to: name];
+            [client listScripts];
+        } 
+        [savePanel release];
+    }];
+}
+
+- (IBAction) delete: (id) sender;
+{
+    id selectedScript = [self selectedScriptForSender: sender];
+    NSAssert( nil != selectedScript, @"User interface item enabled when it should not be" );
+
+    [client deleteScript: [selectedScript valueForKey: @"name"]];
+    [client listScripts];
+}
+
+- (BOOL) validateUserInterfaceItem: (id <NSValidatedUserInterfaceItem>) item;
+{
+    id script = [self selectedScriptForSender: item];
+    SEL action = [item action];
+    if (action == @selector( delete: ) || action == @selector( activateScript: )) {
+        if (nil == script) return NO;
+        return ![[script valueForKey: @"active"] boolValue];
+    } else if (action == @selector( renameScript: )) {
+        return nil != script;
+    } else return YES;
+}
+
 
 #pragma mark -
 #pragma mark Tab bar delegate
@@ -234,7 +293,8 @@
         return [self hasOpenTabs];
     }
     
-    return YES;
+  
+    return [self validateUserInterfaceItem: menuItem];
 }
 
 
