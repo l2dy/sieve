@@ -309,7 +309,9 @@
             NSAssert( ![sasl needsToEncodeData], @"Sieve security layers are not supported." );
             [self setSasl: nil];
             
-            [delegate sieveClientSucceededAuth: self];
+            if ([delegate respondsToSelector: @selector( sieveClientSucceededAuth: )]) {
+                [delegate sieveClientSucceededAuth: self];
+            }
             [self startNextOperation];
         }
         
@@ -476,34 +478,64 @@
     if (nil == currentOperation && status == SieveClientAuthenticated) [self startNextOperation];
 }
 
+- (void) putScript: (NSString *) script withName: (NSString *) name delegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SievePutScriptOperation alloc] initWithScript: script name:name forClient:self delegate:newDelegate userInfo: userInfo] autorelease]];
+}
+
 - (void) putScript: (NSString *) script withName: (NSString *) name;
 {
-    [self addOperation: [[[SievePutScriptOperation alloc] initWithScript: script name:name forClient:self] autorelease]];
+    [self putScript: script withName: name delegate: delegate userInfo: NULL];
+}
+
+- (void) setActiveScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SieveSetActiveOperation alloc] initWithScript: scriptName forClient: self delegate:newDelegate userInfo: userInfo] autorelease]];
 }
 
 - (void) setActiveScript: (NSString *) scriptName;
 {
-    [self addOperation: [[[SieveSetActiveOperation alloc] initWithScript: scriptName forClient: self] autorelease]];
+    [self setActiveScript: scriptName delegate: delegate userInfo: NULL];
+}
+
+- (void) renameScript: (NSString *) oldName to: (NSString *) newName delegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SieveRenameScriptOperation alloc] initWithOldName: oldName newName: newName forClient: self delegate:newDelegate userInfo: userInfo] autorelease]];
 }
 
 - (void) renameScript: (NSString *) oldName to: (NSString *) newName;
 {
-    [self addOperation: [[[SieveRenameScriptOperation alloc] initWithOldName: oldName newName: newName forClient: self] autorelease]];
+    [self renameScript: oldName to: newName delegate: delegate userInfo: NULL];
+}
+
+- (void) deleteScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SieveDeleteScriptOperation alloc] initWithScript: scriptName forClient: self delegate:newDelegate userInfo: userInfo] autorelease]];
 }
 
 - (void) deleteScript: (NSString *) scriptName;
 {
-    [self addOperation: [[[SieveDeleteScriptOperation alloc] initWithScript: scriptName forClient: self] autorelease]];
+    [self deleteScript: scriptName delegate: delegate userInfo: NULL];
+}
+
+- (void) listScriptsWithDelegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SieveListScriptsOperation alloc] initForClient: self delegate: newDelegate userInfo: userInfo] autorelease]];
 }
 
 - (void) listScripts;
 {
-    [self addOperation: [[[SieveListScriptsOperation alloc] initForClient: self] autorelease]];
+    [self listScriptsWithDelegate: delegate userInfo: NULL];
+}
+
+- (void) getScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
+{
+    [self addOperation: [[[SieveGetScriptOperation alloc] initWithScript: scriptName forClient:self delegate:newDelegate userInfo: userInfo] autorelease]];
 }
 
 - (void) getScript: (NSString *) scriptName;
 {
-    [self addOperation: [[[SieveGetScriptOperation alloc] initWithScript: scriptName forClient:self] autorelease]];
+    [self getScript: scriptName delegate: delegate userInfo: NULL];
 }
 
 #pragma mark -

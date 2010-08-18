@@ -237,24 +237,18 @@
     [c cancelAuth];
 }
 
-- (void) sieveClientSucceededAuth: (SieveClient *) client;
-{
-    NSLog( @"auth successful!" );
-}
-
-- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scriptList active: (NSString *)newActiveScript;
+- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scriptList active: (NSString *)newActiveScript contextInfo: (void *)ci;
 {
     [self setScripts: scriptList];
     [self setActiveScript: newActiveScript];
 }
 
-- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName;
+- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName contextInfo: (void *) ci;
 {
     NSURL *scriptURL = [[self baseURL] URLByAppendingPathComponent: scriptName];
     ServerScriptDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: scriptURL];
     [doc finnishedDownload: script];
 }
-
 
 #pragma mark -
 #pragma mark Accessors

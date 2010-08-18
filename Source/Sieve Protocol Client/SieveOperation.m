@@ -21,14 +21,28 @@
 @implementation SieveOperation
 
 @synthesize client;
+@synthesize delegate;
+@synthesize userInfo;
 
-- initForClient: (SieveClient *) newClient;
+
+- initForClient: (SieveClient *) newClient delegate: (id) newDelegate userInfo: (void *) newUserInfo;
 {
     if (nil == [super init]) return nil;
     
     [self setClient: newClient];
     
+    if (NULL != newDelegate) [self setDelegate: newDelegate];
+    else [self setDelegate: [newClient delegate]];
+    
+    [self setUserInfo: newUserInfo];
+    
     return self;
+    
+}
+
+- initForClient: (SieveClient *) newClient;
+{
+    return [self initForClient: newClient delegate: NULL userInfo: NULL];
 }
 
 - (NSString *) command;
@@ -67,9 +81,9 @@
 
 - (void) receivedSuccessResponse: (NSDictionary *) response;
 {
-    id <SieveClientDelegate> delegate = [[self client] delegate];
+    id delegate = [self delegate];
     
-    if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:)]) {
+    if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:contextInfo:)]) {
         
         NSArray *responseLines = [response objectForKey: @"response"];
         NSString *activeScript = nil;
@@ -87,7 +101,7 @@
             }
         }
         
-        [delegate sieveClient: [self client] retrievedScriptList: scriptNames active: activeScript];
+        [delegate sieveClient: [self client] retrievedScriptList: scriptNames active: activeScript contextInfo: [self userInfo]];
     }
 }
 
@@ -103,9 +117,9 @@
 
 @synthesize scriptName;
 
-- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+- initWithScript: (NSString *) script forClient: (SieveClient *) client  delegate: (id) delegate userInfo: (void *) userInfo;
 {
-    if (nil == [super initForClient: client]) return nil;
+    if (nil == [super initForClient: client delegate: delegate userInfo: userInfo]) return nil;
     [self setScriptName: script];
     return self;
 }
@@ -117,9 +131,9 @@
 
 - (void) receivedSuccessResponse: (NSDictionary *) response;
 {
-    id <SieveClientDelegate> delegate = [[self client] delegate];
-    if ([delegate respondsToSelector: @selector( sieveClient:retrievedScript:withName: )]) {
-        [delegate sieveClient: [self client] retrievedScript: [[response objectForKey: @"response"] objectAtIndex: 0] withName: scriptName];
+    id delegate = [self delegate];
+    if ([delegate respondsToSelector: @selector( sieveClient:retrievedScript:withName:contextInfo: )]) {
+        [delegate sieveClient: [self client] retrievedScript: [[response objectForKey: @"response"] objectAtIndex: 0] withName: scriptName contextInfo: [self userInfo]];
     }
 }
 
@@ -136,9 +150,9 @@
 
 @synthesize scriptName;
 
-- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client;
+- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client delegate: (id) delegate userInfo: (void *) userInfo;
 {
-    if (nil == [super initForClient: client]) return nil;
+    if (nil == [super initForClient: client delegate: delegate userInfo: userInfo]) return nil;
     [self setScriptName: script];
     return self;
 }
@@ -154,9 +168,9 @@
 
 @synthesize scriptName;
 
-- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client;
+- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client delegate: (id) delegate userInfo: (void *) userInfo;
 {
-    if (nil == [super initForClient: client]) return nil;
+    if (nil == [super initForClient: client delegate: delegate userInfo: userInfo]) return nil;
     [self setScriptName: script];
     return self;
 }
@@ -173,9 +187,9 @@
 
 @synthesize oldName, newName;
 
-- initWithOldName:(NSString *)from newName:(NSString *)to forClient:(SieveClient *)client;
+- initWithOldName:(NSString *)from newName:(NSString *)to forClient:(SieveClient *)client  delegate: (id) delegate userInfo: (void *) userInfo;
 {
-    if (nil == [super initForClient: client]) return nil;
+    if (nil == [super initForClient: client  delegate: delegate userInfo: userInfo]) return nil;
     [self setOldName: from];
     [self setNewName: to];
     return self;
@@ -193,9 +207,9 @@
 
 @synthesize script, scriptName;
 
-- initWithScript:(NSString *)scriptString name:(NSString *)name forClient:(SieveClient *)client;
+- initWithScript:(NSString *)scriptString name:(NSString *)name forClient:(SieveClient *)client delegate: (id) delegate userInfo: (void *) userInfo;
 {
-    if (nil == [super initForClient: client]) return nil;
+    if (nil == [super initForClient: client delegate: delegate userInfo: userInfo]) return nil;
     
     [self setScriptName: name];
     [self setScript: [scriptString dataUsingEncoding: NSUTF8StringEncoding]];
@@ -219,6 +233,22 @@
         }];
     } else {
         [self receivedResponse: response];
+    }
+}
+
+- (void) receivedSuccessResponse:(NSDictionary *)response;
+{
+    id delegate = [self delegate];
+    if ([delegate respondsToSelector: @selector( sieveClient:savedScript:contextInfo: )]) {
+        [delegate sieveClient: [self client] savedScript: scriptName contextInfo: [self userInfo]];
+    }
+}
+
+- (void) receivedFailureResponse:(NSDictionary *)response;
+{
+    id delegate = [self delegate];
+    if ([delegate respondsToSelector: @selector( sieveClient:failedToSaveScript:withError:contextInfo: )]) {
+        [delegate sieveClient: [self client] failedToSaveScript: scriptName withError:nil contextInfo: [self userInfo]];
     }
 }
 

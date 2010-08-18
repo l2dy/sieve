@@ -34,13 +34,15 @@ typedef enum {
 @protocol SieveClientDelegate < NSObject > 
 
 - (void) sieveClient: (SieveClient *) client needsCredentials: (NSURLCredential *) defaultCreds;
-- (void) sieveClientSucceededAuth: (SieveClient *) client;
 
 @optional
+- (void) sieveClientSucceededAuth: (SieveClient *) client;
 - (void) sieveClientEstablishedConnection: (SieveClient *) client;
-- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scripts active: (NSString *)activeScript;
-- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName;
-- (void) sieveClient: (SieveClient *) client storedScriptWithName: (NSString *) name;
+
+- (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scripts active: (NSString *)activeScript contextInfo: (void *)ci;
+- (void) sieveClient: (SieveClient *) client retrievedScript: (NSString *) script withName: (NSString *) scriptName contextInfo: (void *)ci;
+- (void) sieveClient: (SieveClient *) client failedToSaveScript: (NSString *) name withError: (NSError *) error contextInfo: (void *)ci;
+- (void) sieveClient: (SieveClient *) client savedScript: (NSString *) name contextInfo: (void *)ci;
 
 @end
 
@@ -83,11 +85,22 @@ typedef enum {
 - (void) cancelAuth;
 
 - (void) listScripts;
+- (void) listScriptsWithDelegate: (id) newDelegate userInfo: (void *) userInfo;
+
 - (void) getScript: (NSString *) scriptName;
+- (void) getScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
+
 - (void) putScript: (NSString *) script withName: (NSString *) name;
+- (void) putScript: (NSString *) script withName: (NSString *) name delegate: (id) newDelegate userInfo: (void *) userInfo;
+
 - (void) setActiveScript: (NSString *) scriptName;
+- (void) setActiveScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
+
 - (void) renameScript: (NSString *) oldName to: (NSString *) newName;
+- (void) renameScript: (NSString *) oldName to: (NSString *) newName delegate: (id) newDelegate userInfo: (void *) userInfo;
+
 - (void) deleteScript: (NSString *) scriptName;
+- (void) deleteScript: (NSString *) scriptName delegate: (id) newDelegate userInfo: (void *) userInfo;
 
 - (void) connectToURL: (NSURL *) url;
 - (void) connectToHost: (NSString *) serverHost port: (unsigned) port;

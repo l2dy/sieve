@@ -21,11 +21,16 @@
 @interface SieveOperation : NSObject {
 @private
     __weak SieveClient *client;
+    __weak void *userInfo;
+    __weak id delegate;
 }
 
 @property (readwrite, assign) SieveClient *client;
+@property (readwrite, assign) id delegate;
+@property (readwrite, assign) void *userInfo;
 
 - initForClient: (SieveClient *) newClient;
+- initForClient: (SieveClient *) newClient delegate: (id) delegate userInfo: (void *) userInfo;
 
 - (void) start;
 
@@ -46,7 +51,7 @@
 
 @property (readwrite, copy) NSString *scriptName;
 
-- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+- initWithScript: (NSString *) script forClient: (SieveClient *) client delegate: (id) delegate userInfo: (void *) userInfo;
 
 @end
 
@@ -56,7 +61,7 @@
 
 @property (readwrite, copy) NSString *scriptName;
 
-- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+- initWithScript: (NSString *) script forClient: (SieveClient *) client delegate: (id) delegate userInfo: (void *) userInfo;
 
 
 @end
@@ -67,7 +72,7 @@
 
 @property (readwrite, copy) NSString *scriptName;
 
-- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+- initWithScript: (NSString *) script forClient: (SieveClient *) client delegate: (id) delegate userInfo: (void *) userInfo;
 
 @end
 
@@ -79,7 +84,7 @@
 @property (readwrite, copy) NSString *scriptName;
 @property (readwrite, copy) NSData *script;
 
-- initWithScript: (NSString *) script name: (NSString *) name forClient: (SieveClient *) client;
+- initWithScript: (NSString *) script name: (NSString *) name forClient: (SieveClient *) client delegate: (id) delegate userInfo: (void *) userInfo;
 
 @end
 
@@ -91,7 +96,7 @@
 @property (readwrite, copy) NSString *oldName;
 @property (readwrite, copy) NSString *newName;
 
-- initWithOldName: (NSString *) from newName: (NSString *)to forClient: (SieveClient *) client;
+- initWithOldName: (NSString *) from newName: (NSString *)to forClient: (SieveClient *) client delegate: (id) delegate userInfo: (void *) userInfo;
 
 @end
 
