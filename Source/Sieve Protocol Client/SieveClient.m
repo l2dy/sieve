@@ -476,19 +476,24 @@
     if (nil == currentOperation && status == SieveClientAuthenticated) [self startNextOperation];
 }
 
-- (void) retrieveScript: (NSString *) name;
+- (void) putScript: (NSString *) script withName: (NSString *) name;
 {
-    
+    [self addOperation: [[[SievePutScriptOperation alloc] initWithScript: script name:name forClient:self] autorelease]];
 }
 
 - (void) setActiveScript: (NSString *) scriptName;
 {
-    
+    [self addOperation: [[[SieveSetActiveOperation alloc] initWithScript: scriptName forClient: self] autorelease]];
 }
 
-- (void) putScript: (NSString *) script withName: (NSString *) name;
+- (void) renameScript: (NSString *) oldName to: (NSString *) newName;
 {
-    
+    [self addOperation: [[[SieveRenameScriptOperation alloc] initWithOldName: oldName newName: newName forClient: self] autorelease]];
+}
+
+- (void) deleteScript: (NSString *) scriptName;
+{
+    [self addOperation: [[[SieveDeleteScriptOperation alloc] initWithScript: scriptName forClient: self] autorelease]];
 }
 
 - (void) listScripts;

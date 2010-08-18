@@ -82,11 +82,12 @@ typedef enum {
 - (void) continueAuthWithCredentials: (NSURLCredential *) creds;
 - (void) cancelAuth;
 
-- (void) retrieveScript: (NSString *) name;
-- (void) setActiveScript: (NSString *) scriptName;
-- (void) putScript: (NSString *) script withName: (NSString *) name;
 - (void) listScripts;
 - (void) getScript: (NSString *) scriptName;
+- (void) putScript: (NSString *) script withName: (NSString *) name;
+- (void) setActiveScript: (NSString *) scriptName;
+- (void) renameScript: (NSString *) oldName to: (NSString *) newName;
+- (void) deleteScript: (NSString *) scriptName;
 
 - (void) connectToURL: (NSURL *) url;
 - (void) connectToHost: (NSString *) serverHost port: (unsigned) port;

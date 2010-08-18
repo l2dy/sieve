@@ -20,33 +20,44 @@
 
 @implementation SieveOperation
 
-@synthesize command;
 @synthesize client;
 
-- initWithCommand: (NSString *) newCommand forClient: (SieveClient *) newClient;
+- initForClient: (SieveClient *) newClient;
 {
     if (nil == [super init]) return nil;
     
     [self setClient: newClient];
-    [self setCommand: newCommand];
     
     return self;
 }
 
-- initForClient: (SieveClient *) newClient;
+- (NSString *) command;
 {
-    return [self initWithCommand: nil forClient: newClient];
+    return @"NOOP";
 }
 
 - (void) start;
 {
-    [client send: command completion: ^( NSDictionary *response) {
+    [client send: [self command] completion: ^( NSDictionary *response) {
         [self receivedResponse: response];
     }];
 }
 
+- (void) receivedSuccessResponse: (NSDictionary *) response;
+{
+    
+}
+
+- (void) receivedFailureResponse: (NSDictionary *) response;
+{
+    
+}
+
 - (void) receivedResponse: (NSDictionary *) response;
 {
+    if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) [self receivedSuccessResponse: response];
+    else [self receivedFailureResponse: response];
+    
     [client startNextOperation];
 }
 
@@ -54,39 +65,35 @@
 
 @implementation  SieveListScriptsOperation
 
-- initForClient: (SieveClient *) newClient;
+- (void) receivedSuccessResponse: (NSDictionary *) response;
 {
-    return [super initWithCommand: @"LISTSCRIPTS" forClient: newClient];
-}
-
-- (void) receivedResponse: (NSDictionary *) response;
-{
-    if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
-        id <SieveClientDelegate> delegate = [[self client] delegate];
+    id <SieveClientDelegate> delegate = [[self client] delegate];
+    
+    if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:)]) {
         
-        if ([delegate respondsToSelector: @selector(sieveClient:retrievedScriptList:active:)]) {
+        NSArray *responseLines = [response objectForKey: @"response"];
+        NSString *activeScript = nil;
+        NSMutableArray *scriptNames = [NSMutableArray arrayWithCapacity: [responseLines count]];
+        for (NSString *line in responseLines) {
+            NSScanner *scanner = [NSScanner scannerWithString: line];
+            [scanner setCaseSensitive: NO];
             
-            NSArray *responseLines = [response objectForKey: @"response"];
-            NSString *activeScript = nil;
-            NSMutableArray *scriptNames = [NSMutableArray arrayWithCapacity: [responseLines count]];
-            for (NSString *line in responseLines) {
-                NSScanner *scanner = [NSScanner scannerWithString: line];
-                [scanner setCaseSensitive: NO];
-                
-                NSString *scriptName = nil;
-                if ([scanner scanQuotedString: &scriptName]) {
-                    [scriptNames addObject: scriptName];
-                    if ([scanner scanString: @"ACTIVE" intoString: NULL]) {
-                        activeScript = scriptName;
-                    }
+            NSString *scriptName = nil;
+            if ([scanner scanQuotedString: &scriptName]) {
+                [scriptNames addObject: scriptName];
+                if ([scanner scanString: @"ACTIVE" intoString: NULL]) {
+                    activeScript = scriptName;
                 }
             }
-            
-            [delegate sieveClient: [self client] retrievedScriptList: scriptNames active: activeScript];
         }
+        
+        [delegate sieveClient: [self client] retrievedScriptList: scriptNames active: activeScript];
     }
+}
 
-    [super receivedResponse: response];
+- (NSString *) command;
+{
+    return @"LISTSCRIPTS";
 }
 
 @end
@@ -98,21 +105,22 @@
 
 - initWithScript: (NSString *) script forClient: (SieveClient *) client;
 {
-    NSString *command = [NSString stringWithFormat: @"GETSCRIPT \"%@\"", script ];
-    if (nil == [super initWithCommand: command forClient: client]) return nil;
+    if (nil == [super initForClient: client]) return nil;
     [self setScriptName: script];
     return self;
 }
 
-- (void) receivedResponse: (NSDictionary *) response;
+- (NSString *) command;
 {
-    if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
-        id <SieveClientDelegate> delegate = [[self client] delegate];
-        if ([delegate respondsToSelector: @selector( sieveClient:retrievedScript:withName: )]) {
-            [delegate sieveClient: [self client] retrievedScript: [[response objectForKey: @"response"] objectAtIndex: 0] withName: scriptName];
-        }
+    return [NSString stringWithFormat: @"GETSCRIPT \"%@\"", scriptName];
+}
+
+- (void) receivedSuccessResponse: (NSDictionary *) response;
+{
+    id <SieveClientDelegate> delegate = [[self client] delegate];
+    if ([delegate respondsToSelector: @selector( sieveClient:retrievedScript:withName: )]) {
+        [delegate sieveClient: [self client] retrievedScript: [[response objectForKey: @"response"] objectAtIndex: 0] withName: scriptName];
     }
-    [super receivedResponse: response];
 }
 
 - (void) dealloc;
@@ -123,3 +131,104 @@
 
 @end
 
+
+@implementation SieveDeleteScriptOperation
+
+@synthesize scriptName;
+
+- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client;
+{
+    if (nil == [super initForClient: client]) return nil;
+    [self setScriptName: script];
+    return self;
+}
+
+- (NSString *) command;
+{
+    return [NSString stringWithFormat: @"DELETESCRIPT \"%@\"", scriptName];
+}
+
+@end
+
+@implementation SieveSetActiveOperation
+
+@synthesize scriptName;
+
+- (id) initWithScript:(NSString *)script forClient:(SieveClient *)client;
+{
+    if (nil == [super initForClient: client]) return nil;
+    [self setScriptName: script];
+    return self;
+}
+
+- (NSString *) command;
+{
+    return [NSString stringWithFormat: @"SETACTIVE \"%@\"", scriptName];
+}
+
+@end
+
+
+@implementation SieveRenameScriptOperation 
+
+@synthesize oldName, newName;
+
+- initWithOldName:(NSString *)from newName:(NSString *)to forClient:(SieveClient *)client;
+{
+    if (nil == [super initForClient: client]) return nil;
+    [self setOldName: from];
+    [self setNewName: to];
+    return self;
+}
+
+
+- (NSString *) command;
+{
+    return [NSString stringWithFormat: @"RENAMESCRIPT \"%@\" \"%@\"", oldName, newName];
+}
+
+@end
+
+@implementation SievePutScriptOperation
+
+@synthesize script, scriptName;
+
+- initWithScript:(NSString *)scriptString name:(NSString *)name forClient:(SieveClient *)client;
+{
+    if (nil == [super initForClient: client]) return nil;
+    
+    [self setScriptName: name];
+    [self setScript: [scriptString dataUsingEncoding: NSUTF8StringEncoding]];
+   
+    return self;
+}
+
+- (void) receivedHaveSpaceResponse: (NSDictionary *) response;
+{
+    if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
+        NSString *sendCommand = [NSString stringWithFormat: @"PUTSCRIPT \"%@\" {%d}", scriptName, [script length]];
+        NSMutableData *sendData = [NSMutableData dataWithData: [sendCommand dataUsingEncoding: NSUTF8StringEncoding]];
+        [sendData appendData: [AsyncSocket CRLFData]];
+        [sendData appendData: script];
+        [sendData appendData: [AsyncSocket CRLFData]];
+        
+        [[self client] logLine: sendCommand from: @"Client"];
+        [[self client] sendData: sendData];
+        [[self client] receiveResponse: ^(NSDictionary *response) {
+            [self receivedResponse: response];
+        }];
+    } else {
+        [self receivedResponse: response];
+    }
+}
+
+- (void) start;
+{
+    NSString *command = [NSString stringWithFormat: @"HAVESPACE \"%@\" %d", scriptName, [script length]];
+    [[self client] send: command completion: ^( NSDictionary *response) {
+        [self receivedHaveSpaceResponse: response];
+    }];
+}
+
+
+@end

@@ -21,18 +21,18 @@
 @interface SieveOperation : NSObject {
 @private
     __weak SieveClient *client;
-    NSString *command;
 }
 
-@property (readwrite, copy) NSString *command;
 @property (readwrite, assign) SieveClient *client;
 
-- initWithCommand: (NSString *) command forClient: (SieveClient *) client;
 - initForClient: (SieveClient *) newClient;
 
 - (void) start;
 
 - (void) receivedResponse: (NSDictionary *) response;
+- (void) receivedSuccessResponse: (NSDictionary *) response;
+- (void) receivedFailureResponse: (NSDictionary *) response;
+- (NSString *) command;
 
 @end
 
@@ -49,3 +49,49 @@
 - initWithScript: (NSString *) script forClient: (SieveClient *) client;
 
 @end
+
+@interface SieveDeleteScriptOperation : SieveOperation {
+    NSString *scriptName;
+}
+
+@property (readwrite, copy) NSString *scriptName;
+
+- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+
+
+@end
+
+@interface SieveSetActiveOperation : SieveOperation {
+    NSString *scriptName;
+}
+
+@property (readwrite, copy) NSString *scriptName;
+
+- initWithScript: (NSString *) script forClient: (SieveClient *) client;
+
+@end
+
+@interface SievePutScriptOperation : SieveOperation {
+    NSString *scriptName;
+    NSData *script;
+}
+
+@property (readwrite, copy) NSString *scriptName;
+@property (readwrite, copy) NSData *script;
+
+- initWithScript: (NSString *) script name: (NSString *) name forClient: (SieveClient *) client;
+
+@end
+
+@interface SieveRenameScriptOperation : SieveOperation {
+    NSString *oldName;
+    NSString *newName;
+}
+
+@property (readwrite, copy) NSString *oldName;
+@property (readwrite, copy) NSString *newName;
+
+- initWithOldName: (NSString *) from newName: (NSString *)to forClient: (SieveClient *) client;
+
+@end
+
