@@ -18,6 +18,7 @@
 #import "ServerWindowController.h"
 #import "ServerScriptDocument.h"
 #import "SaveToServerPanelController.h"
+#import "PasswordPanelController.h"
 
 #import "PSMTabBarControl.h"
 
@@ -300,7 +301,12 @@
 
 - (void) sieveClient: (SieveClient *) c needsCredentials: (NSURLCredential *) defaultCreds;
 {
-    [c cancelAuth];
+    PasswordPanelController *passwordPanel = [[PasswordPanelController alloc] init];
+    [passwordPanel setCredentials: defaultCreds];
+    [passwordPanel beginSheetModalForWindow: [self window] completionBlock: ^( BOOL ok, PasswordPanelController *x ) {
+        if (ok) [c continueAuthWithCredentials: [passwordPanel credentials]];
+        else [c cancelAuth];
+    }];
 }
 
 - (void) sieveClient: (SieveClient *) client retrievedScriptList: (NSArray *) scriptList active: (NSString *)newActiveScript contextInfo: (void *)ci;

@@ -11,6 +11,8 @@
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
 		264084B21213FD61004F42BB /* SieveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264084B11213FD61004F42BB /* SieveOperation.m */; };
+		26458ED7121D70710067CE01 /* PasswordPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26458ED6121D70710067CE01 /* PasswordPanelController.m */; };
+		26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26458EE3121D73EC0067CE01 /* PasswordWindow.xib */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
@@ -92,6 +94,9 @@
 		264084B01213FD61004F42BB /* SieveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveOperation.h; sourceTree = "<group>"; };
 		264084B11213FD61004F42BB /* SieveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveOperation.m; sourceTree = "<group>"; };
 		264084B512140058004F42BB /* SieveClientInternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveClientInternals.h; sourceTree = "<group>"; };
+		26458ED5121D70710067CE01 /* PasswordPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPanelController.h; sourceTree = "<group>"; };
+		26458ED6121D70710067CE01 /* PasswordPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPanelController.m; sourceTree = "<group>"; };
+		26458EE0121D73D40067CE01 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PasswordWindow.xib; sourceTree = "<group>"; };
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
@@ -331,6 +336,8 @@
 				26F2B5101213015800458B80 /* OpenURLController.m */,
 				266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */,
 				266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */,
+				26458ED5121D70710067CE01 /* PasswordPanelController.h */,
+				26458ED6121D70710067CE01 /* PasswordPanelController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -417,6 +424,7 @@
 				26F2B20A1212C2ED00458B80 /* SieveScriptView.xib */,
 				26F2B5091213000200458B80 /* OpenURLWindow.xib */,
 				266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */,
+				26458EE3121D73EC0067CE01 /* PasswordWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -513,6 +521,7 @@
 				26F2B20C1212C2ED00458B80 /* SieveScriptView.xib in Resources */,
 				26F2B50B1213000200458B80 /* OpenURLWindow.xib in Resources */,
 				266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */,
+				26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +584,7 @@
 				26F2B5111213015800458B80 /* OpenURLController.m in Sources */,
 				264084B21213FD61004F42BB /* SieveOperation.m in Sources */,
 				266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */,
+				26458ED7121D70710067CE01 /* PasswordPanelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +613,14 @@
 				1DDD582B0DA1D0D100B32029 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		26458EE3121D73EC0067CE01 /* PasswordWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26458EE0121D73D40067CE01 /* English */,
+			);
+			name = PasswordWindow.xib;
 			sourceTree = "<group>";
 		};
 		266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */ = {
