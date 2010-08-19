@@ -24,6 +24,7 @@
 // TODO: Verschiedene Empfangs-Routinen aufspalten und vereinheltichen
 
 NSString *const kSieveURLScheme = @"sieve";
+static const uint32_t kSieveProtocolType = FOUR_CHAR_CODE( 'SieV' );
 
 @interface SieveClient ()
 
@@ -361,7 +362,13 @@ NSString *const kSieveURLScheme = @"sieve";
 - (void) continueAuthWithCredentials: (NSURLCredential *) creds;
 {
     if ([creds persistence] == NSURLCredentialPersistencePermanent) {
-        // TODO: store credentials in key chain
+        NSData *serverData = [host dataUsingEncoding: NSUTF8StringEncoding];
+        NSData *userData = [[creds user] dataUsingEncoding: NSUTF8StringEncoding];
+        NSData *passwordData = [[creds password] dataUsingEncoding: NSUTF8StringEncoding];
+        SecKeychainAddInternetPassword( NULL, [serverData length], [serverData bytes], 0, NULL, 
+                                       [userData length], [userData bytes], 0, NULL, [socket connectedPort], 
+                                       kSieveProtocolType, kSecAuthenticationTypeDefault, 
+                                       [passwordData length], [passwordData bytes], NULL );
     }
     [self authWithUser: [creds user] andPassword: [creds password]];
 }
@@ -427,7 +434,7 @@ NSString *const kSieveURLScheme = @"sieve";
         
         OSStatus result = SecKeychainFindInternetPassword( NULL, [serverName length], [serverName bytes], 0, NULL,
                                         userNameLength, userNameString, 0, NULL, [socket connectedPort], 
-                                        FOUR_CHAR_CODE( 'SieV' ), kSecAuthenticationTypeDefault, 
+                                        kSieveProtocolType, kSecAuthenticationTypeDefault, 
                                         &passwordLength, &passwordData, &item );
         
         if (errSecSuccess == result) {
