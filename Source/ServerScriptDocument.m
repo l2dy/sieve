@@ -109,6 +109,8 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
     SaveToURLBlock block = (SaveToURLBlock)ci;
     block( YES, nil );
     [block release];
+    
+    [server sieveClient: client savedScript: name contextInfo: ci];
 }
 
 

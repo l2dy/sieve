@@ -118,7 +118,6 @@
     NSAssert( nil != selectedScript, @"User interface item enabled when it should not be" );
     
     [client setActiveScript: [selectedScript valueForKey: @"name"]];
-    [client listScripts];
 }
 
 - (IBAction) renameScript: (id) sender;
@@ -130,7 +129,6 @@
     [savePanel beginSheetModalForWindow: [self window] completionBlock: ^( NSInteger rc, NSString *name ) {
         if (NSOKButton == rc) {
             [client renameScript: [selectedScript valueForKey: @"name"] to: name];
-            [client listScripts];
         } 
         [savePanel release];
     }];
@@ -142,7 +140,6 @@
     NSAssert( nil != selectedScript, @"User interface item enabled when it should not be" );
 
     [client deleteScript: [selectedScript valueForKey: @"name"]];
-    [client listScripts];
 }
 
 - (BOOL) validateUserInterfaceItem: (id <NSValidatedUserInterfaceItem>) item;
@@ -317,6 +314,58 @@
     NSURL *scriptURL = [[self baseURL] URLByAppendingPathComponent: scriptName];
     ServerScriptDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: scriptURL];
     [doc finnishedDownload: script];
+}
+
+- (void) sieveClient: (SieveClient *) client activatedScript: (NSString *) scriptName contextInfo: (void *) ci;
+{
+    [self setActiveScript: scriptName];
+}
+
+- (void) sieveClient: (SieveClient *) client renamedScript: (NSString *) oldName to: (NSString *)newName contextInfo: (void *) ci;
+{
+    NSUInteger oldIndex = [scripts indexOfObject: oldName];
+    NSAssert( NSNotFound != oldIndex, @"Renamed script I don't know anything about." );
+
+    NSIndexSet *indices = [NSIndexSet indexSetWithIndex: oldIndex];
+    [self willChange:NSKeyValueChangeReplacement valuesAtIndexes:indices forKey: @"scripts"];
+    [scripts replaceObjectAtIndex: oldIndex withObject: newName];
+    [self didChange:NSKeyValueChangeReplacement valuesAtIndexes:indices forKey: @"scripts"];
+    
+    NSURL *oldURL = [baseURL URLByAppendingPathComponent: oldName];
+    NSDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: oldURL];
+    if (nil != doc) {
+        NSURL *newURL = [baseURL URLByAppendingPathComponent: newName];
+        [doc setFileURL: newURL];
+    }
+}
+
+- (void) sieveClient: (SieveClient *) client deletedScript: (NSString *) scriptName contextInfo: (void *)ci;
+{
+    NSUInteger oldIndex = [scripts indexOfObject: scriptName];
+    NSAssert( NSNotFound != oldIndex, @"Renamed script I don't know anything about." );
+    
+    NSIndexSet *indices = [NSIndexSet indexSetWithIndex: oldIndex];
+    [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:indices forKey: @"scripts"];
+    [scripts removeObjectAtIndex: oldIndex];
+    [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:indices forKey: @"scripts"];
+    
+    NSURL *URL = [baseURL URLByAppendingPathComponent: scriptName];
+    NSDocument *doc = [[NSDocumentController sharedDocumentController] documentForURL: URL];
+    if (nil != doc) {
+        [doc updateChangeCount: NSChangeDone];
+    }
+}
+
+- (void) sieveClient: (SieveClient *) client savedScript: (NSString *) name contextInfo: (void *)ci;
+{
+    if (nil == scripts) scripts = [[NSMutableArray alloc] init];
+    NSUInteger oldIndex = [scripts indexOfObject: name];
+    if (NSNotFound == oldIndex) {
+        NSIndexSet *indices = [NSIndexSet indexSetWithIndex: [scripts count]];
+        [self willChange: NSKeyValueChangeInsertion valuesAtIndexes:indices forKey: @"scripts"];
+        [scripts addObject: name];
+        [self didChange: NSKeyValueChangeInsertion valuesAtIndexes:indices forKey: @"scripts"];
+    }
 }
 
 #pragma mark -
