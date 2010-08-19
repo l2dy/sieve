@@ -64,7 +64,10 @@
 
 - (void) receivedFailureResponse: (NSDictionary *) response;
 {
-    
+    if ([delegate respondsToSelector: @selector( sieveClient:failedOperationWithError:contextInfo: )]) {
+        NSError *error = [self errorForResponse: response];
+        [delegate sieveClient: client failedOperationWithError: error contextInfo: userInfo];
+    }
 }
 
 - (void) receivedResponse: (NSDictionary *) response;
@@ -73,6 +76,11 @@
     else [self receivedFailureResponse: response];
     
     [client startNextOperation];
+}
+
+- (NSError *) errorForResponse: (NSDictionary *) response;
+{
+    return nil;
 }
 
 @end
@@ -162,6 +170,13 @@
     return [NSString stringWithFormat: @"DELETESCRIPT \"%@\"", scriptName];
 }
 
+- (void) receivedSuccessResponse:(NSDictionary *)response;
+{
+    if ([[self delegate] respondsToSelector: @selector( sieveClient:deletedScript:contextInfo: )]) {
+        [[self delegate] sieveClient: [self client] deletedScript: scriptName contextInfo: [self userInfo]];
+    }
+}
+
 @end
 
 @implementation SieveSetActiveOperation
@@ -178,6 +193,13 @@
 - (NSString *) command;
 {
     return [NSString stringWithFormat: @"SETACTIVE \"%@\"", scriptName];
+}
+
+- (void) receivedSuccessResponse:(NSDictionary *)response;
+{
+    if ([[self delegate] respondsToSelector: @selector( sieveClient:activatedScript:contextInfo: )]) {
+        [[self delegate] sieveClient:[self client] activatedScript: scriptName contextInfo: [self userInfo]];
+    }
 }
 
 @end
@@ -201,6 +223,13 @@
     return [NSString stringWithFormat: @"RENAMESCRIPT \"%@\" \"%@\"", oldName, newName];
 }
 
+- (void) receivedSuccessResponse:(NSDictionary *)response;
+{
+    if ([[self delegate] respondsToSelector: @selector(sieveClient:renamedScript:to:contextInfo:)]) {
+        [[self delegate] sieveClient:[self client] renamedScript: oldName to: newName contextInfo: [self userInfo]];
+    }
+}
+
 @end
 
 @implementation SievePutScriptOperation
@@ -221,16 +250,20 @@
 {
     if ([[response objectForKey: @"responseCode"] isEqualToString: @"OK"]) {
         NSString *sendCommand = [NSString stringWithFormat: @"PUTSCRIPT \"%@\" {%d}", scriptName, [script length]];
-        NSMutableData *sendData = [NSMutableData dataWithData: [sendCommand dataUsingEncoding: NSUTF8StringEncoding]];
-        [sendData appendData: [AsyncSocket CRLFData]];
-        [sendData appendData: script];
-        [sendData appendData: [AsyncSocket CRLFData]];
         
-        [[self client] logLine: sendCommand from: @"Client"];
-        [[self client] sendData: sendData];
-        [[self client] receiveResponse: ^(NSDictionary *response) {
+        SieveClient *client = [self client];
+        
+        [client logLine: sendCommand from: @"Client"];
+        
+        [client sendData: [sendCommand dataUsingEncoding: NSUTF8StringEncoding]];
+        [client sendData: [AsyncSocket CRLFData]];
+        [client sendData: script];
+        [client sendData: [AsyncSocket CRLFData]];
+        
+        [client receiveResponse: ^(NSDictionary *response) {
             [self receivedResponse: response];
         }];
+        
     } else {
         [self receivedResponse: response];
     }

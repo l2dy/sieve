@@ -39,6 +39,8 @@
 - (void) receivedFailureResponse: (NSDictionary *) response;
 - (NSString *) command;
 
+- (NSError *) errorForResponse: (NSDictionary *) response;
+
 @end
 
 

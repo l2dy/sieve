@@ -50,6 +50,12 @@ typedef enum {
 - (void) sieveClient: (SieveClient *) client failedToSaveScript: (NSString *) name withError: (NSError *) error contextInfo: (void *)ci;
 - (void) sieveClient: (SieveClient *) client savedScript: (NSString *) name contextInfo: (void *)ci;
 
+- (void) sieveClient: (SieveClient *) client failedOperationWithError: (NSError *) error contextInfo: (void *)ci;
+
+- (void) sieveClient: (SieveClient *) client renamedScript: (NSString *) oldName to: (NSString *) newName contextInfo: (void *)ci;
+- (void) sieveClient: (SieveClient *) client activatedScript: (NSString *) scriptName contextInfo: (void *)ci;
+- (void) sieveClient: (SieveClient *) client deletedScript: (NSString *) scriptName contextInfo: (void *)ci;
+
 @end
 
 @interface SieveClient : NSObject
