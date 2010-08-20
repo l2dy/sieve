@@ -15,43 +15,29 @@
  */
 
 
-#import <Cocoa/Cocoa.h>
+#import "SieveDocumentController.h"
+#import "SieveDocument.h"
 
-#import "SieveClient.h"
+#import <objc/Object.h>
 
-@class PSMTabBarControl;
-@class SieveScriptViewController;
 
-@interface ServerWindowController : NSWindowController < NSTabViewDelegate, NSWindowDelegate, SieveClientDelegate > {
-    IBOutlet PSMTabBarControl *tabBar;
-    IBOutlet NSTabView *tabView;
-    IBOutlet NSTableView *scriptListView;
-    IBOutlet NSArrayController *scriptsArrayController;
-    
-    NSURL *baseURL;
-    SieveClient *client;
-    NSMutableArray *scripts;
-    NSString *activeScript;
+
+@implementation SieveDocumentController
+
+- (void) closeAllDocumentsWithDelegate:(id)delegate didCloseAllSelector:(SEL)didCloseAllSelector contextInfo:(void *)contextInfo;
+{
+    if ([[self documents] count] > 0) {
+        SieveDocument *lastDocument = [[self documents] lastObject];
+        [lastDocument tryCloseWithBlock: ^( BOOL didClose ) {
+            if (didClose) {
+                [self closeAllDocumentsWithDelegate: delegate didCloseAllSelector:didCloseAllSelector contextInfo: contextInfo];
+            } else {
+                objc_msgSend( delegate, didCloseAllSelector, self, NO, contextInfo );
+            }
+        }];
+    } else {
+        objc_msgSend( delegate, didCloseAllSelector, self, YES, contextInfo );
+    }
 }
-
-@property (readwrite, retain) SieveClient *client;
-@property (readwrite, copy) NSURL *baseURL;
-@property (readwrite, copy) NSString *activeScript;
-
-- (id) initWithURL: (NSURL *) url;
-
-- (void) openURL: (NSURL *) url;
-
-- (void) setScripts: (NSArray *) newScripts;
-
-- (unsigned)countOfScripts;
-- (id)objectInScriptsAtIndex:(unsigned)theIndex;
-
-- (IBAction) newDocument: (id) sender;
-- (IBAction) activateScript: (id) sender;
-- (IBAction) renameScript: (id) sender;
-- (IBAction) delete: (id) sender;
-
-- (void) windowShouldCloseWithBlock: (void (^)( BOOL shouldClose )) shouldCloseBlock;
 
 @end

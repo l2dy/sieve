@@ -69,6 +69,25 @@ NSString * const kSieveScriptFileType = @"SieveScript";
     }
 }
 
+- (void)thisDocument:(NSDocument *)doc shouldClose:(BOOL)shouldClose  contextInfo:(void  *)contextInfo
+{
+    NSParameterAssert( nil != contextInfo );
+    void (^block)( BOOL ) = contextInfo;
+    
+    if (shouldClose) [self close];
+    block( shouldClose );
+
+    [block release];
+}
+
+- (void) tryCloseWithBlock: (void (^)( BOOL )) block;
+{
+    NSParameterAssert( nil != block );
+    
+    [self canCloseDocumentWithDelegate: self shouldCloseSelector:@selector(thisDocument:shouldClose:contextInfo:) contextInfo: [block copy]];
+}
+
+
 #pragma mark -
 #pragma mark Hackery to support binding displayName
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key

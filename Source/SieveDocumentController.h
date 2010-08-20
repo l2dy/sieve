@@ -14,44 +14,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-
 #import <Cocoa/Cocoa.h>
 
-#import "SieveClient.h"
 
-@class PSMTabBarControl;
-@class SieveScriptViewController;
+@interface SieveDocumentController : NSDocumentController {
 
-@interface ServerWindowController : NSWindowController < NSTabViewDelegate, NSWindowDelegate, SieveClientDelegate > {
-    IBOutlet PSMTabBarControl *tabBar;
-    IBOutlet NSTabView *tabView;
-    IBOutlet NSTableView *scriptListView;
-    IBOutlet NSArrayController *scriptsArrayController;
-    
-    NSURL *baseURL;
-    SieveClient *client;
-    NSMutableArray *scripts;
-    NSString *activeScript;
 }
-
-@property (readwrite, retain) SieveClient *client;
-@property (readwrite, copy) NSURL *baseURL;
-@property (readwrite, copy) NSString *activeScript;
-
-- (id) initWithURL: (NSURL *) url;
-
-- (void) openURL: (NSURL *) url;
-
-- (void) setScripts: (NSArray *) newScripts;
-
-- (unsigned)countOfScripts;
-- (id)objectInScriptsAtIndex:(unsigned)theIndex;
-
-- (IBAction) newDocument: (id) sender;
-- (IBAction) activateScript: (id) sender;
-- (IBAction) renameScript: (id) sender;
-- (IBAction) delete: (id) sender;
-
-- (void) windowShouldCloseWithBlock: (void (^)( BOOL shouldClose )) shouldCloseBlock;
 
 @end

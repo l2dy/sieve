@@ -113,6 +113,13 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
     [server sieveClient: client savedScript: name contextInfo: ci];
 }
 
+- (void) tryCloseWithBlock: (void (^)( BOOL )) block;
+{
+    [server windowShouldCloseWithBlock: ^(BOOL shouldClose) {
+        if (shouldClose) [server close];
+        block( shouldClose );;
+    }];
+}
 
 
 - (void) runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
@@ -133,6 +140,12 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
         }
         [savePanel release];
     }];
+}
+
+- (void) close;
+{
+    [self removeWindowController: server];
+    [super close];
 }
 
 @end

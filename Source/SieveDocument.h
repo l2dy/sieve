@@ -26,4 +26,6 @@ extern NSString * const kSieveScriptFileType;
 @property (readwrite, copy) NSString *script;
 @property (readwrite, retain) NSViewController *viewController;
 
+- (void) tryCloseWithBlock: (void (^)( BOOL )) block;
+
 @end

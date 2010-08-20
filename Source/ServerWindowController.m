@@ -63,6 +63,7 @@
     [tabBar setAllowsBackgroundTabClosing: YES];
     [tabBar setUseOverflowMenu: YES];
     [tabBar setAutomaticallyAnimates: YES];
+    [tabBar setCanCloseOnlyTab: YES];
     
     [scriptListView setTarget: self];
     [scriptListView setDoubleAction: @selector( doubleClickedScript: )];
@@ -202,6 +203,60 @@
 
 - (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu
 {
+    return NO;
+}
+
+- (unsigned) countOfUnsavedDocuments;
+{
+    unsigned count = 0;
+    for (NSTabViewItem *item in [tabView tabViewItems]) {
+        if ([[item identifier] isDocumentEdited]) ++count;
+    }
+    return count;    
+}
+
+- (void) reallyCloseAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+    NSParameterAssert( nil != contextInfo );
+    void (^block)( BOOL ) = contextInfo;
+    
+    block( returnCode != NSOKButton );
+    [block release];
+}
+
+- (void) windowWillClose:(NSNotification *)notification;
+{
+    NSArray *items = [[tabView tabViewItems] copy];
+    for (NSTabViewItem *item in items) {
+        NSDocument *doc = [item identifier];
+        [doc close];
+        [tabView removeTabViewItem: item];
+    }
+    // TODO: remove connection from the app controller
+}
+
+- (void) windowShouldCloseWithBlock: (void (^)( BOOL shouldClose )) shouldCloseBlock;
+{
+    unsigned unsavedDocuments = [self countOfUnsavedDocuments];
+    if (0 == unsavedDocuments) {
+        shouldCloseBlock( YES );
+        
+    } else {
+        NSAlert *alert = [NSAlert alertWithMessageText: @"There are unsaved scripts" defaultButton: @"Cancel" alternateButton:@"Close anyways" 
+                                           otherButton: nil 
+                             informativeTextWithFormat: @"There are %d unsaved documents. Do you really want to close them?", unsavedDocuments ];
+        
+        [alert beginSheetModalForWindow:[self window] modalDelegate:self 
+                         didEndSelector:@selector(reallyCloseAlertDidEnd:returnCode:contextInfo:) contextInfo: [shouldCloseBlock copy]];
+    }
+}
+
+- (BOOL) windowShouldClose:(id)sender;
+{
+    [self windowShouldCloseWithBlock: ^( BOOL shouldClose ) {
+        if (shouldClose) [self close];
+    }];
+    
     return NO;
 }
 
