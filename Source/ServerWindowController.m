@@ -291,10 +291,18 @@
         return [self hasOpenTabs];
     }
     
+    if ([menuItem action] == @selector( saveDocument: )) {
+        return [self document] != nil;
+    }
   
     return [self validateUserInterfaceItem: menuItem];
 }
 
+- (void) saveDocument: (id) sender;
+{
+    // Why is that neccessary here? The other Save... items don’t have and need that.
+    [[self document] saveDocument: sender];
+}
 
 #pragma mark -
 #pragma mark SieveClient Delegate
