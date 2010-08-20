@@ -14,12 +14,22 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
+
 #import <Cocoa/Cocoa.h>
 
-@interface AppController : NSObject < NSApplicationDelegate > {
+@class ServerWindowController;
+
+@interface ConnectionController : NSObject {
+    NSMutableDictionary *openConnections;
+
 }
+@property (readwrite, retain, nonatomic) NSMutableDictionary *openConnections;
 
++ (ConnectionController *) sharedConnectionController;
 
-- (IBAction) performOpenURL: (id) sender;
+- (void) openURL: (NSURL *) url;
+- (ServerWindowController *) serverWindowForURL: (NSURL *) url;
+
+- (void) closeConnection: (ServerWindowController *) connection;
 
 @end

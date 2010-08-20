@@ -17,6 +17,7 @@
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
+		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -104,6 +105,8 @@
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
 		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
+		268B28F2121EB0B00046E709 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
+		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				26458ED6121D70710067CE01 /* PasswordPanelController.m */,
 				264F95AB121E8C540037167B /* SieveDocumentController.h */,
 				264F95AC121E8C540037167B /* SieveDocumentController.m */,
+				268B28F2121EB0B00046E709 /* ConnectionController.h */,
+				268B28F3121EB0B00046E709 /* ConnectionController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */,
 				26458ED7121D70710067CE01 /* PasswordPanelController.m in Sources */,
 				264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */,
+				268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

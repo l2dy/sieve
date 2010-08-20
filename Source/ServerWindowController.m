@@ -16,9 +16,11 @@
 
 
 #import "ServerWindowController.h"
+
 #import "ServerScriptDocument.h"
 #import "SaveToServerPanelController.h"
 #import "PasswordPanelController.h"
+#import "ConnectionController.h"
 
 #import "PSMTabBarControl.h"
 
@@ -232,7 +234,7 @@
         [doc close];
         [tabView removeTabViewItem: item];
     }
-    // TODO: remove connection from the app controller
+    [[ConnectionController sharedConnectionController] closeConnection: self];
 }
 
 - (void) windowShouldCloseWithBlock: (void (^)( BOOL shouldClose )) shouldCloseBlock;

@@ -17,6 +17,7 @@
 #import "AppController.h"
 #import "ServerWindowController.h"
 #import "OpenURLController.h"
+#import "ConnectionController.h"
 
 @interface AppController ()
 
@@ -26,21 +27,7 @@
 
 @implementation AppController
 
-@synthesize openConnections;
 
-- (void) dealloc;
-{
-    [self setOpenConnections: nil];
-    [super dealloc];
-}
-
-- (NSMutableDictionary *) openConnections;
-{
-    if (nil == openConnections) {
-        openConnections = [[NSMutableDictionary alloc] init];
-    }
-    return openConnections;
-}
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification
 {
@@ -49,49 +36,19 @@
                          forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 
-- (ServerWindowController *) serverWindowForURL: (NSURL *) url;
-{
-    NSAssert( [[url scheme] isEqualToString: kSieveURLScheme], @"Only work with sieve URLs" );
-    
-    NSURL *rootUrl = [[NSURL URLWithString:@"/" relativeToURL: url] absoluteURL];
-    
-    ServerWindowController *controller = [[self openConnections] objectForKey: rootUrl];
-    if (nil == controller) {
-        controller = [[[ServerWindowController alloc] initWithURL: rootUrl] autorelease];
-        [openConnections setObject: controller forKey: rootUrl];
-    }
-    
-    return controller;
-}
-
-- (void) openURL: (NSURL *) url;
-{
-    if (nil == [url scheme]) {
-        url = [NSURL fileURLWithPath: [url path]];
-    }
-    
-    if ([url isFileURL]) {
-        [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL: url display: YES error: NULL];
-    } else if ([[url scheme] isEqualToString: kSieveURLScheme]) {
-        ServerWindowController *controller = [self serverWindowForURL: url];
-        [controller openURL: url];
-    } else {
-        NSBeep();
-    }
-}
 
 - (void) handleGetURLEvent: (NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent;
 {
     NSURL *url = [NSURL URLWithString: [[event descriptorForKeyword: keyDirectObject] stringValue]];
 
-    [self openURL: url];
+    [[ConnectionController sharedConnectionController] openURL: url];
 }
 
 - (IBAction) performOpenURL: (id) sender;
 {
     [OpenURLController askForURLOnSuccess: ^(NSString *result) {
         NSURL *url = [NSURL URLWithString: result];
-        [self openURL: url];
+        [[ConnectionController sharedConnectionController] openURL: url];
     }];
 }
 
