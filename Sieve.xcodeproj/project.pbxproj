@@ -15,6 +15,7 @@
 		26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26458EE3121D73EC0067CE01 /* PasswordWindow.xib */; };
 		264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F95AC121E8C540037167B /* SieveDocumentController.m */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
+		266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */; };
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
@@ -102,6 +103,7 @@
 		264F95AB121E8C540037167B /* SieveDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentController.h; sourceTree = "<group>"; };
 		264F95AC121E8C540037167B /* SieveDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentController.m; sourceTree = "<group>"; };
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMTabStyleBase.m; sourceTree = "<group>"; };
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
 		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
@@ -235,20 +237,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		26F2ADF01212972C00458B80 /* PSMTabBar */ = {
+		266A9205122CF60B00FD32A3 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
-				26F2AE561212992400458B80 /* Images */,
-				26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */,
-				26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */,
-				26F2ADF31212972C00458B80 /* NSString_AITruncation.h */,
-				26F2ADF41212972C00458B80 /* NSString_AITruncation.m */,
 				26F2ADF51212972C00458B80 /* PSMAdiumTabStyle.h */,
 				26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */,
 				26F2ADF71212972C00458B80 /* PSMAquaTabStyle.h */,
 				26F2ADF81212972C00458B80 /* PSMAquaTabStyle.m */,
 				26F2ADF91212972C00458B80 /* PSMMetalTabStyle.h */,
 				26F2ADFA1212972C00458B80 /* PSMMetalTabStyle.m */,
+				26F2AE0F1212972C00458B80 /* PSMTabStyle.h */,
+				26F2AE101212972C00458B80 /* PSMUnifiedTabStyle.h */,
+				26F2AE111212972C00458B80 /* PSMUnifiedTabStyle.m */,
+				266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		26F2ADF01212972C00458B80 /* PSMTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				266A9205122CF60B00FD32A3 /* Styles */,
+				26F2AE561212992400458B80 /* Images */,
+				26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */,
+				26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */,
+				26F2ADF31212972C00458B80 /* NSString_AITruncation.h */,
+				26F2ADF41212972C00458B80 /* NSString_AITruncation.m */,
 				26F2ADFB1212972C00458B80 /* PSMOverflowPopUpButton.h */,
 				26F2ADFC1212972C00458B80 /* PSMOverflowPopUpButton.m */,
 				26F2ADFD1212972C00458B80 /* PSMProgressIndicator.h */,
@@ -269,9 +283,6 @@
 				26F2AE0C1212972C00458B80 /* PSMTabDragWindow.m */,
 				26F2AE0D1212972C00458B80 /* PSMTabDragWindowController.h */,
 				26F2AE0E1212972C00458B80 /* PSMTabDragWindowController.m */,
-				26F2AE0F1212972C00458B80 /* PSMTabStyle.h */,
-				26F2AE101212972C00458B80 /* PSMUnifiedTabStyle.h */,
-				26F2AE111212972C00458B80 /* PSMUnifiedTabStyle.m */,
 			);
 			path = PSMTabBar;
 			sourceTree = "<group>";
@@ -314,8 +325,8 @@
 		26F2B08E12129B1D00458B80 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				26F2B08F12129B1D00458B80 /* AsyncSocket.h */,
 				26F2B09012129B1D00458B80 /* AsyncSocket.m */,
+				26F2B08F12129B1D00458B80 /* AsyncSocket.h */,
 			);
 			path = AsyncSocket;
 			sourceTree = "<group>";
@@ -597,6 +608,7 @@
 				26458ED7121D70710067CE01 /* PasswordPanelController.m in Sources */,
 				264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */,
 				268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */,
+				266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

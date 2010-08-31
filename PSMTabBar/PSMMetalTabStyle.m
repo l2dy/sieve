@@ -23,40 +23,36 @@
 #pragma mark -
 #pragma mark Creation/Destruction
 
+- (void) loadImages;
+{
+    closeButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front"]];
+    closeButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Pressed"]];
+    closeButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Rollover"]];
+    
+    closeDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty"]];
+    closeDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Pressed"]];
+    closeDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Rollover"]];
+    
+    addTabButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetal"]];
+    addTabButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetalPressed"]];
+    addTabButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetalRollover"]];
+}
+
 - (id) init
 {
     if ( (self = [super init]) ) {
-        metalCloseButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front"]];
-        metalCloseButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Pressed"]];
-        metalCloseButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Front_Rollover"]];
-
-        metalCloseDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty"]];
-        metalCloseDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Pressed"]];
-        metalCloseDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabClose_Dirty_Rollover"]];
-                
-        _addTabButtonImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetal"]];
-        _addTabButtonPressedImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetalPressed"]];
-        _addTabButtonRolloverImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"TabNewMetalRollover"]];
+        [self loadImages];
+        
 		
 		_objectCountStringAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSFontManager sharedFontManager] convertFont:[NSFont fontWithName:@"Helvetica" size:11.0] toHaveTrait:NSBoldFontMask], NSFontAttributeName,
-																					[[NSColor whiteColor] colorWithAlphaComponent:0.85], NSForegroundColorAttributeName,
-																					nil, nil];
+                                        [[NSColor whiteColor] colorWithAlphaComponent:0.85], NSForegroundColorAttributeName,
+                                        nil, nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [metalCloseButton release];
-    [metalCloseButtonDown release];
-    [metalCloseButtonOver release];
-    [metalCloseDirtyButton release];
-    [metalCloseDirtyButtonDown release];
-    [metalCloseDirtyButtonOver release];
-    [_addTabButtonImage release];
-    [_addTabButtonPressedImage release];
-    [_addTabButtonRolloverImage release];
-    
 	[_objectCountStringAttributes release];
 	
     [super dealloc];
@@ -90,17 +86,17 @@
 
 - (NSImage *)addTabButtonImage
 {
-    return _addTabButtonImage;
+    return addTabButton;
 }
 
 - (NSImage *)addTabButtonPressedImage
 {
-    return _addTabButtonPressedImage;
+    return addTabButtonDown;
 }
 
 - (NSImage *)addTabButtonRolloverImage
 {
-    return _addTabButtonRolloverImage;
+    return addTabButtonOver;
 }
 
 #pragma mark -
@@ -134,7 +130,7 @@
     }
     
     NSRect result;
-    result.size = [metalCloseButton size];
+    result.size = [closeButton size];
     result.origin.x = cellFrame.origin.x + MARGIN_X;
     result.origin.y = cellFrame.origin.y + MARGIN_Y + 2.0;
     
@@ -159,7 +155,7 @@
 	result.origin.y = cellFrame.origin.y + MARGIN_Y;
     
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-        result.origin.x += [metalCloseButton size].width + kPSMTabBarCellPadding;
+        result.origin.x += [closeButton size].width + kPSMTabBarCellPadding;
     }
     
     if ([cell state] == NSOnState) {
@@ -225,7 +221,7 @@
     
     // close button?
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-        resultWidth += [metalCloseButton size].width + kPSMTabBarCellPadding;
+        resultWidth += [closeButton size].width + kPSMTabBarCellPadding;
     }
     
     // icon?
@@ -260,7 +256,7 @@
     
     // close button?
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed])
-        resultWidth += [metalCloseButton size].width + kPSMTabBarCellPadding;
+        resultWidth += [closeButton size].width + kPSMTabBarCellPadding;
     
     // icon?
     if ([cell hasIcon]) {
@@ -453,20 +449,14 @@
     
     // close button
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-        NSSize closeButtonSize = NSZeroSize;
         NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
-        NSImage * closeButton = nil;
-        
-        closeButton = [cell isEdited] ? metalCloseDirtyButton : metalCloseButton;
-        if ([cell closeButtonOver]) closeButton = [cell isEdited] ? metalCloseDirtyButtonOver : metalCloseButtonOver;
-        if ([cell closeButtonPressed]) closeButton = [cell isEdited] ? metalCloseDirtyButtonDown : metalCloseButtonDown;
-        
-        closeButtonSize = [closeButton size];
+        NSImage * closeButtonImage = [self closeButtonImageForCell: cell];
+        NSSize closeButtonSize = [closeButtonImage size];
         if ([controlView isFlipped]) {
             closeButtonRect.origin.y += closeButtonRect.size.height;
         }
         
-        [closeButton compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += closeButtonSize.width + kPSMTabBarCellPadding;
@@ -617,15 +607,15 @@
 {
     //[super encodeWithCoder:aCoder];
     if ([aCoder allowsKeyedCoding]) {
-        [aCoder encodeObject:metalCloseButton forKey:@"metalCloseButton"];
-        [aCoder encodeObject:metalCloseButtonDown forKey:@"metalCloseButtonDown"];
-        [aCoder encodeObject:metalCloseButtonOver forKey:@"metalCloseButtonOver"];
-        [aCoder encodeObject:metalCloseDirtyButton forKey:@"metalCloseDirtyButton"];
-        [aCoder encodeObject:metalCloseDirtyButtonDown forKey:@"metalCloseDirtyButtonDown"];
-        [aCoder encodeObject:metalCloseDirtyButtonOver forKey:@"metalCloseDirtyButtonOver"];
-        [aCoder encodeObject:_addTabButtonImage forKey:@"addTabButtonImage"];
-        [aCoder encodeObject:_addTabButtonPressedImage forKey:@"addTabButtonPressedImage"];
-        [aCoder encodeObject:_addTabButtonRolloverImage forKey:@"addTabButtonRolloverImage"];
+        [aCoder encodeObject:closeButton forKey:@"metalCloseButton"];
+        [aCoder encodeObject:closeButtonDown forKey:@"metalCloseButtonDown"];
+        [aCoder encodeObject:closeButtonOver forKey:@"metalCloseButtonOver"];
+        [aCoder encodeObject:closeDirtyButton forKey:@"metalCloseDirtyButton"];
+        [aCoder encodeObject:closeDirtyButtonDown forKey:@"metalCloseDirtyButtonDown"];
+        [aCoder encodeObject:closeDirtyButtonOver forKey:@"metalCloseDirtyButtonOver"];
+        [aCoder encodeObject:addTabButton forKey:@"addTabButtonImage"];
+        [aCoder encodeObject:addTabButtonDown forKey:@"addTabButtonPressedImage"];
+        [aCoder encodeObject:addTabButtonOver forKey:@"addTabButtonRolloverImage"];
     }
 }
 
@@ -634,15 +624,15 @@
    // self = [super initWithCoder:aDecoder];
     //if (self) {
         if ([aDecoder allowsKeyedCoding]) {
-            metalCloseButton = [[aDecoder decodeObjectForKey:@"metalCloseButton"] retain];
-            metalCloseButtonDown = [[aDecoder decodeObjectForKey:@"metalCloseButtonDown"] retain];
-            metalCloseButtonOver = [[aDecoder decodeObjectForKey:@"metalCloseButtonOver"] retain];
-            metalCloseDirtyButton = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButton"] retain];
-            metalCloseDirtyButtonDown = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButtonDown"] retain];
-            metalCloseDirtyButtonOver = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButtonOver"] retain];
-            _addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-            _addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-            _addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
+            closeButton = [[aDecoder decodeObjectForKey:@"metalCloseButton"] retain];
+            closeButtonDown = [[aDecoder decodeObjectForKey:@"metalCloseButtonDown"] retain];
+            closeButtonOver = [[aDecoder decodeObjectForKey:@"metalCloseButtonOver"] retain];
+            closeDirtyButton = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButton"] retain];
+            closeDirtyButtonDown = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButtonDown"] retain];
+            closeDirtyButtonOver = [[aDecoder decodeObjectForKey:@"metalCloseDirtyButtonOver"] retain];
+            addTabButton = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
+            addTabButtonDown = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
+            addTabButtonOver = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
         }
     //}
     return self;

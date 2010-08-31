@@ -56,17 +56,17 @@
     aquaDivider = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabsSeparator"]];
     [aquaDivider setFlipped:NO];
     
-    aquaCloseButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front"]];
-    aquaCloseButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Pressed"]];
-    aquaCloseButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Rollover"]];
+    closeButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front"]];
+    closeButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Pressed"]];
+    closeButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Rollover"]];
     
-    aquaCloseDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front"]];
-    aquaCloseDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Pressed"]];
-    aquaCloseDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Rollover"]];
+    closeDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front"]];
+    closeDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Pressed"]];
+    closeDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Rollover"]];
         
-    _addTabButtonImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNew"]];
-    _addTabButtonPressedImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewPressed"]];
-    _addTabButtonRolloverImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewRollover"]];
+    addTabButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNew"]];
+    addTabButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewPressed"]];
+    addTabButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewRollover"]];
 }
 
 - (void)dealloc
@@ -75,15 +75,6 @@
     [aquaTabBgDown release];
     [aquaDividerDown release];
     [aquaDivider release];
-    [aquaCloseButton release];
-    [aquaCloseButtonDown release];
-    [aquaCloseButtonOver release];
-    [aquaCloseDirtyButton release];
-    [aquaCloseDirtyButtonDown release];
-    [aquaCloseDirtyButtonOver release];
-    [_addTabButtonImage release];
-    [_addTabButtonPressedImage release];
-    [_addTabButtonRolloverImage release];
     
     [_objectCountStringAttributes release];
     
@@ -118,17 +109,17 @@
 
 - (NSImage *)addTabButtonImage
 {
-    return _addTabButtonImage;
+    return addTabButton;
 }
 
 - (NSImage *)addTabButtonPressedImage
 {
-    return _addTabButtonPressedImage;
+    return addTabButtonDown;
 }
 
 - (NSImage *)addTabButtonRolloverImage
 {
-    return _addTabButtonRolloverImage;
+    return addTabButtonOver;
 }
 
 #pragma mark -
@@ -146,7 +137,7 @@
     }
     
     NSRect result;
-    result.size = [aquaCloseButton size];
+    result.size = [closeButton size];
     result.origin.x = cellFrame.origin.x + MARGIN_X;
     result.origin.y = cellFrame.origin.y + MARGIN_Y + 2.0;
     
@@ -167,7 +158,7 @@
     result.origin.y = cellFrame.origin.y + MARGIN_Y;
     
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-        result.origin.x += [aquaCloseButton size].width + kPSMTabBarCellPadding;
+        result.origin.x += [closeButton size].width + kPSMTabBarCellPadding;
     }
     
     return result;
@@ -224,7 +215,7 @@
     
     // close button?
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed])
-        resultWidth += [aquaCloseButton size].width + kPSMTabBarCellPadding;
+        resultWidth += [closeButton size].width + kPSMTabBarCellPadding;
     
     // icon?
     if ([cell hasIcon]) {
@@ -259,7 +250,7 @@
     
     // close button?
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
-        resultWidth += [aquaCloseButton size].width + kPSMTabBarCellPadding;
+        resultWidth += [closeButton size].width + kPSMTabBarCellPadding;
     }
     
     // icon?
@@ -441,20 +432,15 @@
     if ([cell hasCloseButton] && ![cell isCloseButtonSuppressed]) {
         NSSize closeButtonSize = NSZeroSize;
         NSRect closeButtonRect = [cell closeButtonRectForFrame:cellFrame];
-        NSImage *closeButton = nil;
+        NSImage *closeButtonImage = [self closeButtonImageForCell: cell];
         
-        closeButton = [cell isEdited] ? aquaCloseDirtyButton : aquaCloseButton;
-        
-        if ([cell closeButtonOver]) closeButton = [cell isEdited] ? aquaCloseDirtyButtonOver : aquaCloseButtonOver;
-        if ([cell closeButtonPressed]) closeButton = [cell isEdited] ? aquaCloseDirtyButtonDown : aquaCloseButtonDown;
-        
-        closeButtonSize = [closeButton size];
+        closeButtonSize = [closeButtonImage size];
         
         if ([controlView isFlipped]) {
             closeButtonRect.origin.y += closeButtonRect.size.height;
         }
         
-        [closeButton compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += closeButtonSize.width + kPSMTabBarCellPadding;
@@ -525,7 +511,7 @@
 #pragma mark Archiving
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    //[super encodeWithCoder:aCoder];
+    [super encodeWithCoder:aCoder];
     if ([aCoder allowsKeyedCoding]) {
         [aCoder encodeObject:aquaTabBg forKey:@"aquaTabBg"];
         [aCoder encodeObject:aquaTabBgDown forKey:@"aquaTabBgDown"];
@@ -533,21 +519,12 @@
         [aCoder encodeObject:aquaTabBgDownNonKey forKey:@"aquaTabBgDownNonKey"];
         [aCoder encodeObject:aquaDividerDown forKey:@"aquaDividerDown"];
         [aCoder encodeObject:aquaDivider forKey:@"aquaDivider"];
-        [aCoder encodeObject:aquaCloseButton forKey:@"aquaCloseButton"];
-        [aCoder encodeObject:aquaCloseButtonDown forKey:@"aquaCloseButtonDown"];
-        [aCoder encodeObject:aquaCloseButtonOver forKey:@"aquaCloseButtonOver"];
-        [aCoder encodeObject:aquaCloseDirtyButton forKey:@"aquaCloseDirtyButton"];
-        [aCoder encodeObject:aquaCloseDirtyButtonDown forKey:@"aquaCloseDirtyButtonDown"];
-        [aCoder encodeObject:aquaCloseDirtyButtonOver forKey:@"aquaCloseDirtyButtonOver"];
-        [aCoder encodeObject:_addTabButtonImage forKey:@"addTabButtonImage"];
-        [aCoder encodeObject:_addTabButtonPressedImage forKey:@"addTabButtonPressedImage"];
-        [aCoder encodeObject:_addTabButtonRolloverImage forKey:@"addTabButtonRolloverImage"];
     }
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    //self = [super initWithCoder:aDecoder];
-    //if (self) {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
         if ([aDecoder allowsKeyedCoding]) {
             aquaTabBg = [[aDecoder decodeObjectForKey:@"aquaTabBg"] retain];
             aquaTabBgDown = [[aDecoder decodeObjectForKey:@"aquaTabBgDown"] retain];
@@ -555,17 +532,8 @@
             aquaTabBgDownNonKey = [[aDecoder decodeObjectForKey:@"aquaTabBgDownNonKey"] retain];
             aquaDividerDown = [[aDecoder decodeObjectForKey:@"aquaDividerDown"] retain];
             aquaDivider = [[aDecoder decodeObjectForKey:@"aquaDivider"] retain];
-            aquaCloseButton = [[aDecoder decodeObjectForKey:@"aquaCloseButton"] retain];
-            aquaCloseButtonDown = [[aDecoder decodeObjectForKey:@"aquaCloseButtonDown"] retain];
-            aquaCloseButtonOver = [[aDecoder decodeObjectForKey:@"aquaCloseButtonOver"] retain];
-            aquaCloseDirtyButton = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButton"] retain];
-            aquaCloseDirtyButtonDown = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonDown"] retain];
-            aquaCloseDirtyButtonOver = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonOver"] retain];
-            _addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-            _addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-            _addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
         }
-    //}
+    }
     return self;
 }
 

@@ -50,6 +50,23 @@ Protocol to be observed by all style delegate objects.  These objects handle the
 
 @end
 
+@interface PSMTabStyleBase : NSObject < NSCoding > { 
+  NSImage *closeButton;
+  NSImage *closeButtonDown;
+  NSImage *closeButtonOver;
+  NSImage *closeDirtyButton;
+  NSImage *closeDirtyButtonDown;
+  NSImage *closeDirtyButtonOver;
+  NSImage *addTabButton;
+  NSImage *addTabButtonDown;
+  NSImage *addTabButtonOver;
+}
+
+- (NSImage *) closeButtonImageForCell: (PSMTabBarCell *)cell;
+
+@end // PSMTabStyleBase
+
+
 @interface PSMTabBarControl (StyleAccessors)
 
 - (NSMutableArray *)cells;

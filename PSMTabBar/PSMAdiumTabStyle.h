@@ -9,11 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "PSMTabStyle.h"
 
-@interface PSMAdiumTabStyle : NSObject <PSMTabStyle>
+@interface PSMAdiumTabStyle : PSMTabStyleBase <PSMTabStyle>
 {
-	NSImage *_closeButton, *_closeButtonDown, *_closeButtonOver;
-	NSImage *_closeDirtyButton, *_closeDirtyButtonDown, *_closeDirtyButtonOver;
-	NSImage *_addTabButtonImage, *_addTabButtonPressedImage, *_addTabButtonRolloverImage;
 	NSImage *_gradientImage;
 	
     NSDictionary *_objectCountStringAttributes;

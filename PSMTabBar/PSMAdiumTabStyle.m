@@ -48,34 +48,34 @@
 
 - (void)loadImages
 {
-	_closeButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front"]];
-	_closeButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Pressed"]];
-	_closeButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Rollover"]];
+	closeButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front"]];
+	closeButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Pressed"]];
+	closeButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabClose_Front_Rollover"]];
 
-    _closeDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front"]];
-    _closeDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Pressed"]];
-    _closeDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Rollover"]];
+    closeDirtyButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front"]];
+    closeDirtyButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Pressed"]];
+    closeDirtyButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabCloseDirty_Front_Rollover"]];
         	
-	_addTabButtonImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNew"]];
-    _addTabButtonPressedImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewPressed"]];
-    _addTabButtonRolloverImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewRollover"]];
+	addTabButton = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNew"]];
+    addTabButtonDown = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewPressed"]];
+    addTabButtonOver = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewRollover"]];
 	
 	_gradientImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AdiumGradient"]];
 }
 
 - (void)dealloc
 {
-	[_closeButton release];
-	[_closeButtonDown release];
-	[_closeButtonOver release];
+	[closeButton release];
+	[closeButtonDown release];
+	[closeButtonOver release];
     
-	[_closeDirtyButton release];
-	[_closeDirtyButtonDown release];
-	[_closeDirtyButtonOver release];
+	[closeDirtyButton release];
+	[closeDirtyButtonDown release];
+	[closeDirtyButtonOver release];
 	
-	[_addTabButtonImage release];
-	[_addTabButtonPressedImage release];
-	[_addTabButtonRolloverImage release];
+	[addTabButton release];
+	[addTabButtonDown release];
+	[addTabButtonOver release];
 	
 	[_gradientImage release];
 	
@@ -135,17 +135,17 @@
 
 - (NSImage *)addTabButtonImage
 {
-    return _addTabButtonImage;
+    return addTabButton;
 }
 
 - (NSImage *)addTabButtonPressedImage
 {
-    return _addTabButtonPressedImage;
+    return addTabButtonDown;
 }
 
 - (NSImage *)addTabButtonRolloverImage
 {
-    return _addTabButtonRolloverImage;
+    return addTabButtonOver;
 }
 
 #pragma mark -
@@ -177,7 +177,7 @@
 	}
 
 	NSRect result;
-	result.size = [_closeButton size];
+	result.size = [closeButton size];
 
 	switch (orientation) {
 		case PSMTabBarHorizontalOrientation:
@@ -308,7 +308,7 @@
 
 	// close button?
 	if ([self closeButtonIsEnabledForCell:cell]) {
-		resultWidth += MAX([_closeButton size].width, NSWidth([self iconRectForTabCell:cell])) + Adium_CellPadding;
+		resultWidth += MAX([closeButton size].width, NSWidth([self iconRectForTabCell:cell])) + Adium_CellPadding;
 	}
 
 	// icon?
@@ -344,7 +344,7 @@
 
 	// close button?
 	if ([self closeButtonIsEnabledForCell:cell]) {
-		resultWidth += MAX([_closeButton size].width, NSWidth([self iconRectForTabCell:cell])) + Adium_CellPadding;
+		resultWidth += MAX([closeButton size].width, NSWidth([self iconRectForTabCell:cell])) + Adium_CellPadding;
 	}
 
 	// icon?
@@ -592,11 +592,11 @@
 		}
 
 		if ([cell closeButtonPressed]) {
-			closeButtonOrIcon = ([cell isEdited] ? _closeDirtyButtonDown : _closeButtonDown);
+			closeButtonOrIcon = ([cell isEdited] ? closeDirtyButtonDown : closeButtonDown);
 			drawingRect = closeButtonRect;
 
 		} else if ([cell closeButtonOver]) {
-            closeButtonOrIcon = ([cell isEdited] ? _closeDirtyButtonOver : _closeButtonOver);
+            closeButtonOrIcon = ([cell isEdited] ? closeDirtyButtonOver : closeButtonOver);
 			drawingRect = closeButtonRect;
 	
 		} else if ((orientation == PSMTabBarVerticalOrientation) &&
@@ -620,7 +620,7 @@
 			drawingRect = iconRect;
 	
 		} else {
-			closeButtonOrIcon = ([cell isEdited] ? _closeDirtyButton : _closeButton);
+			closeButtonOrIcon = ([cell isEdited] ? closeDirtyButton : closeButton);
 			drawingRect = closeButtonRect;
 		}
 		
@@ -1019,16 +1019,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder 
 {
+    [super encodeWithCoder:  aCoder];
     if ([aCoder allowsKeyedCoding]) {
-        [aCoder encodeObject:_closeButton forKey:@"closeButton"];
-        [aCoder encodeObject:_closeButtonDown forKey:@"closeButtonDown"];
-        [aCoder encodeObject:_closeButtonOver forKey:@"closeButtonOver"];
-        [aCoder encodeObject:_closeDirtyButton forKey:@"closeDirtyButton"];
-        [aCoder encodeObject:_closeDirtyButtonDown forKey:@"closeDirtyButtonDown"];
-        [aCoder encodeObject:_closeDirtyButtonOver forKey:@"closeDirtyButtonOver"];
-        [aCoder encodeObject:_addTabButtonImage forKey:@"addTabButtonImage"];
-        [aCoder encodeObject:_addTabButtonPressedImage forKey:@"addTabButtonPressedImage"];
-        [aCoder encodeObject:_addTabButtonRolloverImage forKey:@"addTabButtonRolloverImage"];
 		[aCoder encodeBool:_drawsUnified forKey:@"drawsUnified"];
 		[aCoder encodeBool:_drawsRight forKey:@"drawsRight"];
     }
@@ -1036,17 +1028,8 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder 
 {
-   if ( (self = [super init]) ) {
+    if ( (self = [super initWithCoder:  aDecoder]) ) {
         if ([aDecoder allowsKeyedCoding]) {
-            _closeButton = [[aDecoder decodeObjectForKey:@"closeButton"] retain];
-            _closeButtonDown = [[aDecoder decodeObjectForKey:@"closeButtonDown"] retain];
-            _closeButtonOver = [[aDecoder decodeObjectForKey:@"closeButtonOver"] retain];
-            _closeDirtyButton = [[aDecoder decodeObjectForKey:@"closeDirtyButton"] retain];
-            _closeDirtyButtonDown = [[aDecoder decodeObjectForKey:@"closeDirtyButtonDown"] retain];
-            _closeDirtyButtonOver = [[aDecoder decodeObjectForKey:@"closeDirtyButtonOver"] retain];
-            _addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-            _addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-            _addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
 			_drawsUnified = [aDecoder decodeBoolForKey:@"drawsUnified"];
 			_drawsRight = [aDecoder decodeBoolForKey:@"drawsRight"];
         }

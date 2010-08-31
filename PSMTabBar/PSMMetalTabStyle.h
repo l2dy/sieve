@@ -9,16 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PSMTabStyle.h"
 
-@interface PSMMetalTabStyle : NSObject <PSMTabStyle> {
-    NSImage *metalCloseButton;
-    NSImage *metalCloseButtonDown;
-    NSImage *metalCloseButtonOver;
-    NSImage *metalCloseDirtyButton;
-    NSImage *metalCloseDirtyButtonDown;
-    NSImage *metalCloseDirtyButtonOver;
-    NSImage *_addTabButtonImage;
-    NSImage *_addTabButtonPressedImage;
-    NSImage *_addTabButtonRolloverImage;
+@interface PSMMetalTabStyle : PSMTabStyleBase <PSMTabStyle> {
 	
 	NSDictionary *_objectCountStringAttributes;
 	
