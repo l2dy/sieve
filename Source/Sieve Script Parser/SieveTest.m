@@ -73,6 +73,16 @@
     return [super initWithName: @"allof" parameters: children];
 }
 
+- initWithName: (NSString *) newName parameters: (NSArray *) newParameters;
+{
+    [NSException raise: @"InvalidInitializer" format: @"SieveAllOfTest cannot be initialized with a different name"];
+}
+
+- (id) copyWithZone:(NSZone *)zone;
+{
+    return [[[self class] allocWithZone: zone] initWithChildren: parameters];
+}
+
 @end
 
 @implementation SieveAnyOfTest
@@ -81,6 +91,17 @@
 {
     return [super initWithName: @"anyof" parameters: children];
 }
+
+- initWithName: (NSString *) newName parameters: (NSArray *) newParameters;
+{
+    [NSException raise: @"InvalidInitializer" format: @"SieveAnyOfTest cannot be initialized with a different name"];
+}
+
+- (id) copyWithZone:(NSZone *)zone;
+{
+    return [[[self class] allocWithZone: zone] initWithChildren: parameters];
+}
+
 
 @end
 
