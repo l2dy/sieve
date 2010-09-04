@@ -29,6 +29,15 @@
 		26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26458EE3121D73EC0067CE01 /* PasswordWindow.xib */; };
 		264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F95AC121E8C540037167B /* SieveDocumentController.m */; };
 		2653D04812323B7000CC7DF6 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2653D03D12323B6700CC7DF6 /* OCMock.framework */; };
+		2653D08B12323C3500CC7DF6 /* TestSieveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D08A12323C3500CC7DF6 /* TestSieveClient.m */; };
+		2653D09D12323DA600CC7DF6 /* SieveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09F12129B2600458B80 /* SieveClient.m */; };
+		2653D0A412323DBF00CC7DF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
+		2653D0A812323DD400CC7DF6 /* NSData+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09912129B2600458B80 /* NSData+Base64Encoding.m */; };
+		2653D0A912323DD400CC7DF6 /* NSScanner+QuotedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09B12129B2600458B80 /* NSScanner+QuotedString.m */; };
+		2653D0AA12323DD400CC7DF6 /* SaslConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09D12129B2600458B80 /* SaslConn.m */; };
+		2653D0AB12323DD400CC7DF6 /* SieveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264084B11213FD61004F42BB /* SieveOperation.m */; };
+		2653D0AF12323DE100CC7DF6 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
+		2653D0B312323DF700CC7DF6 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09012129B1D00458B80 /* AsyncSocket.m */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */; };
 		266B56DE1231112900D0741F /* SieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A612129B2600458B80 /* SieveTest.m */; };
@@ -130,6 +139,7 @@
 		264F95AB121E8C540037167B /* SieveDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentController.h; sourceTree = "<group>"; };
 		264F95AC121E8C540037167B /* SieveDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentController.m; sourceTree = "<group>"; };
 		2653D03D12323B6700CC7DF6 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = /Library/Frameworks/OCMock.framework; sourceTree = "<absolute>"; };
+		2653D08A12323C3500CC7DF6 /* TestSieveClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSieveClient.m; sourceTree = "<group>"; };
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMTabStyleBase.m; sourceTree = "<group>"; };
 		266B56D9123110E400D0741F /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2653D04812323B7000CC7DF6 /* OCMock.framework in Frameworks */,
+				2653D0A412323DBF00CC7DF6 /* Security.framework in Frameworks */,
+				2653D0AF12323DE100CC7DF6 /* libsasl2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +311,7 @@
 			children = (
 				266B56DA123110E400D0741F /* Tests-Info.plist */,
 				266B56E01231113800D0741F /* TestSieveTest.m */,
+				2653D08A12323C3500CC7DF6 /* TestSieveClient.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -663,6 +676,13 @@
 			files = (
 				266B56DE1231112900D0741F /* SieveTest.m in Sources */,
 				266B56E11231113800D0741F /* TestSieveTest.m in Sources */,
+				2653D08B12323C3500CC7DF6 /* TestSieveClient.m in Sources */,
+				2653D09D12323DA600CC7DF6 /* SieveClient.m in Sources */,
+				2653D0A812323DD400CC7DF6 /* NSData+Base64Encoding.m in Sources */,
+				2653D0A912323DD400CC7DF6 /* NSScanner+QuotedString.m in Sources */,
+				2653D0AA12323DD400CC7DF6 /* SaslConn.m in Sources */,
+				2653D0AB12323DD400CC7DF6 /* SieveOperation.m in Sources */,
+				2653D0B312323DF700CC7DF6 /* AsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
