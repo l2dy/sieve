@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		2665AD721234106C0063B62F /* Package */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2665AD7A1234107D0063B62F /* Build configuration list for PBXAggregateTarget "Package" */;
+			buildPhases = (
+				2665AD711234106C0063B62F /* ShellScript */,
+			);
+			dependencies = (
+				2665AD76123410710063B62F /* PBXTargetDependency */,
+			);
+			name = Package;
+			productName = Package;
+		};
 		266B571A1231162B00D0741F /* Documentation */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 266B571F1231166C00D0741F /* Build configuration list for PBXAggregateTarget "Documentation" */;
@@ -120,6 +132,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2665AD75123410710063B62F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4 /* Sieve */;
+			remoteInfo = Sieve;
+		};
 		266B56F81231138900D0741F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -613,6 +632,7 @@
 				8D15AC270486D014006FF6A4 /* Sieve */,
 				266B56D8123110E400D0741F /* Tests */,
 				266B571A1231162B00D0741F /* Documentation */,
+				2665AD721234106C0063B62F /* Package */,
 			);
 		};
 /* End PBXProject section */
@@ -672,6 +692,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2665AD711234106C0063B62F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nLONG_VERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nMINIMUM_SYSTEM=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" LSMinimumSystemVersion)\n\nDOWNLOAD_BASE_URL=\"http://dergraf.net/sieve\"\nARCHIVE_FILENAME=\"$PROJECT_NAME $LONG_VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nPRIVATE_KEY=\"$SOURCE_ROOT/dsa_priv.pem\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$ARCHIVE_FILENAME\"\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign \"$PRIVATE_KEY\" \\\n\t| openssl enc -base64\n)\n\ncat <<EOF > \"appcast-$VERSION.xml\"\n<item>\n\t<title>$PROJECT_NAME Version $LONG_VERSION</title>\n\t<pubDate>$PUBDATE</pubDate>\n\t<sparkle:minimumSystemVersion>$MINIMUM_SYSTEM</sparkle:minimumSystemVersion>\n\t<enclosure\n\t\turl=\"$DOWNLOAD_URL\"\n\t\tsparkle:version=\"$VERSION\"\n\t\tsparkle:shortVersionString=\"$LONG_VERSION\"\n\t\ttype=\"application/octet-stream\"\n\t\tlength=\"$SIZE\"\n\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t/>\n</item>\nEOF";
+			showEnvVarsInLog = 0;
+		};
 		266B56D7123110E400D0741F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,6 +803,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2665AD76123410710063B62F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* Sieve */;
+			targetProxy = 2665AD75123410710063B62F /* PBXContainerItemProxy */;
+		};
 		266B56F91231138900D0741F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 266B56D8123110E400D0741F /* Tests */;
@@ -844,6 +883,27 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2665AD731234106C0063B62F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Package;
+			};
+			name = Debug;
+		};
+		2665AD741234106C0063B62F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = Package;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		266B56DB123110E500D0741F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -990,6 +1050,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2665AD7A1234107D0063B62F /* Build configuration list for PBXAggregateTarget "Package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2665AD731234106C0063B62F /* Debug */,
+				2665AD741234106C0063B62F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		266B56DD123110E500D0741F /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
