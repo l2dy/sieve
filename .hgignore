@@ -1,5 +1,7 @@
 syntax: glob
 
+
+dsa_priv.pem
 build
 DoxygenDocs.docset
 .DS_Store
