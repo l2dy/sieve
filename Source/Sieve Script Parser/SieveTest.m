@@ -76,6 +76,7 @@
 - initWithName: (NSString *) newName parameters: (NSArray *) newParameters;
 {
     [NSException raise: @"InvalidInitializer" format: @"SieveAllOfTest cannot be initialized with a different name"];
+    return nil;
 }
 
 - (id) copyWithZone:(NSZone *)zone;
@@ -95,6 +96,7 @@
 - initWithName: (NSString *) newName parameters: (NSArray *) newParameters;
 {
     [NSException raise: @"InvalidInitializer" format: @"SieveAnyOfTest cannot be initialized with a different name"];
+    return nil;
 }
 
 - (id) copyWithZone:(NSZone *)zone;

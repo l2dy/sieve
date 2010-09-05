@@ -234,6 +234,7 @@
         [doc close];
         [tabView removeTabViewItem: item];
     }
+    [items release];
     [[ConnectionController sharedConnectionController] closeConnection: self];
 }
 
