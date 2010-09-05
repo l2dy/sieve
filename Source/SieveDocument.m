@@ -40,6 +40,7 @@ NSString * const kSieveScriptFileType = @"net.dergraf.sieve.sieve-script";
 {
     NSAssert( [typeName isEqualToString: kSieveScriptFileType], @"Only supporting sieve scripts" );
     
+    [[self viewController] commitEditing];
 	return [script dataUsingEncoding: NSUTF8StringEncoding];
 }
 
