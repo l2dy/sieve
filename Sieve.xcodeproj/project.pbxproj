@@ -56,6 +56,8 @@
 		2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
 		2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
 		2665AD6512340F290063B62F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2665AD6412340F290063B62F /* dsa_pub.pem */; };
+		2665ADD5123430DE0063B62F /* Sieve.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADD4123430DE0063B62F /* Sieve.icns */; };
+		2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADE01234326F0063B62F /* SieveDocument.icns */; };
 		266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */; };
 		266B56DE1231112900D0741F /* SieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A612129B2600458B80 /* SieveTest.m */; };
 		266B56E11231113800D0741F /* TestSieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B56E01231113800D0741F /* TestSieveTest.m */; };
@@ -136,7 +138,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D15AC270486D014006FF6A4 /* Sieve */;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = Sieve;
 		};
 		266B56F81231138900D0741F /* PBXContainerItemProxy */ = {
@@ -184,6 +186,8 @@
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		2665AD1812340C040063B62F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2665AD6412340F290063B62F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		2665ADD4123430DE0063B62F /* Sieve.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Sieve.icns; sourceTree = "<group>"; };
+		2665ADE01234326F0063B62F /* SieveDocument.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SieveDocument.icns; sourceTree = "<group>"; };
 		266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMTabStyleBase.m; sourceTree = "<group>"; };
 		266B56D9123110E400D0741F /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266B56DA123110E400D0741F /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -547,6 +551,8 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2665ADE01234326F0063B62F /* SieveDocument.icns */,
+				2665ADD4123430DE0063B62F /* Sieve.icns */,
 				2665AD6412340F290063B62F /* dsa_pub.pem */,
 				8D15AC360486D014006FF6A4 /* Sieve-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
@@ -686,6 +692,8 @@
 				266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */,
 				26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */,
 				2665AD6512340F290063B62F /* dsa_pub.pem in Resources */,
+				2665ADD5123430DE0063B62F /* Sieve.icns in Resources */,
+				2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
