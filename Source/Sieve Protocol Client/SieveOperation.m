@@ -265,7 +265,16 @@
         }];
         
     } else {
-        [self receivedResponse: response];
+        id delegate = [self delegate];
+        if ([delegate respondsToSelector: @selector( sieveClient:failedToSaveScript:withError:contextInfo: )]) {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys: 
+                                      response, kSieveErrorResponseDictKey, 
+                                      NSLocalizedString( @"Quota exceeded while storing script to server", @"" ), NSLocalizedDescriptionKey, 
+                                      [response objectForKey: @"userInfo"], NSLocalizedRecoverySuggestionErrorKey,
+                                      nil];
+            NSError *error = [NSError errorWithDomain: kSieveErrorDomain code: kSieveErrorQuota userInfo: userInfo];
+            [delegate sieveClient: [self client] failedToSaveScript: scriptName withError:error contextInfo: [self userInfo]];
+        }
     }
 }
 
@@ -281,7 +290,12 @@
 {
     id delegate = [self delegate];
     if ([delegate respondsToSelector: @selector( sieveClient:failedToSaveScript:withError:contextInfo: )]) {
-        [delegate sieveClient: [self client] failedToSaveScript: scriptName withError:nil contextInfo: [self userInfo]];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys: response, kSieveErrorResponseDictKey, 
+                                  NSLocalizedString(@"Cannot store script to server", @""), NSLocalizedDescriptionKey, 
+                                  [response objectForKey: @"userInfo"], NSLocalizedRecoverySuggestionErrorKey,
+                                  nil];
+        NSError *error = [NSError errorWithDomain: kSieveErrorDomain code: kSieveErrorInvalidScript userInfo: userInfo];
+        [delegate sieveClient: [self client] failedToSaveScript: scriptName withError:error contextInfo: [self userInfo]];
     }
 }
 

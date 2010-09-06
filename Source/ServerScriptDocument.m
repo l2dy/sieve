@@ -65,6 +65,10 @@
     return [server window];
 }
 
+- (void)didPresentErrorWithRecovery:(BOOL)didRecover  contextInfo:(void *)contextInfo;
+{
+}
+
 typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
 - (void) saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)selector contextInfo:(void *)contextInfo;
 {
@@ -84,6 +88,8 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
                 if (nil == [self fileURL] || NSSaveAsOperation == saveOperation) {
                     [self setFileURL: url];
                 }
+            } else {
+                [self presentError: error modalForWindow: [self windowForSheet] delegate: self didPresentSelector: @selector(didPresentErrorWithRecovery:contextInfo:) contextInfo: NULL];
             }
             ((void (*)( id, SEL, id, BOOL, void *))objc_msgSend)( delegate, selector, self, result, contextInfo );
         } copy];

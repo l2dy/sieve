@@ -22,6 +22,12 @@
 #import "SaslConn.h"
 
 extern NSString *const kSieveURLScheme;
+extern NSString * const kSieveErrorDomain;
+extern NSString * const kSieveErrorResponseDictKey;
+enum {
+    kSieveErrorQuota,
+    kSieveErrorInvalidScript,
+};
 
 enum {
     kSieveDefaultPort = 2000,

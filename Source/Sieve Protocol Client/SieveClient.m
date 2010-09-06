@@ -24,6 +24,9 @@
 // TODO: Verschiedene Empfangs-Routinen aufspalten und vereinheltichen
 
 NSString *const kSieveURLScheme = @"sieve";
+NSString * const kSieveErrorDomain = @"SieveErrorDomain";
+NSString * const kSieveErrorResponseDictKey = @"SieveErrorResponseDictKey";
+
 static const uint32_t kSieveProtocolType = FOUR_CHAR_CODE( 'SieV' );
 
 @interface SieveClient ()
