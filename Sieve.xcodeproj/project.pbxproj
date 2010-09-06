@@ -63,6 +63,8 @@
 		266B56E11231113800D0741F /* TestSieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B56E01231113800D0741F /* TestSieveTest.m */; };
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
+		267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
+		267508D312352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
@@ -197,6 +199,8 @@
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
 		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
+		267508D012352FCC00B8E26D /* ServiceLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLookup.h; sourceTree = "<group>"; };
+		267508D112352FCC00B8E26D /* ServiceLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLookup.m; sourceTree = "<group>"; };
 		268B28F2121EB0B00046E709 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
 		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
 		26B5D3191234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
@@ -371,6 +375,15 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		267508CF12352FB100B8E26D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				267508D012352FCC00B8E26D /* ServiceLookup.h */,
+				267508D112352FCC00B8E26D /* ServiceLookup.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		26F2ADF01212972C00458B80 /* PSMTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +464,7 @@
 		26F2B09212129B2600458B80 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				267508CF12352FB100B8E26D /* Tools */,
 				26F2B0A012129B2600458B80 /* Sieve Script Parser */,
 				26F2B09712129B2600458B80 /* Sieve Protocol Client */,
 				26F2B09312129B2600458B80 /* GUI */,
@@ -797,6 +811,7 @@
 				2653D0B312323DF700CC7DF6 /* AsyncSocket.m in Sources */,
 				2653D17E1232977500CC7DF6 /* TestMockSocket.m in Sources */,
 				2653D1841232995100CC7DF6 /* MockSocket.m in Sources */,
+				267508D312352FCC00B8E26D /* ServiceLookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +858,7 @@
 				264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */,
 				268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */,
 				266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */,
+				267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
