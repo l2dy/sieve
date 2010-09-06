@@ -75,7 +75,10 @@ static const uint32_t kSieveProtocolType = FOUR_CHAR_CODE( 'SieV' );
 - (void) dealloc;
 {
     [self setHost: nil];
+
+    [socket setDelegate: nil];
     [self setSocket: nil];
+    
     [self setSasl: nil];
     
     [super dealloc];
