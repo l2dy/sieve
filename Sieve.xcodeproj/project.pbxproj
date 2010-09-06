@@ -53,6 +53,7 @@
 		2653D17E1232977500CC7DF6 /* TestMockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D17D1232977500CC7DF6 /* TestMockSocket.m */; };
 		2653D1841232995100CC7DF6 /* MockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D1831232995100CC7DF6 /* MockSocket.m */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
+		2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2661BD69123584A7001CBBC5 /* PFMoveApplication.m */; };
 		2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
 		2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
 		2665AD6512340F290063B62F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2665AD6412340F290063B62F /* dsa_pub.pem */; };
@@ -190,6 +191,8 @@
 		2653D1821232995100CC7DF6 /* MockSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSocket.h; sourceTree = "<group>"; };
 		2653D1831232995100CC7DF6 /* MockSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockSocket.m; sourceTree = "<group>"; };
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		2661BD68123584A7001CBBC5 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
+		2661BD69123584A7001CBBC5 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		2665AD1812340C040063B62F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		2665AD6412340F290063B62F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		2665ADD4123430DE0063B62F /* Sieve.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Sieve.icns; sourceTree = "<group>"; };
@@ -348,6 +351,15 @@
 				266B56D9123110E400D0741F /* Tests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2661BD67123584A7001CBBC5 /* PFMoveApplication */ = {
+			isa = PBXGroup;
+			children = (
+				2661BD68123584A7001CBBC5 /* PFMoveApplication.h */,
+				2661BD69123584A7001CBBC5 /* PFMoveApplication.m */,
+			);
+			path = PFMoveApplication;
 			sourceTree = "<group>";
 		};
 		266A9205122CF60B00FD32A3 /* Styles */ = {
@@ -553,6 +565,7 @@
 		26F2B0B512129B5600458B80 /* Library Code */ = {
 			isa = PBXGroup;
 			children = (
+				2661BD67123584A7001CBBC5 /* PFMoveApplication */,
 				26F2B08E12129B1D00458B80 /* AsyncSocket */,
 				26F2ADF01212972C00458B80 /* PSMTabBar */,
 			);
@@ -869,6 +882,7 @@
 				266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */,
 				267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */,
 				267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */,
+				2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

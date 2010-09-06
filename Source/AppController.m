@@ -19,6 +19,8 @@
 #import "OpenURLController.h"
 #import "ConnectionController.h"
 
+#import "PFMoveApplication.h"
+
 @interface AppController ()
 
 - (void) handleGetURLEvent: (NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent;
@@ -31,6 +33,8 @@
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification
 {
+    PFMoveToApplicationsFolderIfNecessary();
+    
     NSAppleEventManager *appleEventManager = [NSAppleEventManager sharedAppleEventManager];
     [appleEventManager setEventHandler:self andSelector:@selector(handleGetURLEvent:withReplyEvent:) 
                          forEventClass:kInternetEventClass andEventID:kAEGetURL];
