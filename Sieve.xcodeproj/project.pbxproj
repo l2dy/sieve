@@ -65,6 +65,8 @@
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
 		267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
 		267508D312352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
+		267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267509AD123554E100B8E26D /* CreateAccountWindow.xib */; };
+		267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267509B21235574D00B8E26D /* CreateAccountWindowController.m */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
@@ -201,6 +203,9 @@
 		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
 		267508D012352FCC00B8E26D /* ServiceLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLookup.h; sourceTree = "<group>"; };
 		267508D112352FCC00B8E26D /* ServiceLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLookup.m; sourceTree = "<group>"; };
+		267509AE123554E100B8E26D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CreateAccountWindow.xib; sourceTree = "<group>"; };
+		267509B11235574D00B8E26D /* CreateAccountWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountWindowController.h; sourceTree = "<group>"; };
+		267509B21235574D00B8E26D /* CreateAccountWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountWindowController.m; sourceTree = "<group>"; };
 		268B28F2121EB0B00046E709 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
 		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
 		26B5D3191234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
@@ -490,6 +495,8 @@
 				264F95AC121E8C540037167B /* SieveDocumentController.m */,
 				268B28F2121EB0B00046E709 /* ConnectionController.h */,
 				268B28F3121EB0B00046E709 /* ConnectionController.m */,
+				267509B11235574D00B8E26D /* CreateAccountWindowController.h */,
+				267509B21235574D00B8E26D /* CreateAccountWindowController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -583,6 +590,7 @@
 				26F2B5091213000200458B80 /* OpenURLWindow.xib */,
 				266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */,
 				26458EE3121D73EC0067CE01 /* PasswordWindow.xib */,
+				267509AD123554E100B8E26D /* CreateAccountWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -718,6 +726,7 @@
 				2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */,
 				26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */,
 				26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */,
+				267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +868,7 @@
 				268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */,
 				266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */,
 				267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */,
+				267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +926,14 @@
 				266D7C88121C14D700DFA1F4 /* English */,
 			);
 			name = SaveToServerPanel.xib;
+			sourceTree = "<group>";
+		};
+		267509AD123554E100B8E26D /* CreateAccountWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				267509AE123554E100B8E26D /* English */,
+			);
+			name = CreateAccountWindow.xib;
 			sourceTree = "<group>";
 		};
 		26B5D3181234F4C100C065F8 /* AsyncSocket.strings */ = {
