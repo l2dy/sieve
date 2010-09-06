@@ -19,6 +19,8 @@
 
 #include <sasl/sasl.h>
 
+NSString * const kSASLErrorDomain = @"SaslErrorDomain";
+
 @interface SaslConn ()
 @property (readwrite, retain) NSString *mechanism;
 @property (readwrite, retain) NSMutableArray *authComponents;
@@ -88,11 +90,11 @@ static sasl_callback_t SaslCallbacks[] = {
     if (flags & SaslConnNeedProxy) saslFlags |= SASL_NEED_PROXY;
     if (flags & SaslConnSuccessData) saslFlags |= SASL_SUCCESS_DATA;
     
-    int rc = sasl_client_new([service UTF8String], [serverFQDN UTF8String], [localIp UTF8String], 
-                             [remoteIp UTF8String], NULL, saslFlags, (sasl_conn_t **)&conn );
-    if (SASL_OK != rc) {
-        const char *errstring = sasl_errstring( rc, "de", NULL );
-        NSLog( @"sasl error: %d: %s", rc, errstring );
+    lastError = sasl_client_new([service UTF8String], [serverFQDN UTF8String], [localIp UTF8String], 
+                                [remoteIp UTF8String], NULL, saslFlags, (sasl_conn_t **)&conn );
+    if (SASL_OK != lastError) {
+        const char *errstring = sasl_errstring( lastError, NULL, NULL );
+        NSLog( @"sasl error: %d: %s", lastError, errstring );
         [self release];
         return nil;
     }
@@ -152,24 +154,24 @@ static sasl_callback_t SaslCallbacks[] = {
         lenParam = NULL;
         clientOutParam = NULL;
     }
-    
-    int rc = 0;
+
+    lastError = 0;
     for (;;) {
-        rc = sasl_client_start( conn, [mechList UTF8String], &prompts, clientOutParam, lenParam, &mech );
+        lastError = sasl_client_start( conn, [mechList UTF8String], &prompts, clientOutParam, lenParam, &mech );
         
-        if (rc != SASL_INTERACT) break;
+        if (lastError != SASL_INTERACT) break;
 
         [self fillPrompts: prompts];
     }
     
-    if (rc != SASL_CONTINUE) {
+    if (lastError != SASL_CONTINUE) {
         [self setAuthComponents: nil];
     }
     
-    if (rc != SASL_OK && rc != SASL_CONTINUE) {
+    if (lastError != SASL_OK && lastError != SASL_CONTINUE) {
         const char *err = sasl_errdetail( conn );
-        const char *errstring = sasl_errstring( rc, "de", NULL );
-        NSLog( @"sasl error: %d: %s: %s", rc, errstring, err );
+        const char *errstring = sasl_errstring( lastError, "de", NULL );
+        NSLog( @"sasl error: %d: %s: %s", lastError, errstring, err );
         return SaslConnFailed;
     }
     
@@ -180,7 +182,7 @@ static sasl_callback_t SaslCallbacks[] = {
     
     [self setMechanism: [NSString stringWithUTF8String: mech]];
     
-    return (rc == SASL_OK) ? SaslConnSuccess : SaslConnContinue;
+    return (lastError == SASL_OK) ? SaslConnSuccess : SaslConnContinue;
 }
 
 - (SaslConnStatus) continueWithServerData: (NSData *) serverData clientOut: (NSData **) outData;
@@ -197,23 +199,23 @@ static sasl_callback_t SaslCallbacks[] = {
     const char *clientOut = NULL;
     unsigned len = 0;
     
-    int rc = 0;
+    lastError = 0;
     for (;;) {
-        rc = sasl_client_step( conn, bytes, length, &prompts, &clientOut, &len );
+        lastError = sasl_client_step( conn, bytes, length, &prompts, &clientOut, &len );
         
-        if (rc != SASL_INTERACT) break;
+        if (lastError != SASL_INTERACT) break;
 
         [self fillPrompts: prompts];
     }
 
-    if (rc != SASL_CONTINUE) {
+    if (lastError != SASL_CONTINUE) {
         [self setAuthComponents: nil];
     }
     
-    if (rc != SASL_OK && rc != SASL_CONTINUE) {
+    if (lastError != SASL_OK && lastError != SASL_CONTINUE) {
         const char *err = sasl_errdetail( conn );
-        const char *errstring = sasl_errstring( rc, "de", NULL );
-        NSLog( @"sasl error: %d: %s: %s", rc, errstring, err );
+        const char *errstring = sasl_errstring( lastError, "de", NULL );
+        NSLog( @"sasl error: %d: %s: %s", lastError, errstring, err );
 
         return SaslConnFailed;
     }
@@ -223,7 +225,7 @@ static sasl_callback_t SaslCallbacks[] = {
         else *outData = nil;
     }
 
-    return (rc == SASL_OK) ? SaslConnSuccess : SaslConnContinue;
+    return (lastError == SASL_OK) ? SaslConnSuccess : SaslConnContinue;
 }
 
 - (SaslConnStatus) finishWithServerData: (NSData *) serverData;
@@ -236,8 +238,8 @@ static sasl_callback_t SaslCallbacks[] = {
     unsigned outLen = 0;
     const char *outData = NULL;
     
-    int rc = sasl_encode( conn, [inData bytes], [inData length], &outData, &outLen );
-    if (SASL_OK != rc) return nil;
+    lastError = sasl_encode( conn, [inData bytes], [inData length], &outData, &outLen );
+    if (SASL_OK != lastError) return nil;
     
     return [NSData dataWithBytesNoCopy: (void *)outData length: outLen freeWhenDone: NO];
 }
@@ -248,8 +250,8 @@ static sasl_callback_t SaslCallbacks[] = {
     unsigned outLen = 0;
     const char *outData = NULL;
     
-    int rc = sasl_decode( conn, [inData bytes], [inData length], &outData, &outLen );
-    if (SASL_OK != rc) return nil;
+    lastError = sasl_decode( conn, [inData bytes], [inData length], &outData, &outLen );
+    if (SASL_OK != lastError) return nil;
     
     return [NSData dataWithBytesNoCopy: (void *)outData length: outLen freeWhenDone: NO];    
 }
@@ -257,8 +259,8 @@ static sasl_callback_t SaslCallbacks[] = {
 - (BOOL) needsToEncodeData;
 {
     const sasl_ssf_t *ssf = NULL;
-    int rc = sasl_getprop( conn, SASL_SSF, (const void **)&ssf );
-    if (SASL_OK != rc) return YES;
+    lastError = sasl_getprop( conn, SASL_SSF, (const void **)&ssf );
+    if (SASL_OK != lastError) return YES;
     
     return *ssf != 0;
 }
@@ -281,7 +283,16 @@ static sasl_callback_t SaslCallbacks[] = {
 
 - (NSError *) lastError;
 {
-    // TODO: Implementieren
-    return nil;
+    if (lastError == SASL_OK) {
+        return nil;
+    }
+
+    NSString *languages = [[NSLocale preferredLanguages] componentsJoinedByString:  @","];
+    const char *errString = sasl_errstring( lastError, [languages UTF8String], NULL );
+    NSString *description = [NSString stringWithUTF8String: errString];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys: description, NSLocalizedDescriptionKey, nil];
+    
+    return [NSError errorWithDomain: kSASLErrorDomain code: lastError userInfo: userInfo];
 }
+
 @end

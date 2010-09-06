@@ -34,6 +34,8 @@ enum SaslConnFlags {
 
 typedef NSUInteger SaslConnFlags;
 
+extern NSString * const kSASLErrorDomain;
+
 @interface SaslConn : NSObject {
 @private
     void *conn;
@@ -45,6 +47,8 @@ typedef NSUInteger SaslConnFlags;
     NSString *password;
     
     NSMutableArray *authComponents;
+    
+    int lastError;
 }
 
 @property (readonly, retain) NSString *mechanism;
