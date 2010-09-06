@@ -1,6 +1,6 @@
 syntax: glob
 
-
+English.lproj/*.strings
 dsa_priv.pem
 build
 DoxygenDocs.docset

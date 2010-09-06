@@ -64,6 +64,8 @@
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
+		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
+		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -197,6 +199,8 @@
 		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
 		268B28F2121EB0B00046E709 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
 		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
+		26B5D3191234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
+		26B5D31B1234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26B5D3181234F4C100C065F8 /* AsyncSocket.strings */,
+				26B5D31A1234F4C100C065F8 /* Localizable.strings */,
 				2665ADE01234326F0063B62F /* SieveDocument.icns */,
 				2665ADD4123430DE0063B62F /* Sieve.icns */,
 				2665AD6412340F290063B62F /* dsa_pub.pem */,
@@ -607,6 +613,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Sieve" */;
 			buildPhases = (
+				26B5D3071234F3FF00C065F8 /* Extract strings */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				2665AD3812340C5A0063B62F /* Copy Frameworks */,
@@ -695,6 +702,8 @@
 				2665AD6512340F290063B62F /* dsa_pub.pem in Resources */,
 				2665ADD5123430DE0063B62F /* Sieve.icns in Resources */,
 				2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */,
+				26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */,
+				26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +764,20 @@
 			shellPath = /bin/sh;
 			shellScript = "#  Build the doxygen documentation for the project and load the docset into Xcode.\n\n#  Use the following to adjust the value of the $DOXYGEN_PATH User-Defined Setting:\n#    Binary install location: /Applications/Doxygen.app/Contents/Resources/doxygen\n#    Source build install location: /usr/local/bin/doxygen\n\n#  If the config file doesn't exist, run 'doxygen -g $SOURCE_ROOT/doxygen.config' to \n#   a get default file.\n\nif ! [ -f $SOURCE_ROOT/doxygen.config ] \nthen \n  echo doxygen config file does not exist\n  $DOXYGEN_PATH -g $SOURCE_ROOT/doxygen.config\nfi\n\n#  Append the proper input/output directories and docset info to the config file.\n#  This works even though values are assigned higher up in the file. Easier than sed.\n\ncp \"$SOURCE_ROOT/doxygen.config\" \"$TEMP_DIR/doxygen.config\"\n\necho \"INPUT = $SOURCE_ROOT/Source\" >> $TEMP_DIR/doxygen.config\necho \"OUTPUT_DIRECTORY = $SOURCE_ROOT/DoxygenDocs.docset\" >> $TEMP_DIR/doxygen.config\necho \"GENERATE_DOCSET        = YES\" >> $TEMP_DIR/doxygen.config\necho \"DOCSET_BUNDLE_ID       = com.mycompany.Sieve\" >> $TEMP_DIR/doxygen.config\n\n#  Run doxygen on the updated config file.\n#  Note: doxygen creates a Makefile that does most of the heavy lifting.\n\n$DOXYGEN_PATH $TEMP_DIR/doxygen.config\n\n#  make will invoke docsetutil. Take a look at the Makefile to see how this is done.\n\nmake -C $SOURCE_ROOT/DoxygenDocs.docset/html install\n\n#  Construct a temporary applescript file to tell Xcode to load a docset.\n\ncat << EOF | osascript\ntell application \"Xcode\"\nload documentation set with path \"/Users/$USER/Library/Developer/Shared/Documentation/DocSets/\"\nend tell\nEOF\n\nexit 0\n";
 			showEnvVarsInLog = 0;
+		};
+		26B5D3071234F3FF00C065F8 /* Extract strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Extract strings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# -q silences duplicate comments with same key warning\nfind ${SRCROOT} -name \"*.[hm]\" -print0 | xargs -0 genstrings -q -o ${SRCROOT}/${DEVELOPMENT_LANGUAGE}.lproj \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -877,6 +900,22 @@
 				266D7C88121C14D700DFA1F4 /* English */,
 			);
 			name = SaveToServerPanel.xib;
+			sourceTree = "<group>";
+		};
+		26B5D3181234F4C100C065F8 /* AsyncSocket.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26B5D3191234F4C100C065F8 /* English */,
+			);
+			name = AsyncSocket.strings;
+			sourceTree = "<group>";
+		};
+		26B5D31A1234F4C100C065F8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26B5D31B1234F4C100C065F8 /* English */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		26F2B1031212A4A500458B80 /* ServerWindow.xib */ = {
