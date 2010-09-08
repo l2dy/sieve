@@ -38,6 +38,31 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
 @synthesize port;
 @synthesize canInteract;
 
+- (void) run;
+{
+    isSheet = NO;
+    [self showWindow: self];
+}
+
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+}
+
+- (void) runAsSheetForWindow: (NSWindow *)window;
+{
+    isSheet = YES;
+    [NSApp beginSheet: [self window] modalForWindow: window modalDelegate: self didEndSelector: @selector(sheetDidEnd:returnCode:contextInfo:) contextInfo: NULL];
+}
+
+- (void) closeSelf;
+{
+    if (isSheet) {
+        [NSApp endSheet: [self window]];
+    }
+    [[self window] orderOut: self];
+    isSheet = NO;
+}
+
 - init;
 {
     self =  [super initWithWindowNibName: @"CreateAccountWindow"];
@@ -57,7 +82,7 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
 
 - (IBAction) cancelClicked: (id) sender;
 {
-    [[self window] close];
+    [self closeSelf];
 }
 
 - (IBAction) continueClicked: (id) sender;
@@ -147,7 +172,7 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
 - (void) savePreset;
 {
     // TODO: save preset/bookmark
-    [[self window] close];
+    [self closeSelf];
 }
 
 #pragma mark -

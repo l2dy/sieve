@@ -204,7 +204,7 @@ NSString * const kAccountUTI = @"net.dergraf.sieve.sieve-account";
 - (IBAction) createAccount: (id) sender;
 {
     CreateAccountWindowController *wc = [[CreateAccountWindowController alloc] init];
-    [wc showWindow: sender];
+    [wc run];
 }
 
 #pragma mark -

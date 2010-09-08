@@ -40,6 +40,8 @@ enum {
     
     BOOL triedAuth;
     BOOL canInteract;
+    
+    BOOL isSheet;
 }
 
 @property (assign, readwrite) BOOL savePassword;
@@ -54,5 +56,8 @@ enum {
 - (IBAction) cancelClicked: (id) sender;
 - (IBAction) continueClicked: (id) sender;
 - (IBAction) switchToAdvancedView: (id) sender;
+
+- (void) run;
+- (void) runAsSheetForWindow: (NSWindow *)window;
 
 @end
