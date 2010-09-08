@@ -18,6 +18,7 @@
 #import "CreateAccountWindowController.h"
 #import "ServiceLookup.h"
 #import "Account.h"
+#import "AccountList.h"
 
 NSString * const kAppErrorDomain = @"AppErrorDomain";
 
@@ -177,11 +178,20 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
     [client connectToHost: [account host] port: [account port]];
 }
 
+- (void) didPresentErrorWithRecovery: (BOOL)didRecover contextInfo: (void *)contextInfo
+{
+    
+}
 
 - (void) savePreset;
 {
-    // TODO: save preset/bookmark
-    [self closeSelf];
+    NSError *error = nil;
+    if (![account saveError: &error]) {
+        [self presentError: error modalForWindow: [self window] delegate: self didPresentSelector: @selector(didPresentErrorWithRecovery:contextInfo:) contextInfo: NULL];
+    } else {
+        [[AccountList sharedAccountList] addAccount: account];
+        [self closeSelf];
+    }
 }
 
 #pragma mark -

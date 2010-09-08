@@ -153,8 +153,19 @@ static NSString * const kPortKey = @"port";
     
     NSURL *saveURL = accountFileURL;
     if (nil == saveURL) {
-        NSString *fileName = [accountName stringByAppendingPathExtension: @"sieveAccount"];
-        saveURL = [[[AccountList sharedAccountList] accountsFolder] URLByAppendingPathComponent: fileName];
+        NSString *fileName = accountName;
+        NSURL *accountsFolder = [[AccountList sharedAccountList] accountsFolder];
+        saveURL = [accountsFolder URLByAppendingPathComponent: [fileName stringByAppendingPathExtension: @"sieveAccount"]];
+     
+        int try = 1;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        while ([fm fileExistsAtPath: [saveURL path]]) {
+            fileName = [NSString stringWithFormat: @"%@ (%d).sieveAccount", accountName, try];
+            saveURL = [accountsFolder URLByAppendingPathComponent: [fileName stringByAppendingPathExtension: @"sieveAccount"]];
+            ++try;
+        }
+        
+        [self setAccountName: fileName];
     }
     
     if (![saveData writeToURL: saveURL options: 0 error: &error]) {

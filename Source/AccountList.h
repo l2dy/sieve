@@ -16,6 +16,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+@class Account;
+
 extern NSString * const kAccountUTI;
 extern NSString * const kAccountsFolderDefaultsKey;
 
@@ -36,6 +39,8 @@ extern NSString * const kAccountsFolderDefaultsKey;
 
 - (NSArray *) accounts;
 - (void) setAccounts: (NSArray *) newAccounts;
+
+- (void) addAccount: (Account *) newAccount;
 
 - (IBAction) openAccount: (id) sender;
 - (IBAction) createAccount: (id) sender;

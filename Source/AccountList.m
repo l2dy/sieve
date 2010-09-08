@@ -28,6 +28,14 @@ NSString * const kAccountsFolderDefaultsKey = @"accountsFolder";
 
 - (void) scanAccountsDirectory;
 
+- (NSArray *)accounts;
+- (unsigned)countOfAccounts;
+- (id)objectInAccountsAtIndex:(unsigned)theIndex;
+- (void)getAccounts:(id *)objsPtr range:(NSRange)range;
+- (void)insertObject:(id)obj inAccountsAtIndex:(unsigned)theIndex;
+- (void)removeObjectFromAccountsAtIndex:(unsigned)theIndex;
+- (void)replaceObjectInAccountsAtIndex:(unsigned)theIndex withObject:(id)obj;
+
 @end
 
 
@@ -207,6 +215,11 @@ NSString * const kAccountUTI = @"net.dergraf.sieve.sieve-account";
     [wc run];
 }
 
+- (void) addAccount: (Account *) newAccount;
+{
+    [self insertObject: newAccount inAccountsAtIndex: [accounts count]];
+}
+
 #pragma mark -
 #pragma mark NSMenuDelegate
 
@@ -254,6 +267,43 @@ enum {
             [menu removeItemAtIndex: i];
         }
     }
+}
+
+- (unsigned)countOfAccounts 
+{
+    return [accounts count];
+}
+
+- (id)objectInAccountsAtIndex:(unsigned)theIndex {
+    return [accounts objectAtIndex:theIndex];
+}
+
+- (void)getAccounts:(id *)objsPtr range:(NSRange)range {
+    if (!accounts) {
+        accounts = [[NSMutableArray alloc] init];
+    }
+    [accounts getObjects:objsPtr range:range];
+}
+
+- (void)insertObject:(id)obj inAccountsAtIndex:(unsigned)theIndex {
+    if (!accounts) {
+        accounts = [[NSMutableArray alloc] init];
+    }
+    [accounts insertObject:obj atIndex:theIndex];
+    updateMenu = YES;
+}
+
+- (void)removeObjectFromAccountsAtIndex:(unsigned)theIndex {
+    [accounts removeObjectAtIndex:theIndex];
+    updateMenu = YES;
+}
+
+- (void)replaceObjectInAccountsAtIndex:(unsigned)theIndex withObject:(id)obj {
+    if (!accounts) {
+        accounts = [[NSMutableArray alloc] init];
+    }
+    [accounts replaceObjectAtIndex:theIndex withObject:obj];
+    updateMenu = YES;
 }
 
 @end
