@@ -73,6 +73,10 @@
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
 		26C153FB12379AC3002A242E /* AccountList.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C153FA12379AC3002A242E /* AccountList.m */; };
 		26C1546C1237C02B002A242E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C1546B1237C02B002A242E /* Account.m */; };
+		26C1562E12382092002A242E /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C1562D12382092002A242E /* PreferencesWindowController.m */; };
+		26C1563D1238210C002A242E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1563C1238210C002A242E /* PreferencesWindow.xib */; };
+		26C1569D12383596002A242E /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
+		26C156A0123835AD002A242E /* BWToolkitFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -166,6 +170,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				26C156A0123835AD002A242E /* BWToolkitFramework.framework in Copy Frameworks */,
 				2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -219,6 +224,10 @@
 		26C153FA12379AC3002A242E /* AccountList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountList.m; sourceTree = "<group>"; };
 		26C1546A1237C02B002A242E /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		26C1546B1237C02B002A242E /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		26C1562C12382092002A242E /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		26C1562D12382092002A242E /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		26C15633123820BD002A242E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
+		26C1569C12383596002A242E /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -344,6 +353,7 @@
 				26F2AE2E1212981E00458B80 /* Carbon.framework in Frameworks */,
 				2659699512153CC10050A913 /* Security.framework in Frameworks */,
 				2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */,
+				26C1569D12383596002A242E /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +529,8 @@
 				26C153FA12379AC3002A242E /* AccountList.m */,
 				26C1546A1237C02B002A242E /* Account.h */,
 				26C1546B1237C02B002A242E /* Account.m */,
+				26C1562C12382092002A242E /* PreferencesWindowController.h */,
+				26C1562D12382092002A242E /* PreferencesWindowController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -614,6 +626,7 @@
 				266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */,
 				26458EE3121D73EC0067CE01 /* PasswordWindow.xib */,
 				267509AD123554E100B8E26D /* CreateAccountWindow.xib */,
+				26C1563C1238210C002A242E /* PreferencesWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -629,6 +642,7 @@
 				2639EA9E120F74490023F625 /* libsasl2.dylib */,
 				2659699412153CC10050A913 /* Security.framework */,
 				2653D03D12323B6700CC7DF6 /* OCMock.framework */,
+				26C1569C12383596002A242E /* BWToolkitFramework.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -750,6 +764,7 @@
 				26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */,
 				26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */,
 				267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */,
+				26C1563D1238210C002A242E /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,6 +910,7 @@
 				2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */,
 				26C153FB12379AC3002A242E /* AccountList.m in Sources */,
 				26C1546C1237C02B002A242E /* Account.m in Sources */,
+				26C1562E12382092002A242E /* PreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +992,14 @@
 				26B5D31B1234F4C100C065F8 /* English */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		26C1563C1238210C002A242E /* PreferencesWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26C15633123820BD002A242E /* English */,
+			);
+			name = PreferencesWindow.xib;
 			sourceTree = "<group>";
 		};
 		26F2B1031212A4A500458B80 /* ServerWindow.xib */ = {
