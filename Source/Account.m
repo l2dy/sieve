@@ -57,9 +57,22 @@ static NSString * const kUserKey = @"user";
 static NSString * const kTLSKey = @"tls";
 static NSString * const kPortKey = @"port";
 
-- initWithAccountFileURL: (NSURL *) url;
+- init;
 {
     self = [super init];
+    if (nil == self) {
+        return nil;
+    }
+    
+    port = 2000;
+    tls = YES;
+    
+    return self;
+}
+
+- initWithAccountFileURL: (NSURL *) url;
+{
+    self = [self init];
     if (nil == self) {
         return nil;
     }
