@@ -160,7 +160,7 @@ static NSString * const kPortKey = @"port";
         int try = 1;
         NSFileManager *fm = [NSFileManager defaultManager];
         while ([fm fileExistsAtPath: [saveURL path]]) {
-            fileName = [NSString stringWithFormat: @"%@ (%d).sieveAccount", accountName, try];
+            fileName = [NSString stringWithFormat: @"%@ (%d)", accountName, try];
             saveURL = [accountsFolder URLByAppendingPathComponent: [fileName stringByAppendingPathExtension: @"sieveAccount"]];
             ++try;
         }
