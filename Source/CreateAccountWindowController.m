@@ -17,6 +17,7 @@
 
 #import "CreateAccountWindowController.h"
 #import "ServiceLookup.h"
+#import "Account.h"
 
 NSString * const kAppErrorDomain = @"AppErrorDomain";
 
@@ -31,11 +32,9 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
 @implementation CreateAccountWindowController
 
 @synthesize savePassword;
-@synthesize serverName;
 @synthesize email;
 @synthesize password;
-@synthesize userName;
-@synthesize port;
+@synthesize account;
 @synthesize canInteract;
 
 - (void) run;
@@ -66,9 +65,10 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
 - init;
 {
     self =  [super initWithWindowNibName: @"CreateAccountWindow"];
+
+    [self setAccount:  [[[Account alloc] init] autorelease]];
     
     savePassword = YES;
-    port = 2000;
     canInteract = YES;
     
     return self;
@@ -122,6 +122,15 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
     }
 }
 
+- (void) setEmail: (NSString *)newEmail;
+{
+    if (email != newEmail) {
+        [email release];
+        email = [newEmail copy];
+        [account setAccountName: email];
+    }
+}
+
 - (void) beginChecks;
 {
     if (showsAdvancedView) {
@@ -133,8 +142,8 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
     NSRange range = [email rangeOfString: @"@"];
     NSAssert( range.location != NSNotFound, @"Validation means there has to be a @" );
     
-    [self setUserName: [email substringToIndex: range.location]];
-    [self setServerName: [email substringFromIndex: range.location + 1]];
+    [account setUser: [email substringToIndex: range.location]];
+    [account setHost: [email substringFromIndex: range.location + 1]];
     
     [spinner setHidden:  NO];
     [spinner startAnimation: self];
@@ -142,7 +151,7 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
     [statusText setHidden: NO];
     [statusText setStringValue: NSLocalizedString( @"Looking up host name", @"" )];
     
-    ServiceLookup *lookup = [[ServiceLookup alloc] initWithServiceName: [NSString stringWithFormat: @"_sieve._tcp.%@", serverName]];
+    ServiceLookup *lookup = [[ServiceLookup alloc] initWithServiceName: [NSString stringWithFormat: @"_sieve._tcp.%@", [account host]]];
     [lookup setTimeout: [[NSUserDefaults standardUserDefaults] floatForKey: @"srvLookupTimeout"]];
     
     [lookup lookupWithBlock: ^{
@@ -151,8 +160,8 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
             
             // TODO: figure out, which has the highest priority/weight
             NSDictionary *item = [result objectAtIndex: 0];
-            [self setServerName: [item valueForKey: kServiceLookupHostKey]];
-            [self setPort:  [[item valueForKey: kServiceLookupPortKey] unsignedIntValue]];
+            [account setHost: [item valueForKey: kServiceLookupHostKey]];
+            [account setPort:  [[item valueForKey: kServiceLookupPortKey] unsignedIntValue]];
         }
         [self checkConnection];
         [lookup release];
@@ -165,7 +174,7 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
     SieveClient *client = [[SieveClient alloc] init];
     [client setDelegate: self];
     
-    [client connectToHost: serverName port: port];
+    [client connectToHost: [account host] port: [account port]];
 }
 
 
@@ -186,7 +195,7 @@ NSString * const kAppErrorDomain = @"AppErrorDomain";
         [client release];
         [self switchToAdvancedView: self];
     } else {
-        NSURLCredential *creds = [NSURLCredential credentialWithUser: userName password: password persistence: NSURLCredentialPersistenceNone];
+        NSURLCredential *creds = [NSURLCredential credentialWithUser: [account user] password: password persistence: NSURLCredentialPersistenceNone];
         triedAuth = YES;
         [client continueAuthWithCredentials: creds];
     }

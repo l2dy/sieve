@@ -17,6 +17,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "SieveClient.h"
+@class Account;
 
 extern NSString * const kAppErrorDomain;
 enum {
@@ -34,9 +35,8 @@ enum {
     BOOL savePassword;
     NSString *email;
     NSString *password;
-    NSString *userName;
-    NSString *serverName;
-    unsigned port;
+    
+    Account *account;
     
     BOOL triedAuth;
     BOOL canInteract;
@@ -47,9 +47,7 @@ enum {
 @property (assign, readwrite) BOOL savePassword;
 @property (copy, readwrite) NSString *email;
 @property (copy, readwrite) NSString *password;
-@property (copy, readwrite) NSString *userName;
-@property (copy, readwrite) NSString *serverName;
-@property (assign, readwrite) unsigned port;
+@property (retain, readwrite) Account *account;
 
 @property (assign, readwrite) BOOL canInteract;
 
