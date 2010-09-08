@@ -43,6 +43,9 @@
     
     @synchronized( self ) {
         if (nil == icon) {
+            icon = [NSImage imageNamed: @"NSNetwork"];
+            [icon setSize: NSMakeSize( 16, 16 )];
+            [icon retain];
         }
     }
     
