@@ -18,6 +18,7 @@
 #import "ServerWindowController.h"
 #import "OpenURLController.h"
 #import "ConnectionController.h"
+#import "PreferencesWindowController.h"
 
 #import "PFMoveApplication.h"
 
@@ -29,7 +30,15 @@
 
 @implementation AppController
 
+@synthesize preferences;
 
+- (PreferencesWindowController *) preferences;
+{
+    if (nil == preferences) {
+        preferences = [[PreferencesWindowController alloc] init];
+    }
+    return preferences;
+}
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification
 {
@@ -54,6 +63,16 @@
         NSURL *url = [NSURL URLWithString: result];
         [[ConnectionController sharedConnectionController] openURL: url];
     }];
+}
+
+- (IBAction) displayAccountsList: (id) sender;
+{
+    [self showPreferencesPanel: sender];
+}
+
+- (IBAction) showPreferencesPanel: (id) sender;
+{
+    [[self preferences] showWindow: sender];
 }
 
 @end

@@ -16,10 +16,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PreferencesWindowController;
+
 @interface AppController : NSObject < NSApplicationDelegate > {
+    PreferencesWindowController *preferences;
 }
 
+@property (readwrite, retain) PreferencesWindowController *preferences;
 
 - (IBAction) performOpenURL: (id) sender;
+
+- (IBAction) displayAccountsList: (id) sender;
+- (IBAction) showPreferencesPanel: (id) sender;
 
 @end
