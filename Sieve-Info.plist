@@ -88,6 +88,21 @@
 				<string>application/sieve</string>
 			</dict>
 		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.property-list</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>net.dergraf.sieve.sieve-account</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>sieveAccount</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

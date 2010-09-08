@@ -71,6 +71,8 @@
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
+		26C153FB12379AC3002A242E /* AccountList.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C153FA12379AC3002A242E /* AccountList.m */; };
+		26C1546C1237C02B002A242E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C1546B1237C02B002A242E /* Account.m */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -213,6 +215,10 @@
 		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
 		26B5D3191234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
 		26B5D31B1234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		26C153F912379AC3002A242E /* AccountList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountList.h; sourceTree = "<group>"; };
+		26C153FA12379AC3002A242E /* AccountList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountList.m; sourceTree = "<group>"; };
+		26C1546A1237C02B002A242E /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		26C1546B1237C02B002A242E /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -509,6 +515,10 @@
 				268B28F3121EB0B00046E709 /* ConnectionController.m */,
 				267509B11235574D00B8E26D /* CreateAccountWindowController.h */,
 				267509B21235574D00B8E26D /* CreateAccountWindowController.m */,
+				26C153F912379AC3002A242E /* AccountList.h */,
+				26C153FA12379AC3002A242E /* AccountList.m */,
+				26C1546A1237C02B002A242E /* Account.h */,
+				26C1546B1237C02B002A242E /* Account.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -883,6 +893,8 @@
 				267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */,
 				267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */,
 				2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */,
+				26C153FB12379AC3002A242E /* AccountList.m in Sources */,
+				26C1546C1237C02B002A242E /* Account.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
