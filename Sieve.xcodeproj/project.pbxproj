@@ -77,6 +77,7 @@
 		26C1563D1238210C002A242E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1563C1238210C002A242E /* PreferencesWindow.xib */; };
 		26C1569D12383596002A242E /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
 		26C156A0123835AD002A242E /* BWToolkitFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
+		26E1B4BD125342C100F0D060 /* LineNumbersRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
 		26F2AE141212972C00458B80 /* PSMAdiumTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF61212972C00458B80 /* PSMAdiumTabStyle.m */; };
@@ -228,6 +229,8 @@
 		26C1562D12382092002A242E /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
 		26C15633123820BD002A242E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		26C1569C12383596002A242E /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
+		26E1B4BB125342C100F0D060 /* LineNumbersRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumbersRulerView.h; sourceTree = "<group>"; };
+		26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumbersRulerView.m; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
 		26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_AMShading.m; sourceTree = "<group>"; };
 		26F2ADF31212972C00458B80 /* NSString_AITruncation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_AITruncation.h; sourceTree = "<group>"; };
@@ -538,6 +541,8 @@
 		26F2B09312129B2600458B80 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				26E1B4BB125342C100F0D060 /* LineNumbersRulerView.h */,
+				26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */,
 				26F2B09412129B2600458B80 /* SyntaxHighlighter.h */,
 				26F2B09512129B2600458B80 /* SyntaxHighlighter.m */,
 			);
@@ -911,6 +916,7 @@
 				26C153FB12379AC3002A242E /* AccountList.m in Sources */,
 				26C1546C1237C02B002A242E /* Account.m in Sources */,
 				26C1562E12382092002A242E /* PreferencesWindowController.m in Sources */,
+				26E1B4BD125342C100F0D060 /* LineNumbersRulerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
