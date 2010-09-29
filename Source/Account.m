@@ -181,6 +181,16 @@ static NSString * const kPortKey = @"port";
     return YES;
 }
 
+- (BOOL) deletePresetFileError: (NSError **)outError;
+{
+    if (nil != accountFileURL) {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        return [fm removeItemAtURL: accountFileURL error: outError];
+    } else {
+        return YES;
+    }
+}
+
 - (NSURL *) accountURL;
 {
     NSString *hostPart = host;

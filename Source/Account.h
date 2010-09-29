@@ -38,5 +38,6 @@
 + (Account *) readFromURL: (NSURL *) url;
 
 - (BOOL) saveError: (NSError **) outError;
+- (BOOL) deletePresetFileError: (NSError **)outError;
 
 @end

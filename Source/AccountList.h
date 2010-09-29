@@ -45,4 +45,12 @@ extern NSString * const kAccountsFolderDefaultsKey;
 - (IBAction) openAccount: (id) sender;
 - (IBAction) createAccount: (id) sender;
 
+
+- (unsigned)countOfAccounts;
+- (id)objectInAccountsAtIndex:(unsigned)theIndex;
+- (void)getAccounts:(id *)objsPtr range:(NSRange)range;
+- (void)insertObject:(id)obj inAccountsAtIndex:(unsigned)theIndex;
+- (void)removeObjectFromAccountsAtIndex:(unsigned)theIndex;
+- (void)replaceObjectInAccountsAtIndex:(unsigned)theIndex withObject:(id)obj;
+
 @end

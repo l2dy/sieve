@@ -22,11 +22,15 @@
 @interface PreferencesWindowController : NSWindowController {
     NSTabView *tabs;
     AccountList *accountList;
+    NSArrayController *accountArrayController;
 }
 
 @property (readwrite, retain) IBOutlet NSTabView *tabs;
+@property (readwrite, retain) IBOutlet NSArrayController *accountArrayController;
 
 - (IBAction) selectPanel: (id) sender;
+
 - (IBAction) newAccount: (id) sender;
+- (IBAction) deleteAccount: (id) sender;
 
 @end

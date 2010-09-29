@@ -17,11 +17,13 @@
 
 #import "PreferencesWindowController.h"
 #import "AccountList.h"
+#import "Account.h"
 #import "CreateAccountWindowController.h"
 
 @implementation PreferencesWindowController
 
 @synthesize tabs;
+@synthesize accountArrayController;
 
 - init;
 {
@@ -43,6 +45,29 @@
 - (IBAction) newAccount: (id) sender;
 {
     [[[CreateAccountWindowController alloc] init] runAsSheetForWindow: [self window]];
+}
+
+- (IBAction) deleteAccount: (id) sender;
+{
+    NSIndexSet *selectedIndices = [accountArrayController selectionIndexes];
+    [selectedIndices enumerateIndexesWithOptions: NSEnumerationReverse 
+                                      usingBlock: ^( NSUInteger index, BOOL *stop ) {
+        Account *account = [accountList objectInAccountsAtIndex: index];
+        NSError *error = nil;
+        BOOL deleted = [account deletePresetFileError: &error];
+        if (!deleted) {
+            if (nil != error) {
+                [self presentError: error modalForWindow: [self window] delegate: self didPresentSelector: @selector(didPresentErrorWithRecovery:contextInfo:) contextInfo: NULL];
+            }
+            *stop = YES;
+        } else {
+            [accountList removeObjectFromAccountsAtIndex: index];
+        }
+    }];
+}
+
+- (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void *)contextInfo;
+{
 }
 
 - (void) windowDidLoad;

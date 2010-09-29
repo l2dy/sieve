@@ -28,14 +28,6 @@ NSString * const kAccountsFolderDefaultsKey = @"accountsFolder";
 
 - (void) scanAccountsDirectory;
 
-- (NSArray *)accounts;
-- (unsigned)countOfAccounts;
-- (id)objectInAccountsAtIndex:(unsigned)theIndex;
-- (void)getAccounts:(id *)objsPtr range:(NSRange)range;
-- (void)insertObject:(id)obj inAccountsAtIndex:(unsigned)theIndex;
-- (void)removeObjectFromAccountsAtIndex:(unsigned)theIndex;
-- (void)replaceObjectInAccountsAtIndex:(unsigned)theIndex withObject:(id)obj;
-
 @end
 
 
