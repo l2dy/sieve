@@ -503,7 +503,7 @@
 				267508CF12352FB100B8E26D /* Tools */,
 				26F2B0A012129B2600458B80 /* Sieve Script Parser */,
 				26F2B09712129B2600458B80 /* Sieve Protocol Client */,
-				26F2B09312129B2600458B80 /* GUI */,
+				26F2B09312129B2600458B80 /* Script Editor Components */,
 				26F2B0A812129B2600458B80 /* SieveDocument.h */,
 				26F2B0A912129B2600458B80 /* SieveDocument.m */,
 				26F2B4BE1212F73E00458B80 /* ServerScriptDocument.h */,
@@ -538,7 +538,7 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		26F2B09312129B2600458B80 /* GUI */ = {
+		26F2B09312129B2600458B80 /* Script Editor Components */ = {
 			isa = PBXGroup;
 			children = (
 				26E1B4BB125342C100F0D060 /* LineNumbersRulerView.h */,
@@ -546,6 +546,7 @@
 				26F2B09412129B2600458B80 /* SyntaxHighlighter.h */,
 				26F2B09512129B2600458B80 /* SyntaxHighlighter.m */,
 			);
+			name = "Script Editor Components";
 			path = GUI;
 			sourceTree = "<group>";
 		};
