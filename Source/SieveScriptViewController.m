@@ -17,13 +17,31 @@
 
 #import "SieveScriptViewController.h"
 
+#import "LineNumbersRulerView.h"
 
 @implementation SieveScriptViewController
+
+@synthesize scriptTextView;
 
 - init;
 {
     if (nil == [super initWithNibName: @"SieveScriptView" bundle: nil]) return nil;
     return self;
+}
+
+- (void) awakeFromNib;
+{
+    NSScrollView *scrollView = [scriptTextView enclosingScrollView];
+    
+    LineNumbersRulerView *rulerView = [[[LineNumbersRulerView alloc] initWithScrollView: scrollView orientation: NSVerticalRuler] autorelease];
+    [rulerView setClientView: scriptTextView];
+    
+    [scrollView setVerticalRulerView: rulerView];
+    [scrollView setHasVerticalRuler: YES];
+    
+    [scrollView setHasHorizontalRuler: NO];
+
+    [scrollView setRulersVisible: YES];
 }
 
 @end

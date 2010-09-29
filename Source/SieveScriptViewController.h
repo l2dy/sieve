@@ -19,7 +19,9 @@
 
 
 @interface SieveScriptViewController : NSViewController {
-
+    NSTextView *scriptTextView;
 }
+
+@property (nonatomic, readwrite, retain) IBOutlet NSTextView *scriptTextView;
 
 @end
