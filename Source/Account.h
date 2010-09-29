@@ -25,6 +25,8 @@
     BOOL tls;
     unsigned port;
     NSImage *icon;
+    
+    BOOL dirty;
 }
 
 @property (readwrite, copy) NSString *accountName;
@@ -34,10 +36,13 @@
 @property (readwrite, assign) unsigned port;
 @property (readwrite, copy) NSImage *icon;
 @property (readonly) NSURL *accountURL;
+@property (readonly, assign) BOOL dirty;
 
 + (Account *) readFromURL: (NSURL *) url;
 
 - (BOOL) saveError: (NSError **) outError;
+- (BOOL) loadError: (NSError **) outError;
+
 - (BOOL) deletePresetFileError: (NSError **)outError;
 
 @end

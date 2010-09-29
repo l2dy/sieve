@@ -23,7 +23,7 @@
 - initWithAccountFileURL: (NSURL *) url;
 
 @property (copy, readwrite) NSURL *accountFileURL;
-
+@property (assign, readwrite) BOOL dirty;
 @end
 
 
@@ -36,6 +36,7 @@
 @synthesize tls;
 @synthesize port;
 @synthesize icon;
+@synthesize dirty;
 
 + (NSImage *) defaultAccountIcon;
 {
@@ -70,25 +71,23 @@ static NSString * const kPortKey = @"port";
     return self;
 }
 
-- initWithAccountFileURL: (NSURL *) url;
+- (BOOL) loadError: (NSError **) outError;
 {
-    self = [self init];
-    if (nil == self) {
-        return nil;
+    if (nil == accountFileURL) {
+        if (NULL != outError) {
+            // TODO: set *outError to a new error object
+        }
+        return NO;
     }
-
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL: url];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL: accountFileURL];
     if (nil == dict) {
-        [self release];
-        return nil;
+        return NO;
     }
-
-    [self setAccountFileURL: url];
     
     [self setHost: [dict objectForKey: kHostKey]];
     if (nil == host) {
-        [self release];
-        return nil;
+        return NO;
     }
     
     [self setUser: [dict objectForKey: kUserKey]];
@@ -99,26 +98,84 @@ static NSString * const kPortKey = @"port";
     } else {
         [self setTls: YES];
     }
-
+    
     NSNumber *portNumber = [dict objectForKey: kPortKey];
     if (nil != portNumber) {
         [self setPort: [portNumber unsignedIntValue]];        
     } else {
         [self setPort: 2000];
     }
-
+    
     NSString *name = nil;
-    if (![url getResourceValue: &name forKey: NSURLLocalizedNameKey error: NULL] || nil == name) {
-        name = [[url lastPathComponent] stringByDeletingPathExtension];
+    if (![accountFileURL getResourceValue: &name forKey: NSURLLocalizedNameKey error: NULL] || nil == name) {
+        name = [[accountFileURL lastPathComponent] stringByDeletingPathExtension];
     }
     [self setAccountName: name];
     
     NSImage *customFileIcon = nil;
-    if ([url getResourceValue: &customFileIcon forKey: NSURLCustomIconKey error: NULL] && nil != customFileIcon) {
+    if ([accountFileURL getResourceValue: &customFileIcon forKey: NSURLCustomIconKey error: NULL] && nil != customFileIcon) {
         [self setIcon: customFileIcon];
     }    
     
+    [self setDirty: NO];
+    
+    return YES;
+}
+
+- initWithAccountFileURL: (NSURL *) url;
+{
+    NSParameterAssert( url );
+    
+    self = [self init];
+    if (nil == self) {
+        return nil;
+    }
+
+    [self setAccountFileURL: url];
+
+    if (![self loadError: NULL]) {
+        [self release];
+        return nil;
+    }
+    
     return self;
+}
+
+- (void) setTls: (BOOL)tls_;
+{
+    if (tls != tls_) {
+        tls_ = YES;
+        [self setDirty: YES];
+    }
+}
+
+- (void) setHost: (NSString *)host_;
+{
+    if (host != host_) {
+        [host release];
+        host = [host_ copy];
+        
+        [self setDirty: YES];
+    }
+}
+
+- (void) setPort: (unsigned)port_;
+{
+    if (port != port_) {
+        port = port_;
+        
+        [self setDirty: YES];
+    }
+}
+
+- (void) setUser: (NSString *)user_;
+{
+    if (user != user_) {
+        [user release];
+        user = [user_ copy];
+        
+        [self setDirty: YES];
+    }
 }
 
 + (Account *) readFromURL: (NSURL *) url;
@@ -177,6 +234,8 @@ static NSString * const kPortKey = @"port";
     
     [self setAccountFileURL: saveURL];
     [saveURL setResourceValue: [NSNumber numberWithBool: YES] forKey: NSURLHasHiddenExtensionKey error: NULL];
+    
+    [self setDirty: NO];
     
     return YES;
 }

@@ -20,6 +20,8 @@
 #import "Account.h"
 #import "CreateAccountWindowController.h"
 
+#import <objc/objc-runtime.h>
+
 @implementation PreferencesWindowController
 
 @synthesize tabs;
@@ -68,6 +70,61 @@
 
 - (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void *)contextInfo;
 {
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex
+{
+    NSUInteger selectedRow = [accountArrayController selectionIndex];
+    if (NSNotFound == selectedRow) {
+        return YES;
+    }
+    
+    Account *account = [[accountArrayController arrangedObjects] objectAtIndex: selectedRow];
+    
+    if ([account dirty]) {
+        NSString *message = [NSString stringWithFormat: NSLocalizedString( @"Do you want to save the changes to the account '%@'?", @"" ), [account accountName]];
+        NSAlert *alert = [NSAlert alertWithMessageText: message 
+                                         defaultButton: NSLocalizedString( @"Save", @"Save button" ) 
+                                       alternateButton: NSLocalizedString( @"Don’t save", @"Don’t save button" )
+                                           otherButton: NSLocalizedString( @"Cancel", @"Cancel button" ) 
+                             informativeTextWithFormat: NSLocalizedString( @"If you don’t save your changes are getting lost.", @"" )];
+        [alert beginSheetModalForWindow: [self window] modalDelegate: self 
+                         didEndSelector: @selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo: (void *)rowIndex];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+    SEL op = NULL;
+    switch (returnCode) {
+        case NSAlertDefaultReturn:
+            op = @selector( saveError: );
+            break;
+            
+        case NSAlertAlternateReturn:
+            op = @selector( loadError: );
+            break;
+            
+        case NSAlertOtherReturn:
+            return;
+    }
+
+    NSUInteger selectedRow = [accountArrayController selectionIndex];
+    Account *account = [[accountArrayController arrangedObjects] objectAtIndex: selectedRow];
+    
+    NSError *error = nil;
+    BOOL success = ((BOOL (*)(id,SEL,NSError **))objc_msgSend)( account, op, &error );
+    if (success) {
+        [accountArrayController setSelectionIndex: (NSUInteger)contextInfo];
+    } else {
+        [self presentError: error modalForWindow: [self window] 
+                  delegate: self didPresentSelector: @selector(didPresentErrorWithRecovery:contextInfo:) 
+               contextInfo: NULL];
+    }
 }
 
 - (void) windowDidLoad;
