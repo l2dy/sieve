@@ -24,6 +24,7 @@
 
 @property (copy, readwrite) NSURL *accountFileURL;
 @property (assign, readwrite) BOOL dirty;
+@property (assign, readwrite) BOOL changedAccountName;
 @end
 
 
@@ -37,6 +38,7 @@
 @synthesize port;
 @synthesize icon;
 @synthesize dirty;
+@synthesize changedAccountName;
 
 + (NSImage *) defaultAccountIcon;
 {
@@ -118,6 +120,7 @@ static NSString * const kPortKey = @"port";
     }    
     
     [self setDirty: NO];
+    [self setChangedAccountName: NO];
     
     return YES;
 }
@@ -178,6 +181,17 @@ static NSString * const kPortKey = @"port";
     }
 }
 
+- (void) setAccountName: (NSString *)accountName_;
+{
+    if (accountName != accountName_) {
+        [accountName release];
+        accountName = [accountName_ copy];
+        
+        [self setDirty: YES];
+        [self setChangedAccountName: YES];
+    }
+}
+
 + (Account *) readFromURL: (NSURL *) url;
 {
     return [[[self alloc] initWithAccountFileURL: url] autorelease];
@@ -209,6 +223,12 @@ static NSString * const kPortKey = @"port";
     }
     
     NSURL *saveURL = accountFileURL;
+    if (changedAccountName && nil != saveURL) {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        [fm removeItemAtURL: saveURL error: NULL];
+        saveURL = nil;
+    }
+    
     if (nil == saveURL) {
         NSString *fileName = accountName;
         NSURL *accountsFolder = [[AccountList sharedAccountList] accountsFolder];
@@ -236,6 +256,7 @@ static NSString * const kPortKey = @"port";
     [saveURL setResourceValue: [NSNumber numberWithBool: YES] forKey: NSURLHasHiddenExtensionKey error: NULL];
     
     [self setDirty: NO];
+    [self setChangedAccountName: NO];
     
     return YES;
 }

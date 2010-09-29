@@ -27,6 +27,7 @@
     NSImage *icon;
     
     BOOL dirty;
+    BOOL changedAccountName;
 }
 
 @property (readwrite, copy) NSString *accountName;

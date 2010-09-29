@@ -241,15 +241,15 @@ enum {
             NSMenuItem *item = nil;
             if (firstItem < count) {
                 item = [menu itemAtIndex: firstItem];
-                [item setTitle: [account accountName]];
             } else {
                 item = [[[NSMenuItem alloc] initWithTitle: [account accountName] action: @selector(openAccount:) keyEquivalent: @""] autorelease];
                 [item setTag: kBookmarkTag];
                 [item setTarget: self];
+                [item bind: @"title" toObject: item withKeyPath: @"representedObject.accountName" options: nil];
+                [item bind: @"image" toObject: item withKeyPath: @"representedObject.icon" options: nil];
                 [menu addItem: item];
             }
             [item setRepresentedObject: account];
-            [item setImage: [account icon]];
             ++firstItem;
         }
         
