@@ -38,6 +38,7 @@
 @property (readwrite, copy) NSImage *icon;
 @property (readonly) NSURL *accountURL;
 @property (readonly, assign) BOOL dirty;
+@property (readonly) NSAttributedString *displayString;
 
 + (Account *) readFromURL: (NSURL *) url;
 

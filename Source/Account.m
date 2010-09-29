@@ -277,7 +277,38 @@ static NSString * const kPortKey = @"port";
     if (nil != user && ![user isEqualToString: @""]) {
         hostPart = [user stringByAppendingFormat: @"@%@", host];
     }
-    return [NSURL URLWithString: [NSString stringWithFormat: @"sieve://%@:%u/", hostPart, port]];
+    if (2000 != port) {
+        hostPart = [hostPart stringByAppendingFormat: @":%u", port];
+    }
+    return [NSURL URLWithString: [NSString stringWithFormat: @"sieve://%@/", hostPart]];
+}
+
++ (NSSet *) keyPathsForValuesAffectingAccountURL;
+{
+    return [NSSet setWithObjects: @"host", @"user", @"port", nil];
+}
+
+- (NSAttributedString *) displayString;
+{
+    static NSDictionary *attributes = nil;
+    if (nil == attributes) {
+        attributes = [[NSDictionary dictionaryWithObjectsAndKeys: 
+                       [NSFont systemFontOfSize: [NSFont systemFontSizeForControlSize: NSSmallControlSize]], NSFontAttributeName,
+                       [NSColor lightGrayColor], NSForegroundColorAttributeName,
+                       nil] retain];
+    }
+    
+    NSMutableAttributedString *result = [[[NSMutableAttributedString alloc] initWithString: accountName] autorelease];
+    NSString *urlString = [@"\n" stringByAppendingString: [[self accountURL] absoluteString]];
+    NSAttributedString *subtitleString = [[[NSAttributedString alloc] initWithString: urlString attributes: attributes] autorelease];
+    [result appendAttributedString: subtitleString];
+
+    return result;
+}
+
++ (NSSet *) keyPathsForValuesAffectingDisplayString;
+{
+    return [NSSet setWithObjects: @"accountURL", @"accountName", nil];
 }
 
 @end
