@@ -99,7 +99,6 @@
 {
     __block BOOL didCallBlock = NO;
     
-    id x;
     NSData *testData = [@"abcde" dataUsingEncoding: NSASCIIStringEncoding];
     [sock writeData: testData withTimeout: -1 tag: 0 block: ^{
         XCTAssertEqualObjects( testData, [sock mockSentData], @"Should have returned the same data that was sent" );

@@ -18,7 +18,7 @@
 #import <Cocoa/Cocoa.h>
 
 typedef void (^MockSockReadCompletionBlock_t)( NSData *data );
-typedef void (^MockSockWriteCompletionBlock_t)();
+typedef void (^MockSockWriteCompletionBlock_t)(void);
 
 @interface MockSocket : NSObject {
     NSData *data;

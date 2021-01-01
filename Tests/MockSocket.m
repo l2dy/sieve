@@ -55,7 +55,7 @@
 
 - (void) mockClearSentData;
 {
-    [writtenData release], writtenData = nil;
+    [writtenData release]; writtenData = nil;
 }
 
 - (void)writeData:(NSData *)dataToSend withTimeout:(NSTimeInterval)timeout tag:(long)tag;

@@ -53,10 +53,10 @@
     [mockSasl verify];
     [mockSocket verify];
     
-    [client release], client = nil;
-    [mockDelegate release], mockDelegate = nil;
-    [mockSasl release], mockSasl = nil;
-    [mockSocket release], mockSocket = nil;
+    [client release]; client = nil;
+    [mockDelegate release]; mockDelegate = nil;
+    [mockSasl release]; mockSasl = nil;
+    [mockSocket release]; mockSocket = nil;
 }
 
 - (void) testConnect;
