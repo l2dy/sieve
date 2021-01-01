@@ -30,7 +30,7 @@ enum {
 };
 
 enum {
-    kSieveDefaultPort = 2000,
+    kSieveDefaultPort = 4190,
 };
 
 typedef enum {
