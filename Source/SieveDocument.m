@@ -19,7 +19,7 @@
 #import "SieveScriptViewController.h"
 #import "SieveDocumentWindowController.h"
 
-NSString * const kSieveScriptFileType = @"net.dergraf.sieve.sieve-script";
+NSString * const kSieveScriptFileType = @"de.5sw.sieve.sieve-script";
 
 
 @interface NSDocument (MessingWithInternals)

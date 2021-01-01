@@ -21,9 +21,11 @@
 			<string>SieveScript</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>net.dergraf.sieve.sieve-script</string>
+				<string>de.5sw.sieve.sieve-script</string>
 			</array>
 			<key>NSDocumentClass</key>
 			<string>SieveDocument</string>
@@ -72,8 +74,10 @@
 				<string>public.utf8-plain-text</string>
 				<string>public.script</string>
 			</array>
+			<key>UTTypeIcons</key>
+			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>net.dergraf.sieve.sieve-script</string>
+			<string>de.5sw.sieve.sieve-script</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -89,8 +93,10 @@
 			<array>
 				<string>com.apple.property-list</string>
 			</array>
+			<key>UTTypeIcons</key>
+			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>net.dergraf.sieve.sieve-account</string>
+			<string>de.5sw.sieve.sieve-account</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

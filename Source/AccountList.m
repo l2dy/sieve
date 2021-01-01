@@ -158,7 +158,7 @@ static AccountList *sharedAccountList = nil;
     }
 }
 
-NSString * const kAccountUTI = @"net.dergraf.sieve.sieve-account";
+NSString * const kAccountUTI = @"de.5sw.sieve.sieve-account";
 
 - (void) scanAccountsDirectory;
 {

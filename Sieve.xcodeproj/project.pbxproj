@@ -1155,7 +1155,7 @@
 				GCC_PREFIX_HEADER = Source/Sieve_Prefix.pch;
 				INFOPLIST_FILE = "Sieve-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dergraf.sieve;
+				PRODUCT_BUNDLE_IDENTIFIER = de.5sw.sieve;
 				PRODUCT_NAME = Sieve;
 			};
 			name = Debug;
@@ -1173,7 +1173,7 @@
 				GCC_PREFIX_HEADER = Source/Sieve_Prefix.pch;
 				INFOPLIST_FILE = "Sieve-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dergraf.sieve;
+				PRODUCT_BUNDLE_IDENTIFIER = de.5sw.sieve;
 				PRODUCT_NAME = Sieve;
 			};
 			name = Release;
