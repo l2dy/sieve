@@ -62,21 +62,21 @@
 - (void) testConnect;
 {
     BOOL yes = YES;
-    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 2000 error: NULL ];
+    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 2000 error: [OCMArg anyPointer] ];
     [client connectToHost:  @"localhost" port: 2000];
 }
 
 - (void) testConnectURL;
 {
     BOOL yes = YES;
-    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 2000 error: NULL ];
+    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 4190 error: [OCMArg anyPointer] ];
     [client connectToURL: [NSURL URLWithString:  @"sieve://localhost"]];
 }
 
 - (void) testConnectURLWithPort;
 {
     BOOL yes = YES;
-    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 42 error: NULL ];
+    [[[mockSocket expect] andReturnValue: OCMOCK_VALUE(yes)] connectToHost: @"localhost" onPort: 42 error: [OCMArg anyPointer] ];
     [client connectToURL: [NSURL URLWithString:  @"sieve://localhost:42"]];
 }
 

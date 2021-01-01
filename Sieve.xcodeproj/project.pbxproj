@@ -40,18 +40,6 @@
 		26458ED7121D70710067CE01 /* PasswordPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26458ED6121D70710067CE01 /* PasswordPanelController.m */; };
 		26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26458EE3121D73EC0067CE01 /* PasswordWindow.xib */; };
 		264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F95AC121E8C540037167B /* SieveDocumentController.m */; };
-		2653D04812323B7000CC7DF6 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2653D03D12323B6700CC7DF6 /* OCMock.framework */; };
-		2653D08B12323C3500CC7DF6 /* TestSieveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D08A12323C3500CC7DF6 /* TestSieveClient.m */; };
-		2653D09D12323DA600CC7DF6 /* SieveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09F12129B2600458B80 /* SieveClient.m */; };
-		2653D0A412323DBF00CC7DF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
-		2653D0A812323DD400CC7DF6 /* NSData+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09912129B2600458B80 /* NSData+Base64Encoding.m */; };
-		2653D0A912323DD400CC7DF6 /* NSScanner+QuotedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09B12129B2600458B80 /* NSScanner+QuotedString.m */; };
-		2653D0AA12323DD400CC7DF6 /* SaslConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09D12129B2600458B80 /* SaslConn.m */; };
-		2653D0AB12323DD400CC7DF6 /* SieveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 264084B11213FD61004F42BB /* SieveOperation.m */; };
-		2653D0AF12323DE100CC7DF6 /* libsasl2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2639EA9E120F74490023F625 /* libsasl2.dylib */; };
-		2653D0B312323DF700CC7DF6 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B09012129B1D00458B80 /* AsyncSocket.m */; };
-		2653D17E1232977500CC7DF6 /* TestMockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D17D1232977500CC7DF6 /* TestMockSocket.m */; };
-		2653D1841232995100CC7DF6 /* MockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D1831232995100CC7DF6 /* MockSocket.m */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2661BD69123584A7001CBBC5 /* PFMoveApplication.m */; };
 		2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
@@ -60,18 +48,17 @@
 		2665ADD5123430DE0063B62F /* Sieve.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADD4123430DE0063B62F /* Sieve.icns */; };
 		2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADE01234326F0063B62F /* SieveDocument.icns */; };
 		266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */; };
-		266B56DE1231112900D0741F /* SieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B0A612129B2600458B80 /* SieveTest.m */; };
-		266B56E11231113800D0741F /* TestSieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B56E01231113800D0741F /* TestSieveTest.m */; };
 		266D7C87121C14A700DFA1F4 /* SaveToServerPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */; };
 		266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */; };
 		267508D212352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
-		267508D312352FCC00B8E26D /* ServiceLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 267508D112352FCC00B8E26D /* ServiceLookup.m */; };
 		267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267509AD123554E100B8E26D /* CreateAccountWindow.xib */; };
 		267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267509B21235574D00B8E26D /* CreateAccountWindowController.m */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26B07217259F8F6300ED8D87 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26B07215259F8F6300ED8D87 /* PreferencesWindow.xib */; };
-		26B07222259FDD1E00ED8D87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B07221259FDD1E00ED8D87 /* XCTest.framework */; };
-		26B07223259FDD1E00ED8D87 /* XCTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26B07221259FDD1E00ED8D87 /* XCTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26B07253259FE17F00ED8D87 /* MockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D1831232995100CC7DF6 /* MockSocket.m */; };
+		26B07254259FE17F00ED8D87 /* TestSieveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B56E01231113800D0741F /* TestSieveTest.m */; };
+		26B07255259FE17F00ED8D87 /* TestSieveClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D08A12323C3500CC7DF6 /* TestSieveClient.m */; };
+		26B07256259FE17F00ED8D87 /* TestMockSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653D17D1232977500CC7DF6 /* TestMockSocket.m */; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
 		26C153FB12379AC3002A242E /* AccountList.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C153FA12379AC3002A242E /* AccountList.m */; };
@@ -145,10 +132,19 @@
 		26F2B5111213015800458B80 /* OpenURLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2B5101213015800458B80 /* OpenURLController.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		CD4DE47C633D643B1DB9C85F /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372C6D1173209C332EA4690C /* Pods_Tests.framework */; };
+		FE37F5BF27C06A1B32462415 /* Pods_Sieve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7F25606B124EB51437C112 /* Pods_Sieve.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		2665AD75123410710063B62F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
+			remoteInfo = Sieve;
+		};
+		26B0728E259FE4F400ED8D87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
@@ -169,20 +165,11 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		26B07224259FDD1E00ED8D87 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				26B07223259FDD1E00ED8D87 /* XCTest.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0BD4DD558EB78F4FBC72DDAF /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		0C0C9DBFCCE04487602A4FE8 /* Pods-Sieve.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sieve.debug.xcconfig"; path = "Target Support Files/Pods-Sieve/Pods-Sieve.debug.xcconfig"; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2639EA9E120F74490023F625 /* libsasl2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsasl2.dylib; path = /usr/lib/libsasl2.dylib; sourceTree = "<absolute>"; };
 		264084B01213FD61004F42BB /* SieveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveOperation.h; sourceTree = "<group>"; };
@@ -205,8 +192,6 @@
 		2665ADD4123430DE0063B62F /* Sieve.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Sieve.icns; sourceTree = "<group>"; };
 		2665ADE01234326F0063B62F /* SieveDocument.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SieveDocument.icns; sourceTree = "<group>"; };
 		266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMTabStyleBase.m; sourceTree = "<group>"; };
-		266B56D9123110E400D0741F /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		266B56DA123110E400D0741F /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		266B56E01231113800D0741F /* TestSieveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSieveTest.m; sourceTree = "<group>"; };
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
@@ -229,6 +214,11 @@
 		26B07208259F8ECC00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
 		26B07216259F8F6300ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		26B07221259FDD1E00ED8D87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		26B07235259FE0A600ED8D87 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		26B07239259FE0CE00ED8D87 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		26B07243259FE13000ED8D87 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		26B07269259FE24F00ED8D87 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		26B07278259FE2CA00ED8D87 /* libsasl2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsasl2.tbd; path = usr/lib/libsasl2.tbd; sourceTree = SDKROOT; };
 		26C153F912379AC3002A242E /* AccountList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountList.h; sourceTree = "<group>"; };
 		26C153FA12379AC3002A242E /* AccountList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountList.m; sourceTree = "<group>"; };
 		26C1546A1237C02B002A242E /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -336,19 +326,20 @@
 		26F2B5101213015800458B80 /* OpenURLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenURLController.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		372C6D1173209C332EA4690C /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2D0EEED38EC632D189B245 /* Pods-Sieve.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sieve.release.xcconfig"; path = "Target Support Files/Pods-Sieve/Pods-Sieve.release.xcconfig"; sourceTree = "<group>"; };
+		6A7F25606B124EB51437C112 /* Pods_Sieve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sieve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D15AC360486D014006FF6A4 /* Sieve-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sieve-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Sieve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sieve.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8687920874E3172BA68BDA /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		266B56D6123110E400D0741F /* Frameworks */ = {
+		26B07240259FE13000ED8D87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2653D04812323B7000CC7DF6 /* OCMock.framework in Frameworks */,
-				2653D0A412323DBF00CC7DF6 /* Security.framework in Frameworks */,
-				2653D0AF12323DE100CC7DF6 /* libsasl2.dylib in Frameworks */,
-				26B07222259FDD1E00ED8D87 /* XCTest.framework in Frameworks */,
+				CD4DE47C633D643B1DB9C85F /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +352,7 @@
 				26F2AE2E1212981E00458B80 /* Carbon.framework in Frameworks */,
 				2659699512153CC10050A913 /* Security.framework in Frameworks */,
 				2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */,
+				FE37F5BF27C06A1B32462415 /* Pods_Sieve.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Sieve.app */,
-				266B56D9123110E400D0741F /* Tests.octest */,
+				26B07243259FE13000ED8D87 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -405,7 +397,7 @@
 		266B56D11231104300D0741F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				266B56DA123110E400D0741F /* Tests-Info.plist */,
+				26B07269259FE24F00ED8D87 /* Tests-Info.plist */,
 				266B56E01231113800D0741F /* TestSieveTest.m */,
 				2653D08A12323C3500CC7DF6 /* TestSieveClient.m */,
 				2653D17D1232977500CC7DF6 /* TestMockSocket.m */,
@@ -422,6 +414,13 @@
 				267508D112352FCC00B8E26D /* ServiceLookup.m */,
 			);
 			name = Tools;
+			sourceTree = "<group>";
+		};
+		26B07244259FE13000ED8D87 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		26F2ADF01212972C00458B80 /* PSMTabBar */ = {
@@ -612,8 +611,10 @@
 				26F2B0B512129B5600458B80 /* Library Code */,
 				26F2B0B412129B4300458B80 /* Other Sources */,
 				266B56D11231104300D0741F /* Tests */,
+				26B07244259FE13000ED8D87 /* Tests */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				D8CB521995971980762EA19E /* Pods */,
 			);
 			name = Sieve;
 			sourceTree = "<group>";
@@ -644,6 +645,9 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26B07278259FE2CA00ED8D87 /* libsasl2.tbd */,
+				26B07239259FE0CE00ED8D87 /* CFNetwork.framework */,
+				26B07235259FE0A600ED8D87 /* CoreFoundation.framework */,
 				26B07221259FDD1E00ED8D87 /* XCTest.framework */,
 				2665AD1812340C040063B62F /* Sparkle.framework */,
 				26F2AE2D1212981E00458B80 /* Carbon.framework */,
@@ -654,36 +658,51 @@
 				2659699412153CC10050A913 /* Security.framework */,
 				2653D03D12323B6700CC7DF6 /* OCMock.framework */,
 				26C1569C12383596002A242E /* BWToolkitFramework.framework */,
+				6A7F25606B124EB51437C112 /* Pods_Sieve.framework */,
+				372C6D1173209C332EA4690C /* Pods_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8CB521995971980762EA19E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C0C9DBFCCE04487602A4FE8 /* Pods-Sieve.debug.xcconfig */,
+				4A2D0EEED38EC632D189B245 /* Pods-Sieve.release.xcconfig */,
+				DB8687920874E3172BA68BDA /* Pods-Tests.debug.xcconfig */,
+				0BD4DD558EB78F4FBC72DDAF /* Pods-Tests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		266B56D8123110E400D0741F /* Tests */ = {
+		26B07242259FE13000ED8D87 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 266B56DD123110E500D0741F /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildConfigurationList = 26B0724A259FE13000ED8D87 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				266B56D4123110E400D0741F /* Resources */,
-				266B56D5123110E400D0741F /* Sources */,
-				266B56D6123110E400D0741F /* Frameworks */,
-				266B56D7123110E400D0741F /* ShellScript */,
-				26B07224259FDD1E00ED8D87 /* Embed Frameworks */,
+				E663EE765442DAB6B613AF80 /* [CP] Check Pods Manifest.lock */,
+				26B0723F259FE13000ED8D87 /* Sources */,
+				26B07240259FE13000ED8D87 /* Frameworks */,
+				26B07241259FE13000ED8D87 /* Resources */,
+				3DF5820D0305FE2EDD615EBD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				26B0728F259FE4F400ED8D87 /* PBXTargetDependency */,
 			);
 			name = Tests;
 			productName = Tests;
-			productReference = 266B56D9123110E400D0741F /* Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 26B07243259FE13000ED8D87 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8D15AC270486D014006FF6A4 /* Sieve */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Sieve" */;
 			buildPhases = (
+				28210BDABD8966F695647DA5 /* [CP] Check Pods Manifest.lock */,
 				26B5D3071234F3FF00C065F8 /* Extract strings */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
@@ -707,7 +726,14 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					26B07242259FE13000ED8D87 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 8D15AC270486D014006FF6A4;
+					};
+				};
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Sieve" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -717,11 +743,12 @@
 				en,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Sieve */;
+			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Sieve */,
-				266B56D8123110E400D0741F /* Tests */,
+				26B07242259FE13000ED8D87 /* Tests */,
 				266B571A1231162B00D0741F /* Documentation */,
 				2665AD721234106C0063B62F /* Package */,
 			);
@@ -729,7 +756,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		266B56D4123110E400D0741F /* Resources */ = {
+		26B07241259FE13000ED8D87 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -800,7 +827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nLONG_VERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nMINIMUM_SYSTEM=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" LSMinimumSystemVersion)\n\nDOWNLOAD_BASE_URL=\"http://dergraf.net/sieve\"\nARCHIVE_FILENAME=\"$PROJECT_NAME $LONG_VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nPRIVATE_KEY=\"$SOURCE_ROOT/dsa_priv.pem\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$ARCHIVE_FILENAME\"\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign \"$PRIVATE_KEY\" \\\n\t| openssl enc -base64\n)\n\ncat <<EOF > \"appcast-$VERSION.xml\"\n<item>\n\t<title>$PROJECT_NAME Version $LONG_VERSION</title>\n\t<pubDate>$PUBDATE</pubDate>\n\t<sparkle:minimumSystemVersion>$MINIMUM_SYSTEM</sparkle:minimumSystemVersion>\n\t<enclosure\n\t\turl=\"$DOWNLOAD_URL\"\n\t\tsparkle:version=\"$VERSION\"\n\t\tsparkle:shortVersionString=\"$LONG_VERSION\"\n\t\ttype=\"application/octet-stream\"\n\t\tlength=\"$SIZE\"\n\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t/>\n</item>\nEOF";
+			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nLONG_VERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nMINIMUM_SYSTEM=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" LSMinimumSystemVersion)\n\nDOWNLOAD_BASE_URL=\"http://dergraf.net/sieve\"\nARCHIVE_FILENAME=\"$PROJECT_NAME $LONG_VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nPRIVATE_KEY=\"$SOURCE_ROOT/dsa_priv.pem\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$ARCHIVE_FILENAME\"\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign \"$PRIVATE_KEY\" \\\n\t| openssl enc -base64\n)\n\ncat <<EOF > \"appcast-$VERSION.xml\"\n<item>\n\t<title>$PROJECT_NAME Version $LONG_VERSION</title>\n\t<pubDate>$PUBDATE</pubDate>\n\t<sparkle:minimumSystemVersion>$MINIMUM_SYSTEM</sparkle:minimumSystemVersion>\n\t<enclosure\n\t\turl=\"$DOWNLOAD_URL\"\n\t\tsparkle:version=\"$VERSION\"\n\t\tsparkle:shortVersionString=\"$LONG_VERSION\"\n\t\ttype=\"application/octet-stream\"\n\t\tlength=\"$SIZE\"\n\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t/>\n</item>\nEOF\n";
 			showEnvVarsInLog = 0;
 		};
 		2665AE43123438950063B62F /* Remove Headers */ = {
@@ -816,19 +843,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n\n[ \"$BUILD_STYLE\" = \"Release\" ] || exit 0;\n\nSEARCH_DIR=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n\necho \"Deleting PrivateHeaders (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/PrivateHeaders/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"PrivateHeaders\"      \\\n                -delete -print\n\necho \"Deleting Headers (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/Headers/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"Headers\"      \\\n                -delete -print";
-		};
-		266B56D7123110E400D0741F /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
 		266B57191231162B00D0741F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -858,25 +872,79 @@
 			shellPath = /bin/sh;
 			shellScript = "# -q silences duplicate comments with same key warning\n#find ${SRCROOT} -name \"*.[hm]\" -print0 | xargs -0 genstrings -q -o ${SRCROOT}/${DEVELOPMENT_LANGUAGE}.lproj \n";
 		};
+		28210BDABD8966F695647DA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sieve-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3DF5820D0305FE2EDD615EBD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E663EE765442DAB6B613AF80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		266B56D5123110E400D0741F /* Sources */ = {
+		26B0723F259FE13000ED8D87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				266B56DE1231112900D0741F /* SieveTest.m in Sources */,
-				266B56E11231113800D0741F /* TestSieveTest.m in Sources */,
-				2653D08B12323C3500CC7DF6 /* TestSieveClient.m in Sources */,
-				2653D09D12323DA600CC7DF6 /* SieveClient.m in Sources */,
-				2653D0A812323DD400CC7DF6 /* NSData+Base64Encoding.m in Sources */,
-				2653D0A912323DD400CC7DF6 /* NSScanner+QuotedString.m in Sources */,
-				2653D0AA12323DD400CC7DF6 /* SaslConn.m in Sources */,
-				2653D0AB12323DD400CC7DF6 /* SieveOperation.m in Sources */,
-				2653D0B312323DF700CC7DF6 /* AsyncSocket.m in Sources */,
-				2653D17E1232977500CC7DF6 /* TestMockSocket.m in Sources */,
-				2653D1841232995100CC7DF6 /* MockSocket.m in Sources */,
-				267508D312352FCC00B8E26D /* ServiceLookup.m in Sources */,
+				26B07254259FE17F00ED8D87 /* TestSieveTest.m in Sources */,
+				26B07255259FE17F00ED8D87 /* TestSieveClient.m in Sources */,
+				26B07256259FE17F00ED8D87 /* TestMockSocket.m in Sources */,
+				26B07253259FE17F00ED8D87 /* MockSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,6 +1008,11 @@
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Sieve */;
 			targetProxy = 2665AD75123410710063B62F /* PBXContainerItemProxy */;
+		};
+		26B0728F259FE4F400ED8D87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* Sieve */;
+			targetProxy = 26B0728E259FE4F400ED8D87 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1065,60 +1138,6 @@
 			};
 			name = Release;
 		};
-		266B56DB123110E500D0741F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "Tests-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Cocoa,
-					"-framework",
-					SenTestingKit,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Tests;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		266B56DC123110E500D0741F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "Tests-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Cocoa,
-					"-framework",
-					SenTestingKit,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Tests;
-				WRAPPER_EXTENSION = octest;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		266B571B1231162C00D0741F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1138,8 +1157,90 @@
 			};
 			name = Release;
 		};
+		26B0724B259FE13000ED8D87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB8687920874E3172BA68BDA /* Pods-Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 722B335UM5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.5sw.sieve.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sieve.app/Contents/MacOS/Sieve";
+			};
+			name = Debug;
+		};
+		26B0724C259FE13000ED8D87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BD4DD558EB78F4FBC72DDAF /* Pods-Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 722B335UM5;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.5sw.sieve.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sieve.app/Contents/MacOS/Sieve";
+			};
+			name = Release;
+		};
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C0C9DBFCCE04487602A4FE8 /* Pods-Sieve.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1147,7 +1248,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -1163,6 +1264,7 @@
 		};
 		C05733C908A9546B00998B17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A2D0EEED38EC632D189B245 /* Pods-Sieve.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1170,7 +1272,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1274,20 +1376,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		266B56DD123110E500D0741F /* Build configuration list for PBXNativeTarget "Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				266B56DB123110E500D0741F /* Debug */,
-				266B56DC123110E500D0741F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		266B571F1231166C00D0741F /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				266B571B1231162C00D0741F /* Debug */,
 				266B571C1231162C00D0741F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26B0724A259FE13000ED8D87 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26B0724B259FE13000ED8D87 /* Debug */,
+				26B0724C259FE13000ED8D87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
