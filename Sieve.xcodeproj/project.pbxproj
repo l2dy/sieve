@@ -7,18 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		2665AD721234106C0063B62F /* Package */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 2665AD7A1234107D0063B62F /* Build configuration list for PBXAggregateTarget "Package" */;
-			buildPhases = (
-				2665AD711234106C0063B62F /* ShellScript */,
-			);
-			dependencies = (
-				2665AD76123410710063B62F /* PBXTargetDependency */,
-			);
-			name = Package;
-			productName = Package;
-		};
 		266B571A1231162B00D0741F /* Documentation */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 266B571F1231166C00D0741F /* Build configuration list for PBXAggregateTarget "Documentation" */;
@@ -42,9 +30,6 @@
 		264F95AD121E8C540037167B /* SieveDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F95AC121E8C540037167B /* SieveDocumentController.m */; };
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2661BD69123584A7001CBBC5 /* PFMoveApplication.m */; };
-		2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
-		2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		2665AD6512340F290063B62F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2665AD6412340F290063B62F /* dsa_pub.pem */; };
 		2665ADD5123430DE0063B62F /* Sieve.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADD4123430DE0063B62F /* Sieve.icns */; };
 		2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADE01234326F0063B62F /* SieveDocument.icns */; };
 		266A9209122CF6CF00FD32A3 /* PSMTabStyleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */; };
@@ -137,13 +122,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2665AD75123410710063B62F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
-			remoteInfo = Sieve;
-		};
 		26B0728E259FE4F400ED8D87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -160,7 +138,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +156,6 @@
 		26458ED6121D70710067CE01 /* PasswordPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPanelController.m; sourceTree = "<group>"; };
 		264F95AB121E8C540037167B /* SieveDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentController.h; sourceTree = "<group>"; };
 		264F95AC121E8C540037167B /* SieveDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentController.m; sourceTree = "<group>"; };
-		2653D03D12323B6700CC7DF6 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = /Library/Frameworks/OCMock.framework; sourceTree = "<absolute>"; };
 		2653D08A12323C3500CC7DF6 /* TestSieveClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSieveClient.m; sourceTree = "<group>"; };
 		2653D17D1232977500CC7DF6 /* TestMockSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMockSocket.m; sourceTree = "<group>"; };
 		2653D1821232995100CC7DF6 /* MockSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockSocket.h; sourceTree = "<group>"; };
@@ -187,8 +163,6 @@
 		2659699412153CC10050A913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		2661BD68123584A7001CBBC5 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
 		2661BD69123584A7001CBBC5 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
-		2665AD1812340C040063B62F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		2665AD6412340F290063B62F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		2665ADD4123430DE0063B62F /* Sieve.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Sieve.icns; sourceTree = "<group>"; };
 		2665ADE01234326F0063B62F /* SieveDocument.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SieveDocument.icns; sourceTree = "<group>"; };
 		266A9208122CF6CF00FD32A3 /* PSMTabStyleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMTabStyleBase.m; sourceTree = "<group>"; };
@@ -225,7 +199,6 @@
 		26C1546B1237C02B002A242E /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		26C1562C12382092002A242E /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
 		26C1562D12382092002A242E /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
-		26C1569C12383596002A242E /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		26E1B4BB125342C100F0D060 /* LineNumbersRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumbersRulerView.h; sourceTree = "<group>"; };
 		26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumbersRulerView.m; sourceTree = "<group>"; };
 		26F2ADF11212972C00458B80 /* NSBezierPath_AMShading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_AMShading.h; sourceTree = "<group>"; };
@@ -351,7 +324,6 @@
 				2639EA9F120F74490023F625 /* libsasl2.dylib in Frameworks */,
 				26F2AE2E1212981E00458B80 /* Carbon.framework in Frameworks */,
 				2659699512153CC10050A913 /* Security.framework in Frameworks */,
-				2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */,
 				FE37F5BF27C06A1B32462415 /* Pods_Sieve.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,13 +386,6 @@
 				267508D112352FCC00B8E26D /* ServiceLookup.m */,
 			);
 			name = Tools;
-			sourceTree = "<group>";
-		};
-		26B07244259FE13000ED8D87 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		26F2ADF01212972C00458B80 /* PSMTabBar */ = {
@@ -611,7 +576,6 @@
 				26F2B0B512129B5600458B80 /* Library Code */,
 				26F2B0B412129B4300458B80 /* Other Sources */,
 				266B56D11231104300D0741F /* Tests */,
-				26B07244259FE13000ED8D87 /* Tests */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				D8CB521995971980762EA19E /* Pods */,
@@ -626,7 +590,6 @@
 				26B5D31A1234F4C100C065F8 /* Localizable.strings */,
 				2665ADE01234326F0063B62F /* SieveDocument.icns */,
 				2665ADD4123430DE0063B62F /* Sieve.icns */,
-				2665AD6412340F290063B62F /* dsa_pub.pem */,
 				8D15AC360486D014006FF6A4 /* Sieve-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				1DDD58280DA1D0D100B32029 /* SieveDocument.xib */,
@@ -649,15 +612,12 @@
 				26B07239259FE0CE00ED8D87 /* CFNetwork.framework */,
 				26B07235259FE0A600ED8D87 /* CoreFoundation.framework */,
 				26B07221259FDD1E00ED8D87 /* XCTest.framework */,
-				2665AD1812340C040063B62F /* Sparkle.framework */,
 				26F2AE2D1212981E00458B80 /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
 				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 				2639EA9E120F74490023F625 /* libsasl2.dylib */,
 				2659699412153CC10050A913 /* Security.framework */,
-				2653D03D12323B6700CC7DF6 /* OCMock.framework */,
-				26C1569C12383596002A242E /* BWToolkitFramework.framework */,
 				6A7F25606B124EB51437C112 /* Pods_Sieve.framework */,
 				372C6D1173209C332EA4690C /* Pods_Tests.framework */,
 			);
@@ -703,7 +663,6 @@
 			buildConfigurationList = C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Sieve" */;
 			buildPhases = (
 				28210BDABD8966F695647DA5 /* [CP] Check Pods Manifest.lock */,
-				26B5D3071234F3FF00C065F8 /* Extract strings */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				2665AD3812340C5A0063B62F /* Copy Frameworks */,
@@ -750,7 +709,6 @@
 				8D15AC270486D014006FF6A4 /* Sieve */,
 				26B07242259FE13000ED8D87 /* Tests */,
 				266B571A1231162B00D0741F /* Documentation */,
-				2665AD721234106C0063B62F /* Package */,
 			);
 		};
 /* End PBXProject section */
@@ -803,7 +761,6 @@
 				26F2B50B1213000200458B80 /* OpenURLWindow.xib in Resources */,
 				266D7C8D121C14E900DFA1F4 /* SaveToServerPanel.xib in Resources */,
 				26458EE4121D73EC0067CE01 /* PasswordWindow.xib in Resources */,
-				2665AD6512340F290063B62F /* dsa_pub.pem in Resources */,
 				2665ADD5123430DE0063B62F /* Sieve.icns in Resources */,
 				2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */,
 				26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */,
@@ -816,20 +773,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2665AD711234106C0063B62F /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nLONG_VERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nMINIMUM_SYSTEM=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" LSMinimumSystemVersion)\n\nDOWNLOAD_BASE_URL=\"http://dergraf.net/sieve\"\nARCHIVE_FILENAME=\"$PROJECT_NAME $LONG_VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nPRIVATE_KEY=\"$SOURCE_ROOT/dsa_priv.pem\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$ARCHIVE_FILENAME\"\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign \"$PRIVATE_KEY\" \\\n\t| openssl enc -base64\n)\n\ncat <<EOF > \"appcast-$VERSION.xml\"\n<item>\n\t<title>$PROJECT_NAME Version $LONG_VERSION</title>\n\t<pubDate>$PUBDATE</pubDate>\n\t<sparkle:minimumSystemVersion>$MINIMUM_SYSTEM</sparkle:minimumSystemVersion>\n\t<enclosure\n\t\turl=\"$DOWNLOAD_URL\"\n\t\tsparkle:version=\"$VERSION\"\n\t\tsparkle:shortVersionString=\"$LONG_VERSION\"\n\t\ttype=\"application/octet-stream\"\n\t\tlength=\"$SIZE\"\n\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t/>\n</item>\nEOF\n";
-			showEnvVarsInLog = 0;
-		};
 		2665AE43123438950063B62F /* Remove Headers */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,7 +785,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n[ \"$BUILD_STYLE\" = \"Release\" ] || exit 0;\n\nSEARCH_DIR=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n\necho \"Deleting PrivateHeaders (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/PrivateHeaders/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"PrivateHeaders\"      \\\n                -delete -print\n\necho \"Deleting Headers (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/Headers/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"Headers\"      \\\n                -delete -print";
+			shellScript = "#!/bin/sh\n\n[ \"$BUILD_STYLE\" = \"Release\" ] || exit 0;\n\nSEARCH_DIR=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n\necho \"Deleting PrivateHeaders (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/PrivateHeaders/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"PrivateHeaders\"      \\\n                -delete -print\n\necho \"Deleting Headers (files, dirs and links) from \\\"${SEARCH_DIR}\\\"...\"\n\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -type f                    \\\n                -path \"*/Headers/*\"  \\\n                -delete -print &&          \\\n/usr/bin/find  \"${SEARCH_DIR}\"            \\\n                -name \"Headers\"      \\\n                -delete -print\n";
 		};
 		266B57191231162B00D0741F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -857,20 +800,6 @@
 			shellPath = /bin/sh;
 			shellScript = "#  Build the doxygen documentation for the project and load the docset into Xcode.\n\n#  Use the following to adjust the value of the $DOXYGEN_PATH User-Defined Setting:\n#    Binary install location: /Applications/Doxygen.app/Contents/Resources/doxygen\n#    Source build install location: /usr/local/bin/doxygen\n\n#  If the config file doesn't exist, run 'doxygen -g $SOURCE_ROOT/doxygen.config' to \n#   a get default file.\n\nif ! [ -f $SOURCE_ROOT/doxygen.config ] \nthen \n  echo doxygen config file does not exist\n  $DOXYGEN_PATH -g $SOURCE_ROOT/doxygen.config\nfi\n\n#  Append the proper input/output directories and docset info to the config file.\n#  This works even though values are assigned higher up in the file. Easier than sed.\n\ncp \"$SOURCE_ROOT/doxygen.config\" \"$TEMP_DIR/doxygen.config\"\n\necho \"INPUT = $SOURCE_ROOT/Source\" >> $TEMP_DIR/doxygen.config\necho \"OUTPUT_DIRECTORY = $SOURCE_ROOT/DoxygenDocs.docset\" >> $TEMP_DIR/doxygen.config\necho \"GENERATE_DOCSET        = YES\" >> $TEMP_DIR/doxygen.config\necho \"DOCSET_BUNDLE_ID       = com.mycompany.Sieve\" >> $TEMP_DIR/doxygen.config\n\n#  Run doxygen on the updated config file.\n#  Note: doxygen creates a Makefile that does most of the heavy lifting.\n\n$DOXYGEN_PATH $TEMP_DIR/doxygen.config\n\n#  make will invoke docsetutil. Take a look at the Makefile to see how this is done.\n\nmake -C $SOURCE_ROOT/DoxygenDocs.docset/html install\n\n#  Construct a temporary applescript file to tell Xcode to load a docset.\n\ncat << EOF | osascript\ntell application \"Xcode\"\nload documentation set with path \"/Users/$USER/Library/Developer/Shared/Documentation/DocSets/\"\nend tell\nEOF\n\nexit 0\n";
 			showEnvVarsInLog = 0;
-		};
-		26B5D3071234F3FF00C065F8 /* Extract strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Extract strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# -q silences duplicate comments with same key warning\n#find ${SRCROOT} -name \"*.[hm]\" -print0 | xargs -0 genstrings -q -o ${SRCROOT}/${DEVELOPMENT_LANGUAGE}.lproj \n";
 		};
 		28210BDABD8966F695647DA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1004,11 +933,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2665AD76123410710063B62F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D15AC270486D014006FF6A4 /* Sieve */;
-			targetProxy = 2665AD75123410710063B62F /* PBXContainerItemProxy */;
-		};
 		26B0728F259FE4F400ED8D87 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Sieve */;
@@ -1116,28 +1040,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2665AD731234106C0063B62F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = Package;
-			};
-			name = Debug;
-		};
-		2665AD741234106C0063B62F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = Package;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		266B571B1231162C00D0741F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1246,10 +1148,6 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1270,10 +1168,6 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Sieve Code Signing Cert";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)",
-				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Sieve_Prefix.pch;
@@ -1367,15 +1261,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2665AD7A1234107D0063B62F /* Build configuration list for PBXAggregateTarget "Package" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2665AD731234106C0063B62F /* Debug */,
-				2665AD741234106C0063B62F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		266B571F1231166C00D0741F /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
