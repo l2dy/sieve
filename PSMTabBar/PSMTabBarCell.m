@@ -16,14 +16,16 @@
 - (void)update;
 @end
 
-@implementation PSMTabBarCell
+@implementation PSMTabBarCell {
+    id _controlView;
+}
 
 #pragma mark -
 #pragma mark Creation/Destruction
 - (id)initWithControlView:(PSMTabBarControl *)controlView
 {
     if ( (self = [super init]) ) {
-        _controlView = controlView;
+        self.controlView = controlView;
         _closeButtonTrackingTag = 0;
         _cellTrackingTag = 0;
         _closeButtonOver = NO;

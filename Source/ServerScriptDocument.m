@@ -142,7 +142,7 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
             [self saveToURL: newURL ofType: kSieveScriptFileType forSaveOperation: saveOperation delegate: delegate didSaveSelector:didSaveSelector contextInfo: contextInfo];
         } else {
             BOOL result = NO;
-            objc_msgSend( delegate, didSaveSelector, self, result, contextInfo );
+            ((void (*)(id, SEL, id, BOOL, void *))objc_msgSend)( delegate, didSaveSelector, self, result, contextInfo );
         }
         [savePanel release];
     }];

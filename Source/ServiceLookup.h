@@ -43,12 +43,12 @@ extern NSString * const kServiceLookupHostKey;      // = @"host";
     NSTimeInterval timeout;
     BOOL timedOut;
     
-    void (^block)();
+    void (^block)(void);
     __weak id <ServiceLookupDelegate> delegate;
 }
 
 @property (readwrite, assign) NSTimeInterval timeout;
-@property (readwrite, assign) id <ServiceLookupDelegate> delegate;
+@property (readwrite, weak) id <ServiceLookupDelegate> delegate;
 @property (readwrite, copy) NSString *name;
 @property (readonly, retain) NSArray *result;
 @property (readonly, assign) BOOL timedOut;

@@ -88,7 +88,7 @@ typedef enum {
     BOOL triedKeychain;
 }
 
-@property (readwrite, assign) id <SieveClientDelegate> delegate;
+@property (readwrite, weak) id <SieveClientDelegate> delegate;
 
 @property (readonly, copy) NSString *host;
 @property (readwrite, copy) NSString *user;

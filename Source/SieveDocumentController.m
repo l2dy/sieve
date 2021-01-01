@@ -32,11 +32,11 @@
             if (didClose) {
                 [self closeAllDocumentsWithDelegate: delegate didCloseAllSelector:didCloseAllSelector contextInfo: contextInfo];
             } else {
-                objc_msgSend( delegate, didCloseAllSelector, self, NO, contextInfo );
+                ((void (*)(id, SEL, id, BOOL, void *))objc_msgSend)( delegate, didCloseAllSelector, self, NO, contextInfo );
             }
         }];
     } else {
-        objc_msgSend( delegate, didCloseAllSelector, self, YES, contextInfo );
+        ((void (*)(id, SEL, id, BOOL, void *))objc_msgSend)( delegate, didCloseAllSelector, self, YES, contextInfo );
     }
 }
 

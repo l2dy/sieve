@@ -21,12 +21,12 @@
 @interface SieveOperation : NSObject {
 @private
     __weak SieveClient *client;
-    __weak void *userInfo;
+    void *userInfo;
     __weak id delegate;
 }
 
-@property (readwrite, assign) SieveClient *client;
-@property (readwrite, assign) id delegate;
+@property (readwrite, weak) SieveClient *client;
+@property (readwrite, weak) id delegate;
 @property (readwrite, assign) void *userInfo;
 
 - initForClient: (SieveClient *) newClient;

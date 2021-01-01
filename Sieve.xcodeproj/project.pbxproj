@@ -55,7 +55,7 @@
 		2659699512153CC10050A913 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2659699412153CC10050A913 /* Security.framework */; };
 		2661BD6A123584A7001CBBC5 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2661BD69123584A7001CBBC5 /* PFMoveApplication.m */; };
 		2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
-		2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; };
+		2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 2665AD1812340C040063B62F /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2665AD6512340F290063B62F /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2665AD6412340F290063B62F /* dsa_pub.pem */; };
 		2665ADD5123430DE0063B62F /* Sieve.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADD4123430DE0063B62F /* Sieve.icns */; };
 		2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2665ADE01234326F0063B62F /* SieveDocument.icns */; };
@@ -69,14 +69,12 @@
 		267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267509AD123554E100B8E26D /* CreateAccountWindow.xib */; };
 		267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267509B21235574D00B8E26D /* CreateAccountWindowController.m */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
+		26B07217259F8F6300ED8D87 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26B07215259F8F6300ED8D87 /* PreferencesWindow.xib */; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
 		26C153FB12379AC3002A242E /* AccountList.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C153FA12379AC3002A242E /* AccountList.m */; };
 		26C1546C1237C02B002A242E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C1546B1237C02B002A242E /* Account.m */; };
 		26C1562E12382092002A242E /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C1562D12382092002A242E /* PreferencesWindowController.m */; };
-		26C1563D1238210C002A242E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1563C1238210C002A242E /* PreferencesWindow.xib */; };
-		26C1569D12383596002A242E /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
-		26C156A0123835AD002A242E /* BWToolkitFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 26C1569C12383596002A242E /* BWToolkitFramework.framework */; };
 		26E1B4BD125342C100F0D060 /* LineNumbersRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */; };
 		26F2AE121212972C00458B80 /* NSBezierPath_AMShading.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF21212972C00458B80 /* NSBezierPath_AMShading.m */; };
 		26F2AE131212972C00458B80 /* NSString_AITruncation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2ADF41212972C00458B80 /* NSString_AITruncation.m */; };
@@ -155,13 +153,6 @@
 			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = Sieve;
 		};
-		266B56F81231138900D0741F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 266B56D8123110E400D0741F;
-			remoteInfo = Tests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -171,7 +162,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				26C156A0123835AD002A242E /* BWToolkitFramework.framework in Copy Frameworks */,
 				2665AD2612340C520063B62F /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -180,17 +170,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		1DDD58290DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SieveDocument.xib; sourceTree = "<group>"; };
-		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2639EA9E120F74490023F625 /* libsasl2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsasl2.dylib; path = /usr/lib/libsasl2.dylib; sourceTree = "<absolute>"; };
 		264084B01213FD61004F42BB /* SieveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveOperation.h; sourceTree = "<group>"; };
 		264084B11213FD61004F42BB /* SieveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveOperation.m; sourceTree = "<group>"; };
 		264084B512140058004F42BB /* SieveClientInternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveClientInternals.h; sourceTree = "<group>"; };
 		26458ED5121D70710067CE01 /* PasswordPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPanelController.h; sourceTree = "<group>"; };
 		26458ED6121D70710067CE01 /* PasswordPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPanelController.m; sourceTree = "<group>"; };
-		26458EE0121D73D40067CE01 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PasswordWindow.xib; sourceTree = "<group>"; };
 		264F95AB121E8C540037167B /* SieveDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentController.h; sourceTree = "<group>"; };
 		264F95AC121E8C540037167B /* SieveDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentController.m; sourceTree = "<group>"; };
 		2653D03D12323B6700CC7DF6 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = /Library/Frameworks/OCMock.framework; sourceTree = "<absolute>"; };
@@ -211,23 +197,30 @@
 		266B56E01231113800D0741F /* TestSieveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSieveTest.m; sourceTree = "<group>"; };
 		266D7C85121C14A700DFA1F4 /* SaveToServerPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveToServerPanelController.h; sourceTree = "<group>"; };
 		266D7C86121C14A700DFA1F4 /* SaveToServerPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveToServerPanelController.m; sourceTree = "<group>"; };
-		266D7C88121C14D700DFA1F4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
 		267508D012352FCC00B8E26D /* ServiceLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLookup.h; sourceTree = "<group>"; };
 		267508D112352FCC00B8E26D /* ServiceLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLookup.m; sourceTree = "<group>"; };
-		267509AE123554E100B8E26D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CreateAccountWindow.xib; sourceTree = "<group>"; };
 		267509B11235574D00B8E26D /* CreateAccountWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountWindowController.h; sourceTree = "<group>"; };
 		267509B21235574D00B8E26D /* CreateAccountWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountWindowController.m; sourceTree = "<group>"; };
 		268B28F2121EB0B00046E709 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
 		268B28F3121EB0B00046E709 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
-		26B5D3191234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
-		26B5D31B1234F4C100C065F8 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		26B071FA259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountWindow.xib; sourceTree = "<group>"; };
+		26B071FB259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		26B071FC259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		26B071FD259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OpenURLWindow.xib; sourceTree = "<group>"; };
+		26B071FE259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PasswordWindow.xib; sourceTree = "<group>"; };
+		26B07200259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SaveToServerPanel.xib; sourceTree = "<group>"; };
+		26B07201259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ServerWindow.xib; sourceTree = "<group>"; };
+		26B07202259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SieveDocument.xib; sourceTree = "<group>"; };
+		26B07203259F8DEE00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SieveScriptView.xib; sourceTree = "<group>"; };
+		26B07207259F8EB600ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		26B07208259F8ECC00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
+		26B07216259F8F6300ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		26C153F912379AC3002A242E /* AccountList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountList.h; sourceTree = "<group>"; };
 		26C153FA12379AC3002A242E /* AccountList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountList.m; sourceTree = "<group>"; };
 		26C1546A1237C02B002A242E /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		26C1546B1237C02B002A242E /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		26C1562C12382092002A242E /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
 		26C1562D12382092002A242E /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
-		26C15633123820BD002A242E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		26C1569C12383596002A242E /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Library/Frameworks/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		26E1B4BB125342C100F0D060 /* LineNumbersRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumbersRulerView.h; sourceTree = "<group>"; };
 		26E1B4BC125342C100F0D060 /* LineNumbersRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumbersRulerView.m; sourceTree = "<group>"; };
@@ -317,17 +310,14 @@
 		26F2B0A912129B2600458B80 /* SieveDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocument.m; sourceTree = "<group>"; };
 		26F2B0ED1212A02700458B80 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		26F2B0EE1212A02700458B80 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
-		26F2B1041212A4A500458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ServerWindow.xib; sourceTree = "<group>"; };
 		26F2B1071212A4EF00458B80 /* ServerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerWindowController.h; sourceTree = "<group>"; };
 		26F2B1081212A4EF00458B80 /* ServerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerWindowController.m; sourceTree = "<group>"; };
 		26F2B1D51212BDFB00458B80 /* SieveDocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveDocumentWindowController.h; sourceTree = "<group>"; };
 		26F2B1D61212BDFB00458B80 /* SieveDocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveDocumentWindowController.m; sourceTree = "<group>"; };
 		26F2B2051212C2B800458B80 /* SieveScriptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SieveScriptViewController.h; sourceTree = "<group>"; };
 		26F2B2061212C2B800458B80 /* SieveScriptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SieveScriptViewController.m; sourceTree = "<group>"; };
-		26F2B20B1212C2ED00458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SieveScriptView.xib; sourceTree = "<group>"; };
 		26F2B4BE1212F73E00458B80 /* ServerScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerScriptDocument.h; sourceTree = "<group>"; };
 		26F2B4BF1212F73E00458B80 /* ServerScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerScriptDocument.m; sourceTree = "<group>"; };
-		26F2B50A1213000200458B80 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OpenURLWindow.xib; sourceTree = "<group>"; };
 		26F2B50F1213015800458B80 /* OpenURLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenURLController.h; sourceTree = "<group>"; };
 		26F2B5101213015800458B80 /* OpenURLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenURLController.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -356,7 +346,6 @@
 				26F2AE2E1212981E00458B80 /* Carbon.framework in Frameworks */,
 				2659699512153CC10050A913 /* Security.framework in Frameworks */,
 				2665AD1912340C040063B62F /* Sparkle.framework in Frameworks */,
-				26C1569D12383596002A242E /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +621,7 @@
 				266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */,
 				26458EE3121D73EC0067CE01 /* PasswordWindow.xib */,
 				267509AD123554E100B8E26D /* CreateAccountWindow.xib */,
-				26C1563C1238210C002A242E /* PreferencesWindow.xib */,
+				26B07215259F8F6300ED8D87 /* PreferencesWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -688,7 +677,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				266B56F91231138900D0741F /* PBXTargetDependency */,
 			);
 			name = Sieve;
 			productInstallPath = "$(HOME)/Applications";
@@ -701,9 +689,16 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1230;
+			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Sieve" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Sieve */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -768,9 +763,9 @@
 				2665ADD5123430DE0063B62F /* Sieve.icns in Resources */,
 				2665ADE11234326F0063B62F /* SieveDocument.icns in Resources */,
 				26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */,
+				26B07217259F8F6300ED8D87 /* PreferencesWindow.xib in Resources */,
 				26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */,
 				267509AF123554E100B8E26D /* CreateAccountWindow.xib in Resources */,
-				26C1563D1238210C002A242E /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,7 +839,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# -q silences duplicate comments with same key warning\nfind ${SRCROOT} -name \"*.[hm]\" -print0 | xargs -0 genstrings -q -o ${SRCROOT}/${DEVELOPMENT_LANGUAGE}.lproj \n";
+			shellScript = "# -q silences duplicate comments with same key warning\n#find ${SRCROOT} -name \"*.[hm]\" -print0 | xargs -0 genstrings -q -o ${SRCROOT}/${DEVELOPMENT_LANGUAGE}.lproj \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -929,18 +924,13 @@
 			target = 8D15AC270486D014006FF6A4 /* Sieve */;
 			targetProxy = 2665AD75123410710063B62F /* PBXContainerItemProxy */;
 		};
-		266B56F91231138900D0741F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 266B56D8123110E400D0741F /* Tests */;
-			targetProxy = 266B56F81231138900D0741F /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C1660FE840EACC02AAC07 /* English */,
+				26B071FB259F8DEE00ED8D87 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -948,7 +938,7 @@
 		1DDD58280DA1D0D100B32029 /* SieveDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DDD58290DA1D0D100B32029 /* English */,
+				26B07202259F8DEE00ED8D87 /* en */,
 			);
 			name = SieveDocument.xib;
 			sourceTree = "<group>";
@@ -956,7 +946,7 @@
 		1DDD582A0DA1D0D100B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DDD582B0DA1D0D100B32029 /* English */,
+				26B071FC259F8DEE00ED8D87 /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -964,7 +954,7 @@
 		26458EE3121D73EC0067CE01 /* PasswordWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26458EE0121D73D40067CE01 /* English */,
+				26B071FE259F8DEE00ED8D87 /* en */,
 			);
 			name = PasswordWindow.xib;
 			sourceTree = "<group>";
@@ -972,7 +962,7 @@
 		266D7C8C121C14E900DFA1F4 /* SaveToServerPanel.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				266D7C88121C14D700DFA1F4 /* English */,
+				26B07200259F8DEE00ED8D87 /* en */,
 			);
 			name = SaveToServerPanel.xib;
 			sourceTree = "<group>";
@@ -980,15 +970,23 @@
 		267509AD123554E100B8E26D /* CreateAccountWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				267509AE123554E100B8E26D /* English */,
+				26B071FA259F8DEE00ED8D87 /* en */,
 			);
 			name = CreateAccountWindow.xib;
+			sourceTree = "<group>";
+		};
+		26B07215259F8F6300ED8D87 /* PreferencesWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26B07216259F8F6300ED8D87 /* en */,
+			);
+			name = PreferencesWindow.xib;
 			sourceTree = "<group>";
 		};
 		26B5D3181234F4C100C065F8 /* AsyncSocket.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26B5D3191234F4C100C065F8 /* English */,
+				26B07208259F8ECC00ED8D87 /* en */,
 			);
 			name = AsyncSocket.strings;
 			sourceTree = "<group>";
@@ -996,23 +994,15 @@
 		26B5D31A1234F4C100C065F8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26B5D31B1234F4C100C065F8 /* English */,
+				26B07207259F8EB600ED8D87 /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		26C1563C1238210C002A242E /* PreferencesWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26C15633123820BD002A242E /* English */,
-			);
-			name = PreferencesWindow.xib;
 			sourceTree = "<group>";
 		};
 		26F2B1031212A4A500458B80 /* ServerWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26F2B1041212A4A500458B80 /* English */,
+				26B07201259F8DEE00ED8D87 /* en */,
 			);
 			name = ServerWindow.xib;
 			sourceTree = "<group>";
@@ -1020,7 +1010,7 @@
 		26F2B20A1212C2ED00458B80 /* SieveScriptView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26F2B20B1212C2ED00458B80 /* English */,
+				26B07203259F8DEE00ED8D87 /* en */,
 			);
 			name = SieveScriptView.xib;
 			sourceTree = "<group>";
@@ -1028,7 +1018,7 @@
 		26F2B5091213000200458B80 /* OpenURLWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26F2B50A1213000200458B80 /* English */,
+				26B071FD259F8DEE00ED8D87 /* en */,
 			);
 			name = OpenURLWindow.xib;
 			sourceTree = "<group>";
@@ -1039,6 +1029,7 @@
 		2665AD731234106C0063B62F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1049,9 +1040,9 @@
 		2665AD741234106C0063B62F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = Package;
 				ZERO_LINK = NO;
 			};
@@ -1061,10 +1052,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1078,7 +1069,7 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Tests;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1088,10 +1079,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1104,7 +1095,7 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Tests;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
@@ -1114,6 +1105,7 @@
 		266B571B1231162C00D0741F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "Build Documentation";
 			};
 			name = Debug;
@@ -1121,9 +1113,9 @@
 		266B571C1231162C00D0741F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = "Build Documentation";
 				ZERO_LINK = NO;
 			};
@@ -1133,19 +1125,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Sieve_Prefix.pch;
 				INFOPLIST_FILE = "Sieve-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = net.dergraf.sieve;
 				PRODUCT_NAME = Sieve;
 			};
 			name = Debug;
@@ -1154,6 +1148,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Sieve Code Signing Cert";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1165,6 +1160,7 @@
 				GCC_PREFIX_HEADER = Source/Sieve_Prefix.pch;
 				INFOPLIST_FILE = "Sieve-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = net.dergraf.sieve;
 				PRODUCT_NAME = Sieve;
 			};
 			name = Release;
@@ -1172,31 +1168,80 @@
 		C05733CC08A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DOXYGEN_PATH = /Applications/Doxygen.app/Contents/Resources/doxygen;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C05733CD08A9546B00998B17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DOXYGEN_PATH = /Applications/Doxygen.app/Contents/Resources/doxygen;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

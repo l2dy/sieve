@@ -148,7 +148,7 @@ typedef enum AsyncSocketError AsyncSocketError;
 
 
 typedef void (^ReadCompletionBlock_t)( NSData *data );
-typedef void (^WriteCompletionBlock_t)();
+typedef void (^WriteCompletionBlock_t)(void);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -

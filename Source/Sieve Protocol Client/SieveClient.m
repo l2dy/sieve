@@ -36,7 +36,7 @@ static const uint32_t kSieveProtocolType = FOUR_CHAR_CODE( 'SieV' );
 @property (readwrite, retain) SaslConn *sasl;
 @property (readwrite, copy) NSString *availableMechanisms;
 @property (readwrite, assign) SieveClientStatus status;
-@property (readwrite, retain) NSMutableArray *operations;
+@property (nonatomic, readwrite, retain) NSMutableArray *operations;
 @property (readwrite, retain) SieveOperation *currentOperation;
 
 - (void) processResponseLine: (NSData *)readData list: (NSMutableArray *) receivedResponses block: (void (^)(NSDictionary *))completionBlock;
@@ -157,8 +157,10 @@ static const uint32_t kSieveProtocolType = FOUR_CHAR_CODE( 'SieV' );
     [self setHost: newHost]; 
     
     [self setSocket: [[[AsyncSocket alloc] initWithDelegate: self] autorelease]];
-    [socket connectToHost: host onPort: port error: NULL];
-    
+    NSError *error = nil;
+    [socket connectToHost: host onPort: port error: &error];
+
+    NSLog(@"Error %@", error);
     [self receiveResponse: ^(NSDictionary *response) {
         [self receiveCaps: response];
     }];
