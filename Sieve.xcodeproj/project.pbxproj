@@ -70,6 +70,8 @@
 		267509B31235574D00B8E26D /* CreateAccountWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 267509B21235574D00B8E26D /* CreateAccountWindowController.m */; };
 		268B28F4121EB0B00046E709 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268B28F3121EB0B00046E709 /* ConnectionController.m */; };
 		26B07217259F8F6300ED8D87 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26B07215259F8F6300ED8D87 /* PreferencesWindow.xib */; };
+		26B07222259FDD1E00ED8D87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B07221259FDD1E00ED8D87 /* XCTest.framework */; };
+		26B07223259FDD1E00ED8D87 /* XCTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26B07221259FDD1E00ED8D87 /* XCTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26B5D31C1234F4C100C065F8 /* AsyncSocket.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D3181234F4C100C065F8 /* AsyncSocket.strings */; };
 		26B5D31D1234F4C100C065F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B5D31A1234F4C100C065F8 /* Localizable.strings */; };
 		26C153FB12379AC3002A242E /* AccountList.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C153FA12379AC3002A242E /* AccountList.m */; };
@@ -167,6 +169,17 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26B07224259FDD1E00ED8D87 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				26B07223259FDD1E00ED8D87 /* XCTest.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -215,6 +228,7 @@
 		26B07207259F8EB600ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26B07208259F8ECC00ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AsyncSocket.strings; sourceTree = "<group>"; };
 		26B07216259F8F6300ED8D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
+		26B07221259FDD1E00ED8D87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		26C153F912379AC3002A242E /* AccountList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountList.h; sourceTree = "<group>"; };
 		26C153FA12379AC3002A242E /* AccountList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountList.m; sourceTree = "<group>"; };
 		26C1546A1237C02B002A242E /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -334,6 +348,7 @@
 				2653D04812323B7000CC7DF6 /* OCMock.framework in Frameworks */,
 				2653D0A412323DBF00CC7DF6 /* Security.framework in Frameworks */,
 				2653D0AF12323DE100CC7DF6 /* libsasl2.dylib in Frameworks */,
+				26B07222259FDD1E00ED8D87 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +644,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26B07221259FDD1E00ED8D87 /* XCTest.framework */,
 				2665AD1812340C040063B62F /* Sparkle.framework */,
 				26F2AE2D1212981E00458B80 /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
@@ -653,6 +669,7 @@
 				266B56D5123110E400D0741F /* Sources */,
 				266B56D6123110E400D0741F /* Frameworks */,
 				266B56D7123110E400D0741F /* ShellScript */,
+				26B07224259FDD1E00ED8D87 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

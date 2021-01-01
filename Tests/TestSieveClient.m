@@ -6,7 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 #import <objc/objc-class.h>
 
@@ -16,7 +16,7 @@
 - (void) setSasl: (SaslConn *) newSasl;
 @end
 
-@interface TestSieveClient : SenTestCase {
+@interface TestSieveClient : XCTestCase {
     id mockSocket;
     id mockSasl;
     SieveClient *client;

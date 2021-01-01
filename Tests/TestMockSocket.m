@@ -14,11 +14,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "MockSocket.h"
 
-@interface TestMockSocket : SenTestCase {
+@interface TestMockSocket : XCTestCase {
     MockSocket *sock;
 }
 
@@ -45,24 +45,24 @@
 {
     __block BOOL didCallBlock = NO;
     [sock readDataToLength: 10 withTimeout: -1 tag: 0 block: ^(NSData *data) {
-        STAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
+        XCTAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
         NSString *string = [[[NSString alloc] initWithData:  data encoding: NSASCIIStringEncoding] autorelease];
-        STAssertEqualObjects( string, @"1234567890", @"should have read the string 1234567890" );
+        XCTAssertEqualObjects( string, @"1234567890", @"should have read the string 1234567890" );
         didCallBlock = YES;
     } ];
-    
-    STAssertTrue( didCallBlock, @"Block should have been called" );
+
+    XCTAssertTrue( didCallBlock, @"Block should have been called" );
 
 
     didCallBlock = NO;
     [sock readDataToLength: 10 withTimeout: -1 tag: 0 block: ^(NSData *data) {
-        STAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
+        XCTAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
         NSString *string = [[[NSString alloc] initWithData:  data encoding: NSASCIIStringEncoding] autorelease];
-        STAssertEqualObjects( string, @"abcdefghij", @"should have read the string abcdefghij" );
+        XCTAssertEqualObjects( string, @"abcdefghij", @"should have read the string abcdefghij" );
         didCallBlock = YES;
     } ];
     
-    STAssertTrue( didCallBlock, @"Block should have been called" );
+    XCTAssertTrue( didCallBlock, @"Block should have been called" );
     
 
 }
@@ -74,23 +74,23 @@
     
     NSData *data = [@"abc" dataUsingEncoding:  NSASCIIStringEncoding];
     [sock readDataToData: data withTimeout: -1 tag: 0 block: ^(NSData *data) {
-        STAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
+        XCTAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
         NSString *string = [[[NSString alloc] initWithData:  data encoding: NSASCIIStringEncoding] autorelease];
-        STAssertEqualObjects( string, @"1234567890", @"should have read the string 1234567890" );
+        XCTAssertEqualObjects( string, @"1234567890", @"should have read the string 1234567890" );
         didCallBlock = YES;
     } ];
     
-    STAssertTrue( didCallBlock, @"Block should have been called" );
+    XCTAssertTrue( didCallBlock, @"Block should have been called" );
 
     didCallBlock = NO;
     [sock readDataToLength: 10 withTimeout: -1 tag: 0 block: ^(NSData *data) {
-        STAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
+        XCTAssertTrue( [data length] == 10, @"Should have read 10 bytes" );
         NSString *string = [[[NSString alloc] initWithData:  data encoding: NSASCIIStringEncoding] autorelease];
-        STAssertEqualObjects( string, @"defghijklm", @"should have read the string abcdefghij" );
+        XCTAssertEqualObjects( string, @"defghijklm", @"should have read the string abcdefghij" );
         didCallBlock = YES;
     } ];
     
-    STAssertTrue( didCallBlock, @"Block should have been called" );
+    XCTAssertTrue( didCallBlock, @"Block should have been called" );
     
 }
 
@@ -102,25 +102,25 @@
     id x;
     NSData *testData = [@"abcde" dataUsingEncoding: NSASCIIStringEncoding];
     [sock writeData: testData withTimeout: -1 tag: 0 block: ^{
-        STAssertEqualObjects( testData, [sock mockSentData], @"Should have returned the same data that was sent" );
+        XCTAssertEqualObjects( testData, [sock mockSentData], @"Should have returned the same data that was sent" );
         didCallBlock = YES;
     }];
     
-    STAssertTrue( didCallBlock, @"Block should have been called" );
+    XCTAssertTrue( didCallBlock, @"Block should have been called" );
     
     [sock mockClearSentData];
-    STAssertNil( [sock mockSentData], @"Sent data should be nil" );
+    XCTAssertNil( [sock mockSentData], @"Sent data should be nil" );
     
     [sock writeData: testData withTimeout: -1 tag: 0];
-    STAssertEqualObjects( testData, [sock mockSentData], @"Should have returned the same data that was sent" );
+    XCTAssertEqualObjects( testData, [sock mockSentData], @"Should have returned the same data that was sent" );
 }
 
 - (void) testConnect;
 {
     BOOL success = [sock connectToHost: @"localhost" onPort: 42 error: NULL];
-    STAssertTrue( success, @"Connect should be successful" );
-    STAssertTrue( 42 == [sock connectedPort], @"connected port should be 42" );
-    STAssertTrue( 1 == [sock mockConnectCount], @"connect count should be 1" );
+    XCTAssertTrue( success, @"Connect should be successful" );
+    XCTAssertTrue( 42 == [sock connectedPort], @"connected port should be 42" );
+    XCTAssertTrue( 1 == [sock mockConnectCount], @"connect count should be 1" );
 }
 
 @end
