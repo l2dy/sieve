@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="Sieve" id="56">
@@ -29,12 +29,6 @@
                             <menuItem title="Preferences…" keyEquivalent="," id="129">
                                 <connections>
                                     <action selector="showPreferencesPanel:" target="530" id="550"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Check for Updates…" id="541">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="checkForUpdates:" target="540" id="542"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
@@ -317,7 +311,6 @@
         </menu>
         <customObject id="530" customClass="AppController"/>
         <customObject id="539" customClass="SieveDocumentController"/>
-        <customObject id="540" customClass="SUUpdater"/>
         <customObject id="547" customClass="AccountList"/>
     </objects>
 </document>
