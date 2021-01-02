@@ -16,6 +16,7 @@
 
 #import "Account.h"
 #import "AccountList.h"
+#import "SieveClient.h"
 
 @interface Account ()
 
@@ -67,7 +68,7 @@ static NSString * const kPortKey = @"port";
         return nil;
     }
     
-    port = 2000;
+    port = kSieveDefaultPort;
     tls = YES;
     
     return self;
@@ -105,7 +106,7 @@ static NSString * const kPortKey = @"port";
     if (nil != portNumber) {
         [self setPort: [portNumber unsignedIntValue]];        
     } else {
-        [self setPort: 2000];
+        [self setPort: kSieveDefaultPort];
     }
     
     NSString *name = nil;
