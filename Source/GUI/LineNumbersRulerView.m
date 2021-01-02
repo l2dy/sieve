@@ -60,7 +60,7 @@
 - (id)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation {
     self = [super initWithScrollView:scrollView orientation:orientation];
     if (self) {
-        font = [[NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] retain];
+        font = [[NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeMini]] retain];
         textColor = [[NSColor darkGrayColor] retain];
         backgroundColor = [[NSColor colorWithCalibratedWhite:0.9 alpha:1.0] retain];
     }

@@ -19,7 +19,7 @@
 
 @interface ServiceLookup ()
 @property (readwrite, assign) BOOL timedOut;
-@property (readwrite, copy) void (^block)();
+@property (readwrite, copy) void (^block)(void);
 
 - (void) notifyWithTimeout: (BOOL) isTimeOut;
 - (void) callbackFiredWithRdata: (const void *)rdata length: (uint16_t)len more: (BOOL) moreComing;
@@ -91,7 +91,7 @@ static void ServiceLookupCallback(DNSServiceRef service, DNSServiceFlags flags, 
     [l callbackFiredWithRdata: rdata length: rdlen more: (flags & kDNSServiceFlagsMoreComing) == kDNSServiceFlagsMoreComing];
 }
 
-- (void) lookupWithBlock: (void (^)()) newBlock;
+- (void) lookupWithBlock: (void (^)(void)) newBlock;
 {
     [self setBlock:  newBlock];
     

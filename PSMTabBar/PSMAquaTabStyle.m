@@ -305,7 +305,7 @@
     if (!TruncatingTailParagraphStyle) {
         TruncatingTailParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
         [TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-        [TruncatingTailParagraphStyle setAlignment:NSCenterTextAlignment];
+        [TruncatingTailParagraphStyle setAlignment:NSTextAlignmentCenter];
     }
     [attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
     
@@ -320,7 +320,7 @@
     NSRect cellFrame = [cell frame];
     
     // Selected Tab
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height-2.5);
         aRect.size.height -= 0.5;
         
@@ -348,8 +348,8 @@
                 break;
         }
         
-        [bgImage drawInRect:cellFrame fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositeSourceOver fraction:1.0];
-        [aquaDivider compositeToPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 1.0, cellFrame.origin.y + cellFrame.size.height) operation:NSCompositeSourceOver];
+        [bgImage drawInRect:cellFrame fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositingOperationSourceOver fraction:1.0];
+        [aquaDivider compositeToPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 1.0, cellFrame.origin.y + cellFrame.size.height) operation:NSCompositingOperationSourceOver];
         
         aRect.size.height+=0.5;
         
@@ -366,10 +366,10 @@
         // Rollover
         if ([cell isHighlighted]) {
             [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-            NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
+            NSRectFillUsingOperation(aRect, NSCompositingOperationSourceAtop);
         }
         
-        [aquaDivider compositeToPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 1.0, cellFrame.origin.y + cellFrame.size.height) operation:NSCompositeSourceOver];
+        [aquaDivider compositeToPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 1.0, cellFrame.origin.y + cellFrame.size.height) operation:NSCompositingOperationSourceOver];
     }
     
     [self drawInteriorWithTabCell:cell inView:[cell controlView]];
@@ -381,7 +381,7 @@
 		//Draw for our whole bounds; it'll be automatically clipped to fit the appropriate drawing area
 		rect = [tabBar bounds];
 
-		[aquaTabBg drawInRect:rect fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositeSourceOver fraction:1.0];
+		[aquaTabBg drawInRect:rect fromRect:NSMakeRect(0.0, 0.0, 1.0, 22.0) operation:NSCompositingOperationSourceOver fraction:1.0];
 	}
 }
 
@@ -406,7 +406,7 @@
         NSMutableParagraphStyle *centeredParagraphStyle = nil;
         if (!centeredParagraphStyle) {
             centeredParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
-            [centeredParagraphStyle setAlignment:NSCenterTextAlignment];
+            [centeredParagraphStyle setAlignment:NSTextAlignmentCenter];
         }
         [attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
         [attrStr drawInRect:labelRect];
@@ -440,7 +440,7 @@
             closeButtonRect.origin.y += closeButtonRect.size.height;
         }
         
-        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += closeButtonSize.width + kPSMTabBarCellPadding;
@@ -463,7 +463,7 @@
             iconRect.origin.y -= (kPSMTabBarIconWidth - [icon size].height) / 2.0;
         }
         
-        [icon compositeToPoint:iconRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [icon compositeToPoint:iconRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += iconRect.size.width + kPSMTabBarCellPadding;

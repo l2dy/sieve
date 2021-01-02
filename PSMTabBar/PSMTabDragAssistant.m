@@ -176,7 +176,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
     
     [[NSCursor closedHandCursor] set];
     
-    NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+    NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
     NSImage *dragImage = [cell dragImage];
     [[cell indicator] removeFromSuperview];
     [self distributePlaceholdersInTabBar:control withDraggedCell:cell];
@@ -198,7 +198,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	if ([control delegate] && [[control delegate] respondsToSelector:@selector(tabView:shouldDropTabViewItem:inTabBar:)] &&
 			[[control delegate] tabView:[control tabView] shouldDropTabViewItem:[[self draggedCell] representedObject] inTabBar:nil]) {
 		_currentTearOffStyle = [control tearOffStyle];
-		_draggedTab = [[PSMTabDragWindowController alloc] initWithImage:dragImage styleMask:NSBorderlessWindowMask tearOffStyle:_currentTearOffStyle];
+        _draggedTab = [[PSMTabDragWindowController alloc] initWithImage:dragImage styleMask:NSWindowStyleMaskBorderless tearOffStyle:_currentTearOffStyle];
 		
 		cellFrame.origin.y -= cellFrame.size.height;
 		[control dragImage:[[[NSImage alloc] initWithSize:NSMakeSize(1, 1)] autorelease] at:cellFrame.origin offset:offset event:event pasteboard:pboard source:control slideBack:NO];
@@ -285,7 +285,6 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 			}
 			
 			imageSize = [image size];
-			[image setScalesWhenResized:YES];
 			
 			if (imageSize.width > imageSize.height) {
 				[image setSize:NSMakeSize(125, 125 * (imageSize.height / imageSize.width))];
@@ -578,7 +577,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	NSImage *viewImage = nil;
 	
 	if (outMask) {
-		*outMask = NSBorderlessWindowMask;
+        *outMask = NSWindowStyleMaskBorderless;
 	}
 	
 	if ([control delegate] && [[control delegate] respondsToSelector:@selector(tabView:imageForTabViewItem:offset:styleMask:)]) {
@@ -599,7 +598,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 			drawPoint.x += [control frame].size.width - [tabImage size].width;
 		}
 		
-		[tabImage compositeToPoint:drawPoint operation:NSCompositeSourceOver];
+		[tabImage compositeToPoint:drawPoint operation:NSCompositingOperationSourceOver];
 		
 		[viewImage unlockFocus];
 	} else {
@@ -611,7 +610,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 		[viewImage unlockFocus];
 	}
 	
-	if (*outMask | NSBorderlessWindowMask) {
+    if (*outMask | NSWindowStyleMaskBorderless) {
 		_dragWindowOffset.height += 22;
 	}
 	

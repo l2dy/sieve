@@ -184,7 +184,7 @@
 		{
 			result.origin.x = cellFrame.origin.x + Adium_MARGIN_X;
 			result.origin.y = cellFrame.origin.y + MARGIN_Y + 2.0;
-			if ([cell state] == NSOnState) {
+			if ([cell state] == NSControlStateValueOn) {
 				result.origin.y -= 1;
 			}
 			break;
@@ -235,7 +235,7 @@
 			result.origin.y += (kPSMTabBarIconWidth - iconSize.height) / 2.0;
 	}
 
-	if ([cell state] == NSOnState) {
+	if ([cell state] == NSControlStateValueOn) {
 		result.origin.y -= 1;
 	}
 
@@ -255,7 +255,7 @@
 	result.origin.x = cellFrame.origin.x + cellFrame.size.width - Adium_MARGIN_X - kPSMTabBarIndicatorWidth;
 	result.origin.y = cellFrame.origin.y + MARGIN_Y;
 
-	if ([cell state] == NSOnState) {
+	if ([cell state] == NSControlStateValueOn) {
 		result.origin.y -= 1;
 	}
 
@@ -454,7 +454,7 @@
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path setLineWidth:1.0];
 	
-	if ([cell state] == NSOnState) {
+	if ([cell state] == NSControlStateValueOn) {
 		myRect.origin.y -= 1.0;
 	}
 	
@@ -551,7 +551,7 @@
 
 		[image drawInRect:imageDrawingRect
 				 fromRect:NSMakeRect(0, 0, [image size].width, [image size].height)
-				operation:NSCompositeSourceOver
+                operation:NSCompositingOperationSourceOver
 				 fraction:1.0];
 
 		[NSGraphicsContext restoreGraphicsState];
@@ -628,7 +628,7 @@
 			drawingRect.origin.y += drawingRect.size.height;
 		}
 
-		[closeButtonOrIcon compositeToPoint:drawingRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonOrIcon compositeToPoint:drawingRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
 		
 		// scoot label over
 		switch (orientation)
@@ -666,7 +666,7 @@
 			iconRect.origin.y += iconRect.size.height;
 		}
 
-		[icon compositeToPoint:iconRect.origin operation:NSCompositeSourceOver fraction:1.0];
+		[icon compositeToPoint:iconRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
 		
 		// scoot label over by the size of the standard close button
 		switch (orientation)
@@ -681,7 +681,7 @@
 		}		
 	}
 
-	if ([cell state] == NSOnState) {
+	if ([cell state] == NSControlStateValueOn) {
 		labelRect.origin.y -= 1;
 	}
 	
@@ -730,7 +730,7 @@
 	[shadow setShadowBlurRadius:2];
 	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.6 alpha:1.0]];
 
-	if ([cell state] == NSOnState) {
+	if ([cell state] == NSControlStateValueOn) {
 		// selected tab
 		if (orientation == PSMTabBarHorizontalOrientation) {
 			NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, NSWidth(cellFrame), cellFrame.size.height - 2.5);
@@ -746,7 +746,7 @@
 					NSRectFill(aRect);
 				}
 			} else {
-				[_gradientImage drawInRect:NSMakeRect(NSMinX(aRect), NSMinY(aRect), NSWidth(aRect), NSHeight(aRect)) fromRect:NSMakeRect(0, 0, [_gradientImage size].width, [_gradientImage size].height) operation:NSCompositeSourceOver fraction:1.0];
+                [_gradientImage drawInRect:NSMakeRect(NSMinX(aRect), NSMinY(aRect), NSWidth(aRect), NSHeight(aRect)) fromRect:NSMakeRect(0, 0, [_gradientImage size].width, [_gradientImage size].height) operation:NSCompositingOperationSourceOver fraction:1.0];
 			}
 			
 			// frame
@@ -839,7 +839,7 @@
 		// rollover
 		if ([cell isHighlighted]) {
 			[[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-			NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
+			NSRectFillUsingOperation(aRect, NSCompositingOperationSourceAtop);
 		}
 		
 		// frame
@@ -996,7 +996,7 @@
 		
 		if (!centeredParagraphStyle) {
 			centeredParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
-			[centeredParagraphStyle setAlignment:NSCenterTextAlignment];
+			[centeredParagraphStyle setAlignment:NSTextAlignmentCenter];
 		}
 		
 		[attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];

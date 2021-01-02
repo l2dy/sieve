@@ -31,13 +31,13 @@
 - (IBAction) acceptPassword: (id) sender;
 {
     [controller commitEditing];
-    [NSApp endSheet: [self window] returnCode: NSOKButton];
+    [NSApp endSheet: [self window] returnCode: NSModalResponseOK];
 }
 
 - (IBAction) cancelPassword: (id) sender;
 {
     [controller discardEditing];
-    [NSApp endSheet: [self window] returnCode: NSCancelButton];
+    [NSApp endSheet: [self window] returnCode: NSModalResponseCancel];
 }
 
 - (NSURLCredential *) credentials;
@@ -61,7 +61,7 @@
     [sheet orderOut: self];
     PasswordCompletionBlock block = contextInfo;
     if (nil != block) {
-        block( returnCode == NSOKButton, self );
+        block( returnCode == NSModalResponseOK, self );
         [block release];
     }
 }

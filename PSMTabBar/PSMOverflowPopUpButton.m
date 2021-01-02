@@ -17,7 +17,7 @@
 - (id)initWithFrame:(NSRect)frameRect pullsDown:(BOOL)flag
 {
     if (self = [super initWithFrame:frameRect pullsDown:YES]) {
-        [self setBezelStyle:NSRegularSquareBezelStyle];
+        [self setBezelStyle:NSBezelStyleRegularSquare];
         [self setBordered:NO];
         [self setTitle:@""];
         [self setPreferredEdge:NSMaxXEdge];
@@ -52,7 +52,7 @@
         drawPoint.y += imageSize.height;
     }
 	
-    [image compositeToPoint:drawPoint operation:NSCompositeSourceOver fraction:(_animatingAlternateImage ? 0.7f : 1.0f)];
+    [image compositeToPoint:drawPoint operation:NSCompositingOperationSourceOver fraction:(_animatingAlternateImage ? 0.7f : 1.0f)];
 	
 	if (_animatingAlternateImage) {
 		NSImage *alternateImage = [self alternateImage];
@@ -63,7 +63,7 @@
 			drawPoint.y += altImageSize.height;
 		}
 		
-		[[self alternateImage] compositeToPoint:drawPoint operation:NSCompositeSourceOver fraction:sin(_animationValue * M_PI)];
+        [[self alternateImage] compositeToPoint:drawPoint operation:NSCompositingOperationSourceOver fraction:sin(_animationValue * M_PI)];
 	}
 }
 
@@ -80,7 +80,7 @@
 	if ([self isHidden] != value) {
 		if (value) {
 			// Stop any animating alternate image if we hide
-			[_animationTimer invalidate], _animationTimer = nil;
+            [_animationTimer invalidate]; _animationTimer = nil;
 		} else if (_animatingAlternateImage) {
 			// Restart any animating alternate image if we unhide
 			_animationValue = ANIMATION_STEP;
@@ -111,7 +111,7 @@
 				[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSEventTrackingRunLoopMode];
 
 			} else {
-				[_animationTimer invalidate], _animationTimer = nil;
+                [_animationTimer invalidate]; _animationTimer = nil;
 			}
 
 			[self setNeedsDisplay:YES];

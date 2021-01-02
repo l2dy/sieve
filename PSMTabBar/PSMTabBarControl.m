@@ -166,9 +166,9 @@
         }
         [_addTabButton setTitle:@""];
         [_addTabButton setImagePosition:NSImageOnly];
-        [_addTabButton setButtonType:NSMomentaryChangeButton];
+        [_addTabButton setButtonType:NSButtonTypeMomentaryChange];
         [_addTabButton setBordered:NO];
-        [_addTabButton setBezelStyle:NSShadowlessSquareBezelStyle];
+        [_addTabButton setBezelStyle:NSBezelStyleShadowlessSquare];
         [self addSubview:_addTabButton];
         
         if (_showAddTabButton) {
@@ -1201,7 +1201,7 @@
 		
 		if ([window showsResizeIndicator] && NSIntersectsRect([self frame], resizeWidgetFrame)) {
 			//the resize widgets are larger on metal windows
-			_resizeAreaCompensation = [window styleMask] & NSTexturedBackgroundWindowMask ? 20 : 8;
+			_resizeAreaCompensation = [window styleMask] & NSWindowStyleMaskTexturedBackground ? 20 : 8;
 		} else {
 			_resizeAreaCompensation = 0;
 		}
@@ -1244,7 +1244,7 @@
         if (overClose && 
 			![self disableTabClose] && 
 			![cell isCloseButtonSuppressed] &&
-			([self allowsBackgroundTabClosing] || [[cell representedObject] isEqualTo:[tabView selectedTabViewItem]] || [theEvent modifierFlags] & NSCommandKeyMask)) {
+            ([self allowsBackgroundTabClosing] || [[cell representedObject] isEqualTo:[tabView selectedTabViewItem]] || [theEvent modifierFlags] & NSEventModifierFlagCommand)) {
             [cell setCloseButtonOver:NO];
             [cell setCloseButtonPressed:YES];
 			_closeClicked = YES;
@@ -1332,7 +1332,7 @@
 			NSRect iconRect = [mouseDownCell closeButtonRectForFrame:mouseDownCellFrame];
 			
 			if ((NSMouseInRect(mousePt, iconRect,[self isFlipped])) && ![self disableTabClose] && ![cell isCloseButtonSuppressed] && [mouseDownCell closeButtonPressed]) {
-				if (([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) != 0) {
+                if (([[NSApp currentEvent] modifierFlags] & NSEventModifierFlagOption) != 0) {
 					//If the user is holding Option, close all other tabs
 					NSEnumerator	*enumerator = [[[[self cells] copy] autorelease] objectEnumerator];
 					PSMTabBarCell	*otherCell;
@@ -1705,7 +1705,7 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)sender
 {
-	[sender setState:([[sender representedObject] isEqualTo:[tabView selectedTabViewItem]]) ? NSOnState : NSOffState];
+    [sender setState:([[sender representedObject] isEqualTo:[tabView selectedTabViewItem]]) ? NSControlStateValueOn : NSControlStateValueOff];
 	
 	return [[self delegate] respondsToSelector:@selector(tabView:validateOverflowMenuItem:forTabViewItem:)] ?
 		[[self delegate] tabView:[self tabView] validateOverflowMenuItem:sender forTabViewItem:[sender representedObject]] : YES;

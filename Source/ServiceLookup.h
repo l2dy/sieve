@@ -54,7 +54,7 @@ extern NSString * const kServiceLookupHostKey;      // = @"host";
 @property (readonly, assign) BOOL timedOut;
 
 - initWithServiceName: (NSString *) serviceName;
-- (void) lookupWithBlock: (void (^)())newBlock;
+- (void) lookupWithBlock: (void (^)(void))newBlock;
 - (void) lookup;
 
 @end

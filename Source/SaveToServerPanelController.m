@@ -31,13 +31,13 @@
 - (IBAction) saveClicked: (id) sender;
 {
     [objectController commitEditing];
-    [NSApp endSheet: [self window] returnCode: NSOKButton];
+    [NSApp endSheet: [self window] returnCode: NSModalResponseOK];
 }
 
 - (IBAction) cancelClicked: (id) sender;
 {
     [objectController discardEditing];
-    [NSApp endSheet: [self window] returnCode: NSCancelButton];
+    [NSApp endSheet: [self window] returnCode: NSModalResponseCancel];
 }
 
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;

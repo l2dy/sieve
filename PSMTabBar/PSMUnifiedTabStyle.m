@@ -293,7 +293,7 @@
     NSBezierPath* bezier = [NSBezierPath bezierPath];
     lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
 
-    if (!showsBaselineSeparator || [cell state] == NSOnState)
+    if (!showsBaselineSeparator || [cell state] == NSControlStateValueOn)
 	{
         // selected tab
         NSRect aRect = NSMakeRect(cellFrame.origin.x+0.5, cellFrame.origin.y-0.5, cellFrame.size.width, cellFrame.size.height);
@@ -317,7 +317,7 @@
 		//[[NSColor windowBackgroundColor] set];
 		//[bezier fill];
 		if ([NSApp isActive]) {
-			if ([cell state] == NSOnState) {
+			if ([cell state] == NSControlStateValueOn) {
 				[bezier linearGradientFillWithStartColor:[NSColor colorWithCalibratedWhite:0.99 alpha:1.0]
 												endColor:[NSColor colorWithCalibratedWhite:0.941 alpha:1.0]];
 			} else if ([cell isHighlighted]) {
@@ -347,7 +347,7 @@
         if ([cell isHighlighted])
 		{
             [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-            NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
+            NSRectFillUsingOperation(aRect, NSCompositingOperationSourceAtop);
         }
         
         // frame
@@ -401,7 +401,7 @@
             closeButtonRect.origin.y += closeButtonRect.size.height;
         }
         
-        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += closeButtonSize.width + kPSMTabBarCellPadding;
@@ -423,7 +423,7 @@
             iconRect.origin.y -= (kPSMTabBarIconWidth - [icon size].height) / 2.0;
         }
         
-        [icon compositeToPoint:iconRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [icon compositeToPoint:iconRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += iconRect.size.width + kPSMTabBarCellPadding;
@@ -508,7 +508,7 @@
         NSMutableParagraphStyle *centeredParagraphStyle = nil;
         if (!centeredParagraphStyle) {
             centeredParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
-            [centeredParagraphStyle setAlignment:NSCenterTextAlignment];
+            [centeredParagraphStyle setAlignment:NSTextAlignmentCenter];
         }
         [attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
         [attrStr drawInRect:labelRect];

@@ -149,11 +149,11 @@
     PSMTabBarCell *lastCell = nil, *nextCell;
     
     //deselect the previously selected tab
-    while ( (nextCell = [enumerator nextObject]) && ([nextCell state] == NSOffState) ) {
+    while ( (nextCell = [enumerator nextObject]) && ([nextCell state] == NSControlStateValueOff) ) {
         lastCell = nextCell;
     }
     
-    [nextCell setState:NSOffState];
+    [nextCell setState:NSControlStateValueOff];
     [nextCell setTabState:PSMTab_PositionMiddleMask];
     
     if (lastCell && lastCell != [_control lastVisibleTab]) {
@@ -164,7 +164,7 @@
         [nextCell setTabState:~[lastCell tabState] & PSMTab_LeftIsSelectedMask];
     }
     
-    [cell setState:NSOnState];
+    [cell setState:NSControlStateValueOn];
     [cell setTabState:PSMTab_SelectedMask];
     
     if (![cell isInOverflowMenu]) {
@@ -524,7 +524,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum)
     NSTabViewItem *selectedTabViewItem = [[_control tabView] selectedTabViewItem];
     NSMenuItem *menuItem;
     
-    [_overflowMenu release], _overflowMenu = nil;
+    [_overflowMenu release]; _overflowMenu = nil;
     
     for (i = 0; i < cellCount; i++) {
         cell = [cells objectAtIndex:i];
@@ -548,7 +548,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum)
             [_cellTrackingRects addObject:[NSValue valueWithRect:cellRect]];
             
             if ([[cell representedObject] isEqualTo:selectedTabViewItem]) {
-                [cell setState:NSOnState];
+                [cell setState:NSControlStateValueOn];
                 tabState |= PSMTab_SelectedMask;
                 // previous cell
                 if (i > 0) {
@@ -556,9 +556,9 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum)
                 }
                 // next cell - see below
             } else {
-                [cell setState:NSOffState];
+                [cell setState:NSControlStateValueOff];
                 // see if prev cell was selected
-                if ( (i > 0) && ([[cells objectAtIndex:i - 1] state] == NSOnState) ) {
+                if ( (i > 0) && ([[cells objectAtIndex:i - 1] state] == NSControlStateValueOn) ) {
                     tabState |= PSMTab_LeftIsSelectedMask;
                 }
             }
@@ -586,7 +586,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum)
             // next...
             cellRect.origin.x += [[widths objectAtIndex:i] doubleValue];
         } else {
-            [cell setState:NSOffState];
+            [cell setState:NSControlStateValueOff];
             [cell setIsInOverflowMenu:YES];
             [[cell indicator] removeFromSuperview];
             

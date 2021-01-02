@@ -131,7 +131,7 @@
     
     SaveToServerPanelController *savePanel = [[SaveToServerPanelController alloc] init];
     [savePanel beginSheetModalForWindow: [self window] completionBlock: ^( NSInteger rc, NSString *name ) {
-        if (NSOKButton == rc) {
+        if (NSModalResponseOK == rc) {
             [client renameScript: [selectedScript valueForKey: @"name"] to: name];
         } 
         [savePanel release];
@@ -222,7 +222,7 @@
     NSParameterAssert( nil != contextInfo );
     void (^block)( BOOL ) = contextInfo;
     
-    block( returnCode != NSOKButton );
+    block( returnCode != NSModalResponseOK );
     [block release];
 }
 

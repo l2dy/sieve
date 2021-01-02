@@ -134,7 +134,7 @@
     result.origin.x = cellFrame.origin.x + MARGIN_X;
     result.origin.y = cellFrame.origin.y + MARGIN_Y + 2.0;
     
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         result.origin.y -= 1;
     }
     
@@ -158,7 +158,7 @@
         result.origin.x += [closeButton size].width + kPSMTabBarCellPadding;
     }
     
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         result.origin.y -= 1;
     }
 	
@@ -178,7 +178,7 @@
     result.origin.x = cellFrame.origin.x + cellFrame.size.width - MARGIN_X - kPSMTabBarIndicatorWidth;
     result.origin.y = cellFrame.origin.y + MARGIN_Y;
     
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         result.origin.y -= 1;
     }
 	
@@ -310,7 +310,7 @@
     NSShadow* shadow;
     shadow = [[[NSShadow alloc] init] autorelease];
     CGFloat shadowAlpha;
-    if (([cell state] == NSOnState) || [cell isHighlighted]) {
+    if (([cell state] == NSControlStateValueOn) || [cell isHighlighted]) {
         shadowAlpha = 0.8;
     } else {
         shadowAlpha = 0.5;
@@ -325,7 +325,7 @@
     if (!TruncatingTailParagraphStyle) {
         TruncatingTailParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
         [TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-        [TruncatingTailParagraphStyle setAlignment:NSCenterTextAlignment];
+        [TruncatingTailParagraphStyle setAlignment:NSTextAlignmentCenter];
     }
     [attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
     
@@ -346,7 +346,7 @@
 	[NSGraphicsContext saveGraphicsState];
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         // selected tab
 		if (orientation == PSMTabBarHorizontalOrientation) {
 			NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height-2.5);
@@ -407,7 +407,7 @@
         // rollover
         if ([cell isHighlighted]) {
             [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
-            NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
+            NSRectFillUsingOperation(aRect, NSCompositingOperationSourceAtop);
         }
         
 		[lineColor set];
@@ -456,7 +456,7 @@
             closeButtonRect.origin.y += closeButtonRect.size.height;
         }
         
-        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [closeButtonImage compositeToPoint:closeButtonRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += closeButtonSize.width + kPSMTabBarCellPadding;
@@ -479,7 +479,7 @@
             iconRect.origin.y -= (kPSMTabBarIconWidth - [icon size].height)/2.0;
         }
         
-		[icon compositeToPoint:iconRect.origin operation:NSCompositeSourceOver fraction:1.0];
+        [icon compositeToPoint:iconRect.origin operation:NSCompositingOperationSourceOver fraction:1.0];
         
         // scoot label over
         labelPosition += iconRect.size.width + kPSMTabBarCellPadding;
@@ -492,7 +492,7 @@
     labelRect.size.height = cellFrame.size.height;
     labelRect.origin.y = cellFrame.origin.y + MARGIN_Y + 1.0;
     
-    if ([cell state] == NSOnState) {
+    if ([cell state] == NSControlStateValueOn) {
         labelRect.origin.y -= 1;
     }
     
@@ -505,7 +505,7 @@
         [[cell countColor] ?: [NSColor colorWithCalibratedWhite:0.3 alpha:0.6] set];
         NSBezierPath *path = [NSBezierPath bezierPath];
         NSRect myRect = [self objectCounterRectForTabCell:cell];
-        if ([cell state] == NSOnState) {
+        if ([cell state] == NSControlStateValueOn) {
             myRect.origin.y -= 1.0;
         }
         [path moveToPoint:NSMakePoint(myRect.origin.x + kPSMMetalObjectCounterRadius, myRect.origin.y)];
@@ -544,7 +544,7 @@
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	
     [[NSColor colorWithCalibratedWhite:0.0 alpha:0.2] set];
-    NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
+    NSRectFillUsingOperation(rect, NSCompositingOperationSourceAtop);
 	[[NSColor darkGrayColor] set];
 	
 	if (orientation == PSMTabBarHorizontalOrientation) {
@@ -583,7 +583,7 @@
         NSMutableParagraphStyle *centeredParagraphStyle = nil;
         if (!centeredParagraphStyle) {
             centeredParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
-            [centeredParagraphStyle setAlignment:NSCenterTextAlignment];
+            [centeredParagraphStyle setAlignment:NSTextAlignmentCenter];
         }
         [attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
         [attrStr drawInRect:labelRect];

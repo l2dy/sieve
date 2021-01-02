@@ -17,7 +17,7 @@
 @end
 
 @implementation PSMTabBarCell {
-    id _controlView;
+    PSMTabBarControl *_controlView;
 }
 
 #pragma mark -
@@ -31,8 +31,8 @@
         _closeButtonOver = NO;
         _closeButtonPressed = NO;
         _indicator = [[PSMProgressIndicator alloc] initWithFrame:NSMakeRect(0.0,0.0,kPSMTabBarIndicatorWidth,kPSMTabBarIndicatorWidth)];
-        [_indicator setControlSize: NSSmallControlSize];
-        [_indicator setStyle:NSProgressIndicatorSpinningStyle];
+        [_indicator setControlSize: NSControlSizeSmall];
+        [_indicator setStyle:NSProgressIndicatorStyleSpinning];
         [_indicator setAutoresizingMask:NSViewMinYMargin];
         _hasCloseButton = YES;
         _isCloseButtonSuppressed = NO;
@@ -90,12 +90,12 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (id)controlView
+- (PSMTabBarControl *)controlView
 {
     return _controlView;
 }
 
-- (void)setControlView:(id)view
+- (void)setControlView:(PSMTabBarControl *)view
 {
     // no retain release pattern, as this simply switches a tab to another view.
     _controlView = view;
@@ -201,7 +201,7 @@
 
 - (BOOL)closeButtonOver
 {
-    return (_closeButtonOver && ([_controlView allowsBackgroundTabClosing] || ([self tabState] & PSMTab_SelectedMask) || [[NSApp currentEvent] modifierFlags] & NSCommandKeyMask));
+    return (_closeButtonOver && ([_controlView allowsBackgroundTabClosing] || ([self tabState] & PSMTab_SelectedMask) || [[NSApp currentEvent] modifierFlags] & NSEventModifierFlagCommand));
 }
 
 - (void)setCloseButtonOver:(BOOL)value
@@ -351,7 +351,7 @@
 {
     if (_isPlaceholder) {
         [[NSColor colorWithCalibratedWhite:0.0 alpha:0.2] set];
-        NSRectFillUsingOperation(cellFrame, NSCompositeSourceAtop);
+        NSRectFillUsingOperation(cellFrame, NSCompositingOperationSourceAtop);
         return;
     }
     
@@ -373,7 +373,7 @@
     }
 	
 	// scrubtastic
-	if ([_controlView allowsScrubbing] && ([theEvent modifierFlags] & NSAlternateKeyMask))
+    if ([_controlView allowsScrubbing] && ([theEvent modifierFlags] & NSEventModifierFlagOption))
 		[_controlView performSelector:@selector(tabClick:) withObject:self];
 	
 	// tell the control we only need to redraw the affected tab
@@ -411,13 +411,13 @@
     [image addRepresentation:rep];
     NSImage *returnImage = [[[NSImage alloc] initWithSize:[rep size]] autorelease];
     [returnImage lockFocus];
-    [image compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeSourceOver fraction:1.0];
+    [image compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositingOperationSourceOver fraction:1.0];
     [returnImage unlockFocus];
     if (![[self indicator] isHidden]) {
         NSImage *pi = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"pi"]];
         [returnImage lockFocus];
         NSPoint indicatorPoint = NSMakePoint([self frame].size.width - MARGIN_X - kPSMTabBarIndicatorWidth, MARGIN_Y);
-        [pi compositeToPoint:indicatorPoint operation:NSCompositeSourceOver fraction:1.0];
+        [pi compositeToPoint:indicatorPoint operation:NSCompositingOperationSourceOver fraction:1.0];
         [returnImage unlockFocus];
         [pi release];
     }
