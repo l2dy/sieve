@@ -18,11 +18,9 @@
 
 @class PreferencesWindowController;
 
-@interface AppController : NSObject < NSApplicationDelegate > {
-    PreferencesWindowController *preferences;
-}
+@interface AppController : NSObject < NSApplicationDelegate >
 
-@property (readwrite, retain) PreferencesWindowController *preferences;
+@property (readwrite, nonatomic, retain) PreferencesWindowController *preferences;
 
 - (IBAction) performOpenURL: (id) sender;
 

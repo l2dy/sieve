@@ -72,7 +72,7 @@
 typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
 - (void) saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)selector contextInfo:(void *)contextInfo;
 {
-    NSAssert( saveOperation != NSAutosaveOperation, @"I don't support autosave" );
+    NSAssert( saveOperation != NSAutosaveElsewhereOperation, @"I don't support autosave" );
     NSAssert( [typeName isEqualToString: kSieveScriptFileType], @"I only support sieve scripts" );
     
     [[self viewController] commitEditing];
@@ -137,7 +137,7 @@ typedef void (^SaveToURLBlock)( BOOL result, NSError *error );
     
     SaveToServerPanelController *savePanel = [[SaveToServerPanelController alloc] init];
     [savePanel beginSheetModalForWindow: [self windowForSheet] completionBlock: ^( NSInteger rc, NSString *name) {
-        if (NSOKButton == rc) {
+        if (NSModalResponseOK == rc) {
             NSURL *newURL = [[server baseURL] URLByAppendingPathComponent: name];
             [self saveToURL: newURL ofType: kSieveScriptFileType forSaveOperation: saveOperation delegate: delegate didSaveSelector:didSaveSelector contextInfo: contextInfo];
         } else {

@@ -14,31 +14,19 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
+@interface Account : NSObject 
 
-@interface Account : NSObject {
-    NSURL *accountFileURL;
-    NSString *accountName;
-    NSString *host;
-    NSString *user;
-    BOOL tls;
-    unsigned port;
-    NSImage *icon;
-    
-    BOOL dirty;
-    BOOL changedAccountName;
-}
-
-@property (readwrite, copy) NSString *accountName;
-@property (readwrite, copy) NSString *host;
-@property (readwrite, copy) NSString *user;
-@property (readwrite, assign) BOOL tls;
-@property (readwrite, assign) unsigned port;
-@property (readwrite, copy) NSImage *icon;
-@property (readonly) NSURL *accountURL;
-@property (readonly, assign) BOOL dirty;
-@property (readonly) NSAttributedString *displayString;
+@property (readwrite, copy, nonatomic) NSString *accountName;
+@property (readwrite, copy, nonatomic) NSString *host;
+@property (readwrite, copy, nonatomic) NSString *user;
+@property (readwrite, assign, nonatomic) BOOL tls;
+@property (readwrite, assign, nonatomic) unsigned port;
+@property (readwrite, copy, nonatomic) NSImage *icon;
+@property (readonly, nonatomic) NSURL *accountURL;
+@property (readonly, assign, nonatomic) BOOL dirty;
+@property (readonly, nonatomic) NSAttributedString *displayString;
 
 + (Account *) readFromURL: (NSURL *) url;
 
